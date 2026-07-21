@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cron Job: daily-ai-news</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Cron Job: daily-ai-news</h1>
+
+<p><strong>Job ID:</strong> 75caadd565dc</p>
+<p><strong>Run Time:</strong> 2026-07-21 08:08:30</p>
+<p><strong>Schedule:</strong> 0 8 * * *</p>
+
+<h2>Prompt</h2>
+
+<p>[IMPORTANT: You are running as a scheduled cron job. DELIVERY: Your final response will be automatically delivered to the user — do NOT use send_message or try to deliver the output yourself. Just produce your report/output as your final response and the system handles the rest. SILENT: If there is genuinely nothing new to report, respond with exactly &quot;[SILENT]&quot; (nothing else) to suppress delivery. Never combine [SILENT] with content — either report your findings normally, or say [SILENT] and nothing more.]</p>
+
+<p>请生成每日 AI 新闻简报。使用联网搜索查找最近24小时内发布或发生的全球重要AI新闻，优先参考AI公司官方博客、研究机构公告、GitHub官方发布页和可靠科技媒体。筛选5到8条，去除重复报道和未经证实的传闻。必须设置独立的【AI Coding / Code Models】板块，并确保每天至少收录1条与代码模型、AI编程助手、Coding Agent、开发者工具或相关基准评测有关的重要更新；该条目计入总条数。如果该领域最近24小时没有值得报道的更新，可将检索范围扩展到最近72小时，但必须明确标注发布日期和使用了扩展时间范围，不得为了凑数编造内容。使用中文输出：先给出不超过100字的今日总览；随后按【AI Coding / Code Models】和【其他 AI 动态】分栏，每条包含标题、2到3句摘要、新闻发生或发布日期、来源名称和可点击的真实原文链接；最后列出值得持续关注的1到3个趋势。必须提供可核验的真实URL，不要编造链接；如果新闻不足，明确说明并减少条数。输出控制在适合微信阅读的长度，优先简洁准确。</p>
+
+<h2>Response</h2>
+
+<p>我已收集了足够的信息来生成简报。以下是整理后的每日 AI 新闻简报：</p>
+
+<hr>
+
+<h2>🤖 每日 AI 新闻简报 | 2026年7月21日</h2>
+
+<p><strong>今日总览：</strong> 中国开源权重 AI 策略引发广泛讨论，成为昨日最热话题；美国政府对华 AI 封锁政策面临新博弈。编程代理领域，JetBrains 发布 Claude Code 技能基准测试，并行多代理编程工具 Shikigami 获关注。</p>
+
+<hr>
+
+<h3>【AI Coding / Code Models】</h3>
+
+<h4>1. JetBrains 实测：&quot;rtk&quot;技能能否真正降低 Claude Code 60-90% Token 消耗？</h4>
+<p>JetBrains 官方博客发布系列评测第二篇，对 Claude Code 的 &quot;rtk&quot; 技能进行 A/B 基准测试，验证其声称的 token 节省效果。评测采用同题配对对比，结果对开发者选购 AI 编程辅助工具具有直接参考价值。</p>
+<p><strong>日期：</strong> 2026年7月20日</p>
+<p><strong>来源：</strong> JetBrains AI Blog</p>
+<p><strong>链接：</strong> <a href="https://blog.jetbrains.com/ai/2026/07/rtk-claude-code-token-savings/" target="_blank">https://blog.jetbrains.com/ai/2026/07/rtk-claude-code-token-savings/</a></p>
+
+<h4>2. Shikigami：在独立 Git Worktree 中并行运行 AI 编程代理</h4>
+<p>开源工具 Shikigami 让每个 AI 编码代理运行在独立的 Git worktree 中，实现多代理并行协作而不产生冲突。适合需要同时推进多个开发任务的场景，代表 AI 编程代理从单线到并行的演进方向。</p>
+<p><strong>日期：</strong> 2026年7月19日（近72小时内）</p>
+<p><strong>来源：</strong> shikigami.dev</p>
+<p><strong>链接：</strong> <a href="https://shikigami.dev/" target="_blank">https://shikigami.dev/</a></p>
+
+<hr>
+
+<h3>【其他 AI 动态】</h3>
+
+<h4>3. 中国开源权重 AI 策略正在取胜——美国封闭路线或已失败</h4>
+<p>Ben Werdmuller 发表长文指出，中国以 DeepSeek、Qwen、Kimi 等为代表的开源权重 AI 策略正快速占领全球市场，而美国以封闭专有为核心的战略正陷入困境。该文在 Hacker News 获得 922 分，引发广泛讨论。</p>
+<p><strong>日期：</strong> 2026年7月20日</p>
+<p><strong>来源：</strong> Ben Werdmuller (werd.io)</p>
+<p><strong>链接：</strong> <a href="https://werd.io/american-ai-is-locked-down-and-proprietary-its-losing/" target="_blank">https://werd.io/american-ai-is-locked-down-and-proprietary-its-losing/</a></p>
+
+<h4>4. Axios 独家：特朗普政府内部对抗中国 AI 的秘密斗争</h4>
+<p>Axios 报道称，美国行政当局内部正激烈讨论是否禁止中国开源 AI 模型在美使用，包括对 Moonshot AI（Kimi）等产品的限制。这场博弈将直接影响全球 AI 开源生态的未来走向。</p>
+<p><strong>日期：</strong> 2026年7月20日</p>
+<p><strong>来源：</strong> Axios</p>
+<p><strong>链接：</strong> <a href="https://www.axios.com/2026/07/20/ai-us-china-open-source-kimi" target="_blank">https://www.axios.com/2026/07/20/ai-us-china-open-source-kimi</a></p>
+
+<h4>5. 如何测量 arXiv 上 AI 生成的论文——以及测量的局限</h4>
+<p>Unslop 博客深入分析 arXiv 上 AI 辅助写作的检测方法，揭示当前检测工具在识别 AI 生成学术文本方面的准确率、误报率及根本性局限。该研究对学术诚信评估具有重要参考价值。</p>
+<p><strong>日期：</strong> 2026年7月20日</p>
+<p><strong>来源：</strong> Unslop Blog</p>
+<p><strong>链接：</strong> <a href="https://unslop.run/blog/measuring-ai-writing-on-arxiv" target="_blank">https://unslop.run/blog/measuring-ai-writing-on-arxiv</a></p>
+
+<h4>6. 华尔街质疑 AI 投入回报：大型科技股遭抛售</h4>
+<p>Bloomberg 报道指出，投资者对大型科技公司持续高额的 AI 基础设施支出开始失去耐心，部分科技股近期遭到抛售。市场正重新评估 AI 投资的短期回报预期。</p>
+<p><strong>日期：</strong> 2026年7月19日</p>
+<p><strong>来源：</strong> Bloomberg</p>
+<p><strong>链接：</strong> <a href="https://www.bloomberg.com/news/articles/2026-07-19/big-tech-needs-to-justify-ai-spending-as-investors-dump-stocks" target="_blank">https://www.bloomberg.com/news/articles/2026-07-19/big-tech-needs-to-justify-ai-spending-as-investors-dump-stocks</a></p>
+
+<hr>
+
+<h3>🔭 值得持续关注的趋势</h3>
+
+<p>1. <strong>中美 AI 开源博弈加剧</strong>：从模型权重开源到政策层面的封锁与反制，正在从技术竞争演变为地缘政治角力，将深刻影响全球 AI 开发者生态。</p>
+<p>2. <strong>AI 编程代理进入&quot;多代理并行&quot;时代</strong>：JetBrains 基准测试、Shikigami 等工具的涌现，表明单一代理编程正走向多代理协作、benchmark 驱动的成熟阶段。</p>
+<p>3. <strong>AI 投资回报率进入审视期</strong>：华尔街对巨额 AI 资本支出的耐心正在消耗，下一阶段行业焦点可能从&quot;规模竞赛&quot;转向&quot;价值交付&quot;。</p>
+</body></html>
