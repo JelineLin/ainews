@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🤖 每日 AI 新闻简报 · 2026年8月5日</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>🤖 每日 AI 新闻简报 · 2026年8月5日</h1>
+
+<p><strong>今日总览：</strong> 代码模型领域 DeepSeek V4 首次完成单卡 AMD MI300X 推理验证，Flowise 因 Coding Agent 崛起而宣布关停。政策方面，白宫将开源模型排除在 AI 能力测试框架之外，德州暂停新数据中心审批。AI 安全与用工合规问题持续发酵。</p>
+
+<hr>
+
+<h2>【AI Coding / Code Models】</h2>
+
+<h3>1. DeepSeek V4 Flash 成功在单张 AMD MI300X 上运行</h3>
+<p>开发者发布开源项目，首次实现 DeepSeek V4 Flash 模型在单个 AMD MI300X GPU 上的完整推理部署。项目采用 Apache 2.0 许可，已获 94 星，为 AMD 生态下的高密度 MoE 推理提供了重要参考实现。</p>
+<ul>
+<li><strong>日期：</strong> 2026-08-04</li>
+<li><strong>来源：</strong> GitHub (ryanzhou)</li>
+<li><strong>链接：</strong> <a href="https://github.com/ryanzhou/deepseek-v4-flash-mi300x" target="_blank">https://github.com/ryanzhou/deepseek-v4-flash-mi300x</a></li>
+</ul>
+
+<h3>2. Flowise 宣布关停，归因于 Coding Agent 的崛起</h3>
+<p>知名低代码 AI 应用构建平台 Flowise 正式宣布停止运营。团队声明指出，随着 Claude Code 等编码代理能力的快速提升，传统低代码工作流在应对复杂任务时已触及天花板，开发者正大量转向 AI 编程助手。代码库将归档为 Apache 2.0 许可，社区可自行 fork。</p>
+<ul>
+<li><strong>日期：</strong> 2026-08-05</li>
+<li><strong>来源：</strong> FlowiseAI</li>
+<li><strong>链接：</strong> <a href="https://flowiseai.com/sunset" target="_blank">https://flowiseai.com/sunset</a></li>
+</ul>
+
+<h3>3. Kimi K3 AgentENV 技术深扒：微 VM 真的能在 100ms 内 Fork 吗？</h3>
+<p>GenseeAI 发表深度技术文章，分析 Kimi K3 使用的 AgentENV 沙箱架构。文章详细解释了 Firecracker 微 VM 的脏内存捕获路径、OverlayBD 的懒加载机制，并与 TClone 的 CoW 直接共享方案进行对比。该分析澄清了 AgentENV 的 fork 延迟受脏页数量线性影响，并非真正的&quot;100ms 恒定 fork&quot;。</p>
+<ul>
+<li><strong>日期：</strong> 2026-08-03（扩展时间范围至 72 小时）</li>
+<li><strong>来源：</strong> GenseeAI</li>
+<li><strong>链接：</strong> <a href="https://www.gensee.ai/blogs/inside-agentenv-dirty-memory-microvm-fork.html" target="_blank">https://www.gensee.ai/blogs/inside-agentenv-dirty-memory-microvm-fork.html</a></li>
+</ul>
+
+<hr>
+
+<h2>【其他 AI 动态】</h2>
+
+<h3>4. 白宫将开源模型排除在 AI 能力测试新框架之外</h3>
+<p>Axios 报道，白宫最新发布的 AI 高级能力测试框架明确将开源模型排除在外。该框架旨在评估前沿 AI 系统的潜在风险，但仅覆盖闭源商业模型。此举引发开源社区对&quot;监管双轨制&quot;的担忧，认为可能抑制开源 AI 生态的发展。</p>
+<ul>
+<li><strong>日期：</strong> 2026-08-04</li>
+<li><strong>来源：</strong> Axios</li>
+<li><strong>链接：</strong> <a href="https://www.axios.com/2026/08/04/trump-ai-framework-open-models" target="_blank">https://www.axios.com/2026/08/04/trump-ai-framework-open-models</a></li>
+</ul>
+
+<h3>5. OpenAI 因歧视美国工人与美国司法部达成和解</h3>
+<p>美国司法部宣布，OpenAI 就招聘过程中歧视美国工人达成和解协议。这是 AI 行业在用工合规方面的重要标志性案件，表明监管机构正加强对 AI 公司招聘实践的审查力度。</p>
+<ul>
+<li><strong>日期：</strong> 2026-08-04</li>
+<li><strong>来源：</strong> 美国司法部</li>
+<li><strong>链接：</strong> <a href="https://www.justice.gov/opa/pr/civil-rights-division-secures-settlement-openai-discriminating-against-us-workers" target="_blank">https://www.justice.gov/opa/pr/civil-rights-division-secures-settlement-openai-discriminating-against-us-workers</a></li>
+</ul>
+
+<h3>6. Waymo 在达拉斯全面开放自动驾驶服务</h3>
+<p>Waymo 官方宣布其自动驾驶出租车服务在达拉斯向所有公众开放。这是 Waymo 继旧金山、洛杉矶、凤凰城之后，在德州最大城市的全面铺开，标志着自动驾驶出行服务在美国南部的加速扩张。</p>
+<ul>
+<li><strong>日期：</strong> 2026-08-04</li>
+<li><strong>来源：</strong> Waymo 官方博客</li>
+<li><strong>链接：</strong> <a href="https://waymo.com/blog/shorts/dallas-open-to-all/" target="_blank">https://waymo.com/blog/shorts/dallas-open-to-all/</a></li>
+</ul>
+
+<h3>7. 德州州长叫停新建数据中心，要求全面审计</h3>
+<p>德州州长 Greg Abbott 宣布暂停该州所有新数据中心的审批，并要求对现有数据中心进行能源消耗与水资源使用审计。此举直接回应 AI 算力扩张带来的基础设施压力，可能影响多家科技巨头在德州的大型数据中心建设计划。</p>
+<ul>
+<li><strong>日期：</strong> 2026-08-04</li>
+<li><strong>来源：</strong> TechCrunch</li>
+<li><strong>链接：</strong> <a href="https://techcrunch.com/2026/08/04/texas-halts-new-data-centers-as-governor-calls-for-audits/" target="_blank">https://techcrunch.com/2026/08/04/texas-halts-new-data-centers-as-governor-calls-for-audits/</a></li>
+</ul>
+
+<hr>
+
+<h2>🔭 值得持续关注的趋势</h2>
+
+<p>1. <strong>Coding Agent 取代低代码平台</strong>：Flowise 关停事件是一个强烈信号——以 Claude Code、Codex 为代表的 AI 编程代理正在重塑开发者工具链，传统低代码/无代码平台面临根本性挑战。</p>
+<p>2. <strong>AMD 推理生态加速</strong>：DeepSeek V4 在单卡 MI300X 上的成功运行，加上 AMD MI450 的持续优化，AMD GPU 在 AI 推理市场正从&quot;备选&quot;走向&quot;可行&quot;，值得关注其在企业部署中的实际落地。</p>
+<p>3. <strong>AI 基础设施监管收紧</strong>：从德州叫停数据中心到白宫限制开源模型测试，全球范围内 AI 基础设施的监管正在从&quot;鼓励发展&quot;转向&quot;审慎管控&quot;，这将对未来算力布局和开源生态产生深远影响。</p>
+</body></html>
