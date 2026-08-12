@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🤖 AI 每日简报 — 2026年8月12日</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>🤖 AI 每日简报 — 2026年8月12日</h1>
+
+<p><strong>今日总览：</strong> Meta 发布可在消费级 GPU 本地运行的 30B 编程与 Agent 模型 Muse Glimmer；AWS 与诺和诺德联合推进 AI 药物发现；Red Hat 推出将 AI 治理策略自动转化为部署代码的开源项目 asago；Google 安全团队报告首例 AI 辅助零日漏洞攻击。</p>
+
+<hr>
+
+<h2>【AI Coding / Code Models】</h2>
+
+<h3>1. Meta 发布 Muse Glimmer：可在消费级 GPU 本地运行的 AI 编程与 Agent 模型</h3>
+
+<p>Meta 旗下 Superintelligence Labs 发布了 300 亿参数的 Muse Glimmer 模型，采用 Apache 2.0 许可证，权重已上传 Hugging Face。该模型专为本地代码生成、函数调用、AI Agent 及 LLM-as-Judge 等场景设计，可在消费级 GPU 上运行，无需依赖云端基础设施。在 SWE-Bench Pro 编程基准上，Muse Glimmer 以 51.2 分领先 Qwen3.6-27B（50.2）和 Gemma4-31B（36.9）；在 MCP Atlas 通用 Agent 基准上得分 75.5，远超竞品。Meta 强调其面向需要本地处理私密数据的个人 Agent 场景。</p>
+
+<ul>
+<li><strong>发布日期：</strong> 2026年8月10日</li>
+<li><strong>来源：</strong> AI News</li>
+<li><strong>原文链接：</strong> <a href="https://www.artificialintelligence-news.com/news/meta-muse-glimmer-local-ai-agents-consumer-gpus/" target="_blank">https://www.artificialintelligence-news.com/news/meta-muse-glimmer-local-ai-agents-consumer-gpus/</a></li>
+</ul>
+
+<hr>
+
+<h2>【其他 AI 动态】</h2>
+
+<h3>2. 诺和诺德与 AWS 联手，将 Agentic AI 引入药物发现</h3>
+
+<p>诺和诺德宣布 AWS 成为其首选云服务商和战略 AI 合作伙伴，双方在伦敦设立联合创新中心。AWS 工程师将直接与诺和诺德科学家合作，利用 Amazon Bedrock 和 Bio Discovery 平台构建 AI Agent，用于靶点识别、疗法设计和研究流程自动化。此前，诺和诺德已有超过 25,000 名员工使用基于 Bedrock 的生成式 AI 平台，覆盖 2,500 多个用例；临床文档生成时间从 15 周缩短至数分钟。</p>
+
+<ul>
+<li><strong>发布日期：</strong> 2026年8月11日</li>
+<li><strong>来源：</strong> AI News</li>
+<li><strong>原文链接：</strong> <a href="https://www.artificialintelligence-news.com/news/novo-nordisk-ai-drug-discovery-aws/" target="_blank">https://www.artificialintelligence-news.com/news/novo-nordisk-ai-drug-discovery-aws/</a></li>
+</ul>
+
+<h3>3. 西门子划清边界：物理 AI 快 1000 倍，但安全关键决策仍需人类</h3>
+
+<p>西门子数字工业软件发布 Simcenter PhysicsAI，利用几何深度学习从历史仿真数据中学习，可将设计预测速度提升至传统求解器的 1000 倍。但西门子 AI 业务负责人明确表示，该技术&quot;不适用于安全关键应用&quot;，只能用于设计初期的快速探索，最终验证仍需完整的物理仿真。西门子强调其在模型中内置了防护机制，当输入与训练数据分布差异过大时模型会主动拒绝预测，防止工程师误用。</p>
+
+<ul>
+<li><strong>发布日期：</strong> 2026年8月10日</li>
+<li><strong>来源：</strong> AI News</li>
+<li><strong>原文链接：</strong> <a href="https://www.artificialintelligence-news.com/news/siemens-physics-ai-simulation-human-oversight/" target="_blank">https://www.artificialintelligence-news.com/news/siemens-physics-ai-simulation-human-oversight/</a></li>
+</ul>
+
+<h3>4. Google 报告首例疑似 AI 辅助开发的零日漏洞攻击（扩展至 72h）</h3>
+
+<p>Google 威胁情报组报告了首个&quot;高置信度&quot;认为由 AI 辅助发现和武器化的零日漏洞案例。该漏洞出现在 Python 脚本中，能够绕过广泛使用的开源系统管理工具的双因素认证。Google 的分析依据包括脚本中异常详细的指令注释、虚构的漏洞评分以及高度结构化的编码风格。2025 年 Google 追踪到 90 个野外零日漏洞，较 2024 年的 78 个进一步上升，其中企业软件和设备占 48%。</p>
+
+<ul>
+<li><strong>发布日期：</strong> 2026年8月11日</li>
+<li><strong>来源：</strong> AI News</li>
+<li><strong>原文链接：</strong> <a href="https://www.artificialintelligence-news.com/news/how-ai-is-changing-the-vulnerability-response-timeline/" target="_blank">https://www.artificialintelligence-news.com/news/how-ai-is-changing-the-vulnerability-response-timeline/</a></li>
+</ul>
+
+<h3>5. Red Hat、NVIDIA、IBM 联合推出 asago：将 AI 治理策略自动转化为代码 ⏪</h3>
+
+<p>Red Hat 发布开源项目 asago，旨在将 AI 治理策略自动转化为可投入生产的部署代码。该工作流分为四个阶段：风险映射（自动将 NIST AI RMF、OWASP LLM Top 10、EU AI Act 等框架要求映射到组织策略）、风险评估（生成针对性测试场景）、风险缓解（推荐防护措施并构建可审计的推理链条）和部署编排。项目采用 Apache 2.0 许可证，目前在 GitHub 上处于早期形成阶段。Red Hat 的目标是将合规部署从数月缩短至数天。</p>
+
+<p>&gt; ⏪ 本文发布日期为 8 月 4 日，属扩展检索范围（72 小时内）收录。</p>
+
+<ul>
+<li><strong>发布日期：</strong> 2026年8月4日</li>
+<li><strong>来源：</strong> AI News</li>
+<li><strong>原文链接：</strong> <a href="https://www.artificialintelligence-news.com/news/red-hat-nvidia-ibm-back-project-turning-ai-policy-into-code/" target="_blank">https://www.artificialintelligence-news.com/news/red-hat-nvidia-ibm-back-project-turning-ai-policy-into-code/</a></li>
+</ul>
+
+<h3>6. 阿里巴巴拟为 Qwen 开源模型引入收入分成模式 ⏪</h3>
+
+<p>据路透社报道，阿里巴巴计划在下一代 Qwen 开源模型中，对将模型作为服务提供并产生收入的商业用户引入收入分成条款。此前阿里巴巴的 Qwen3 系列采用 Apache 2.0 许可证，允许自由商用。新模式将区分轻度使用与大规模商业部署，具体分成比例尚未最终确定。此举被视为中国 AI 厂商在开源战略与商业变现之间寻求平衡的信号。</p>
+
+<p>&gt; ⏪ 本文发布日期为 8 月 7 日，属扩展检索范围（72 小时内）收录。</p>
+
+<ul>
+<li><strong>发布日期：</strong> 2026年8月7日</li>
+<li><strong>来源：</strong> AI News</li>
+<li><strong>原文链接：</strong> <a href="https://www.artificialintelligence-news.com/news/alibaba-qwen-open-source-ai-revenue-sharing/" target="_blank">https://www.artificialintelligence-news.com/news/alibaba-qwen-open-source-ai-revenue-sharing/</a></li>
+</ul>
+
+<h3>7. Stanford Evo 2 AI 模型成功生成靶向大肠杆菌的噬菌体 ⏪</h3>
+
+<p>斯坦福大学研究人员利用 Evo 2 生成式 AI 模型，从 DNA 序列中合成了近 300 种噬菌体，其中 16 种对大肠杆菌表现出强杀伤活性。研究以 ΦX174 噬菌体（约 5400 碱基对）为测试系统，Evo 2 一次性端到端生成完整基因组。研究团队开发了计算框架来筛选候选基因组，降低 DNA 合成成本。该工作展示了生成式 AI 在合成生物学领域的潜力。</p>
+
+<p>&gt; ⏪ 本文发布日期为 8 月 7 日，属扩展检索范围（72 小时内）收录。</p>
+
+<ul>
+<li><strong>发布日期：</strong> 2026年8月7日</li>
+<li><strong>来源：</strong> AI News</li>
+<li><strong>原文链接：</strong> <a href="https://www.artificialintelligence-news.com/news/stanford-evo-2-ai-model-generates-phages-against-e-coli/" target="_blank">https://www.artificialintelligence-news.com/news/stanford-evo-2-ai-model-generates-phages-against-e-coli/</a></li>
+</ul>
+
+<hr>
+
+<h2>🔭 值得持续关注的趋势</h2>
+
+<p>1. <strong>本地化 Agent 模型竞争加剧</strong> — Meta Muse Glimmer 的发布标志着 Agent 模型正从云端走向本地 GPU，编程、函数调用和私有数据处理的本地化趋势将加速，Qwen、Gemma 等对手的后续动作值得关注。</p>
+<p>2. <strong>AI 治理自动化</strong> — Red Hat asago 等项目试图将抽象的 AI 监管政策转化为可执行的代码和审计链路，EU AI Act 正式生效后，这类工具将成为企业刚需。</p>
+<p>3. <strong>AI 安全攻防进入新阶段</strong> — Google 报告的首例 AI 辅助零日攻击表明，AI 既在加速漏洞发现和修复，也在降低攻击者发现和利用漏洞的门槛，攻防双方都在拥抱 AI。</p>
+</body></html>
