@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日 AI 新闻简报 — 2026年8月29日</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>每日 AI 新闻简报 — 2026年8月29日</h1>
+
+<p>&gt; <strong>今日总览</strong>：Google 连发 Gemini 3.5 Transcribe 与 Omni 1.1 Flash 两款模型；智谱 GLM-5.3 开源引热议；法官裁定特朗普政府非法将 Anthropic 列入黑名单；htmx 4.0 发布，AI Coding Agent 安全与权限控制成焦点；Terminal-Bench-Science 科学编程基准面世。</p>
+
+<hr>
+
+<h2>🤖 AI Coding / Code Models</h2>
+
+<h3>1. htmx 4.0 正式发布</h3>
+<ul>
+<li><strong>摘要</strong>：轻量级前端框架 htmx 发布 4.0 大版本，带来全新的组件模型、增强的 WebSocket 支持和更简洁的 API。htmx 主张&quot;用 HTML 表达行为&quot;，避免过度依赖 JavaScript 框架，在 AI 辅助开发浪潮中成为开发者回归简洁架构的重要选择。</li>
+<li><strong>日期</strong>：2026-08-28</li>
+<li><strong>来源</strong>：htmx 官方博客</li>
+<li><strong>链接</strong>：<a href="https://four.htmx.org/announcements/2026-08-28-htmx-4.0.0-is-released" target="_blank">https://four.htmx.org/announcements/2026-08-28-htmx-4.0.0-is-released</a></li>
+</ul>
+
+<h3>2. Talos：带确定性权限内核的 AI Coding Agent</h3>
+<ul>
+<li><strong>摘要</strong>：Talos 是一个开源 AI 编程代理，核心创新在于每次工具调用都经过确定性策略门控——仅对精确参数授予一次、30 秒有效期的权限，并将裁决写入不可篡改的审计日志。该设计直接回应了&quot;MCP Server 以用户身份运行、拥有完整权限&quot;的安全隐患，为 AI Agent 安全操作提供了可验证的范式。</li>
+<li><strong>日期</strong>：2026-08-28</li>
+<li><strong>来源</strong>：Talos 官网 / Hacker News</li>
+<li><strong>链接</strong>：<a href="https://talos-agent.ch/" target="_blank">https://talos-agent.ch/</a></li>
+</ul>
+
+<h3>3. Terminal-Bench-Science 发布：评估 AI 编程代理的科研能力</h3>
+<ul>
+<li><strong>摘要</strong>：斯坦福大学团队在 Terminal-Bench 基础上推出 Terminal-Bench-Science 0.1，用 70 项真实科研工作流（生命科学、物理、地球科学、数学、工程）评估 AI Agent 编程能力。当前最强模型 Claude Opus 5 仅达 30% 解析率，GPT-5.6 为 22.4%，凸显 AI 在科学编程领域仍有巨大提升空间。</li>
+<li><strong>日期</strong>：2026-08-28</li>
+<li><strong>来源</strong>：Terminal-Bench-Science 官网</li>
+<li><strong>链接</strong>：<a href="https://www.terminal-bench-science.ai/announcement" target="_blank">https://www.terminal-bench-science.ai/announcement</a></li>
+</ul>
+
+<hr>
+
+<h2>🌐 其他 AI 动态</h2>
+
+<h3>4. 智谱 AI 发布 GLM-5.3 开源权重模型</h3>
+<ul>
+<li><strong>摘要</strong>：智谱 AI 在 HuggingFace 上以开放权重形式发布 GLM-5.3，在 HN 上获得 564 分高关注度。该模型在多项基准测试中表现优异，进一步丰富了开源大模型生态，也引发关于中美开源模型竞争的新一轮讨论。</li>
+<li><strong>日期</strong>：2026-08-28</li>
+<li><strong>来源</strong>：HuggingFace / zai-org</li>
+<li><strong>链接</strong>：<a href="https://huggingface.co/zai-org/GLM-5.3" target="_blank">https://huggingface.co/zai-org/GLM-5.3</a></li>
+</ul>
+
+<h3>5. 美国法官裁定特朗普政府将 Anthropic 列入黑名单属非法行为</h3>
+<ul>
+<li><strong>摘要</strong>：联邦法官裁定五角大楼将 Anthropic 列入政府黑名单的行为违法，认为该决定缺乏正当程序。Anthropic CEO Dario Amodei 此前已公开表态，公司从未主张禁止开源权重模型，相关指控不实。此裁决被视为 AI 企业与政府关系中具有里程碑意义的判例。</li>
+<li><strong>日期</strong>：2026-08-27 / 2026-08-28</li>
+<li><strong>来源</strong>：The New York Times / Reuters</li>
+<li><strong>链接</strong>：<a href="https://www.nytimes.com/2026/08/27/technology/anthropic-government-blacklisting-ruling.html" target="_blank">https://www.nytimes.com/2026/08/27/technology/anthropic-government-blacklisting-ruling.html</a></li>
+</ul>
+
+<h3>6. Google 发布 Gemini 3.5 Transcribe 智能语音转写</h3>
+<ul>
+<li><strong>摘要</strong>：Google 推出 Gemini 3.5 Transcribe，将大语言模型的语义理解能力融入语音转文字，可同时完成转录和智能标注、摘要、翻译等任务，大幅超越传统 ASR 方案。该模型面向医疗、法律、媒体等专业场景，HN 上获得 350 分。</li>
+<li><strong>日期</strong>：2026-08-26</li>
+<li><strong>来源</strong>：Google Blog</li>
+<li><strong>链接</strong>：<a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5-transcribe/" target="_blank">https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5-transcribe/</a></li>
+</ul>
+
+<h3>7. Anthropic 预览 Model Hardware Standard（MHS）</h3>
+<ul>
+<li><strong>摘要</strong>：Anthropic 发布 MHS 研究预览版，一套让 AI Agent 安全操作物理设备（显微镜、液体处理器、机械臂等）的共享规范。MHS 可将硬件集成时间从数周缩短至数小时，并支持 Agent 自主编排全天候实验。目前已与 HHMI Janelia 等科研机构合作。</li>
+<li><strong>日期</strong>：2026-08-27</li>
+<li><strong>来源</strong>：Anthropic 官方博客</li>
+<li><strong>链接</strong>：<a href="https://www.anthropic.com/news/model-hardware-standard-research-preview" target="_blank">https://www.anthropic.com/news/model-hardware-standard-research-preview</a></li>
+</ul>
+
+<hr>
+
+<h2>📈 值得持续关注的趋势</h2>
+
+<p>1. <strong>AI Coding Agent 安全与权限控制</strong>：从&quot;AI Agent Has Root&quot;的安全警告到 Talos 的权限内核方案，AI 编程代理在获得 Shell 访问权限时的安全边界成为社区核心议题，相关工具和标准正在快速涌现。</p>
+
+<p>2. <strong>开源大模型军备竞赛</strong>：GLM-5.3、Qwen3.8-Flash-Next 等中/美开源模型接连发布，Dario Amodei 关于开源权重模型的立场声明进一步引发政策层面讨论，开源与闭源的路线之争持续升温。</p>
+
+<p>3. <strong>AI Agent 从软件走向物理世界</strong>：Anthropic MHS 和 Terminal-Bench-Science 分别从硬件操作和科研编程两个维度推动 AI Agent 进入真实物理世界，Agent 能力边界正在从&quot;对话/代码&quot;向&quot;实验室/工厂&quot;延伸。</p>
+</body></html>
