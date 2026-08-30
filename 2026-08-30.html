@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧠 每日 AI 新闻简报 — 2026年8月30日</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>🧠 每日 AI 新闻简报 — 2026年8月30日</h1>
+
+<p><strong>今日总览：</strong> OpenAI 宣布终止与 Cursor 的 API 合作引发 AI 编程工具格局巨震；GLM-5.3 与腾讯混元 Hy4 两大开源模型同日发布；美国法官裁定五角大楼对 Anthropic 的封杀非法；Debian 社区投票允许负责任使用生成式 AI。</p>
+
+<hr>
+
+<h2>🤖 AI Coding / Code Models</h2>
+
+<h3>1. OpenAI 宣布终止与 Cursor 合作，因 SpaceX 收购引发利益冲突</h3>
+<p>OpenAI 于 8 月 29 日正式公告，因 Cursor 被 SpaceX 收购后构成竞争关系，将终止与 Cursor 的 API 合作协议。Cursor 是目前最热门的 AI 编程助手之一，此前深度依赖 OpenAI 的 GPT 系列模型。此次断供将迫使 Cursor 转向 Anthropic 或 xAI 等替代模型提供商，可能重塑 AI 编程工具的市场格局。</p>
+<ul>
+<li>📅 2026-08-29</li>
+<li>📰 OpenAI 官方博客</li>
+<li>🔗 <a href="https://openai.com/index/our-decision-on-cursor-following-its-acquisition-by-spacex/" target="_blank">https://openai.com/index/our-decision-on-cursor-following-its-acquisition-by-spacex/</a></li>
+</ul>
+
+<h3>2. AI 编程代理安全警示：你的 MCP 服务器拥有 Root 权限</h3>
+<p>一篇引发广泛讨论的技术分析文章指出，当前 AI 编程代理（如 Claude Code）通过 MCP 服务器执行 Shell 命令时，实际以用户身份运行，可无限制访问 SSH 密钥、云凭证、浏览器 Cookies 等敏感数据。文章呼吁开发者正视 AI Agent 的权限隔离问题，推动沙箱化运行方案的落地。</p>
+<ul>
+<li>📅 2026-08-28</li>
+<li>📰 Infernal Code</li>
+<li>🔗 <a href="https://infernalcode.com/posts/your-ai-agent-has-root/" target="_blank">https://infernalcode.com/posts/your-ai-agent-has-root/</a></li>
+</ul>
+
+<h3>3. OpenAI Python SDK 迁移至 HTTPX2，提升性能与可维护性</h3>
+<p>OpenAI 官方 Python 库宣布从 HTTPX 迁移至 HTTPX2（由 Pydantic 团队开发的新一代 HTTP 客户端），以提升连接性能和代码可维护性。该迁移涉及大量开发者，是 AI 开发者工具链的一项重要更新。</p>
+<ul>
+<li>📅 2026-08-28</li>
+<li>📰 GitHub / OpenAI</li>
+<li>🔗 <a href="https://github.com/openai/openai-python/blob/main/httpx2.md" target="_blank">https://github.com/openai/openai-python/blob/main/httpx2.md</a></li>
+</ul>
+
+<hr>
+
+<h2>🌐 其他 AI 动态</h2>
+
+<h3>4. 智谱 GLM-5.3 开源：国产大模型再升级</h3>
+<p>智谱 AI 在 Hugging Face 上以开放权重形式发布 GLM-5.3，在 HN 上获得 780 分的热议。该模型在多项基准测试中表现优异，延续了 GLM 系列在开源社区中的影响力。</p>
+<ul>
+<li>📅 2026-08-28</li>
+<li>📰 Hugging Face / ZAI Org</li>
+<li>🔗 <a href="https://huggingface.co/zai-org/GLM-5.3" target="_blank">https://huggingface.co/zai-org/GLM-5.3</a></li>
+</ul>
+
+<h3>5. 腾讯发布并开源混元 Hy4 Preview：770B 参数 MoE 架构</h3>
+<p>腾讯于 8 月 28 日正式发布混元 Hy4 预览版并开源，采用 MoE（混合专家）架构，总参数量 770B，激活参数 49B，支持超 100 万 Token 上下文窗口。这是腾讯在开源大模型领域的一次重量级布局。</p>
+<ul>
+<li>📅 2026-08-28</li>
+<li>📰 Tencent 官方</li>
+<li>🔗 <a href="https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/" target="_blank">https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/</a></li>
+</ul>
+
+<h3>6. 美国法官裁定：五角大楼对 Anthropic 的封杀行为违法</h3>
+<p>联邦法官裁定特朗普政府将 Anthropic 列入黑名单的行为违法，认为五角大楼缺乏正当程序。该裁决对 Anthropic 与政府机构的合作前景具有重大意义，也引发了关于 AI 公司与政府关系的广泛讨论。</p>
+<ul>
+<li>📅 2026-08-28</li>
+<li>📰 Reuters / NYT</li>
+<li>🔗 <a href="https://www.reuters.com/legal/government/us-judge-blocks-pentagons-anthropic-blacklisting-2026-08-28/" target="_blank">https://www.reuters.com/legal/government/us-judge-blocks-pentagons-anthropic-blacklisting-2026-08-28/</a></li>
+</ul>
+
+<h3>7. Debian 社区投票通过&quot;负责任使用生成式 AI&quot;决议</h3>
+<p>Debian 项目通过全体投票，既不禁止也不鼓励在开发、维护和文档编写中使用生成式 AI 工具，但强调贡献者必须对 AI 辅助产出的质量、正确性和合规性承担全部责任。票结果中，全面禁止 AI 的提案排名垫底。</p>
+<ul>
+<li>📅 2026-08-29</li>
+<li>📰 LWN.net</li>
+<li>🔗 <a href="https://lwn.net/Articles/1091231/" target="_blank">https://lwn.net/Articles/1091231/</a></li>
+</ul>
+
+<h3>8. Alphabet 单日蒸发 7000 亿美元市值，AI 支出引发投资者担忧</h3>
+<p>谷歌母公司 Alphabet 因 AI 基础设施投入持续攀升而引发市场恐慌，股价单日暴跌，市值蒸发约 7000 亿美元。投资者开始质疑科技巨头在 AI 领域的巨额资本开支何时能转化为实际回报。</p>
+<ul>
+<li>📅 2026-08-27</li>
+<li>📰 Semafor</li>
+<li>🔗 <a href="https://www.semafor.com/article/08/27/2026/alphabet-stock-sheds-700b-as-ai-bills-climb" target="_blank">https://www.semafor.com/article/08/27/2026/alphabet-stock-sheds-700b-as-ai-bills-climb</a></li>
+</ul>
+
+<hr>
+
+<h2>📈 值得持续关注的趋势</h2>
+
+<p>1. <strong>AI 编程工具格局重塑</strong>：OpenAI 与 Cursor 的决裂预示着 AI 编程助手市场将进入重新洗牌阶段，模型提供商与工具开发商之间的竞合关系日趋复杂，开发者需关注工具链的稳定性与模型切换成本。</p>
+
+<p>2. <strong>中国开源大模型密集发布</strong>：GLM-5.3 与腾讯 Hy4 的同期开源表明中国 AI 公司在开源战略上持续加码，MoE 架构与超长上下文正在成为新模型的标配特征。</p>
+
+<p>3. <strong>AI 监管与法律边界加速成型</strong>：Anthropic 胜诉案和 Debian 社区投票反映出，从政府监管到开源社区治理，社会各界正在积极划定 AI 使用的法律与伦理边界。</p>
+</body></html>
