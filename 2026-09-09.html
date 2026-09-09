@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🗞️ AI 每日简报 — 2026年9月9日</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>🗞️ AI 每日简报 — 2026年9月9日</h1>
+
+<p>&gt; <strong>今日总览</strong>：OpenAI 声称用下一代模型解出 Navier-Stokes 千禧年难题，却引发学术争议；Mistral 完成 €30 亿融资加码开源；美国正式指控中国 AI 公司系统性蒸馏美国模型；NVIDIA 发布 CUDA Rust 双轨 GPU 编程方案。</p>
+
+<hr>
+
+<h2>🧑‍💻 AI Coding / Code Models</h2>
+
+<p><strong>1. NVIDIA 发布 CUDA Rust：双轨 GPU 内核编程方案</strong></p>
+
+<p>NVIDIA 正式推出 CUDA Rust，提供两条在 Rust 中编写 GPU 内核的路径：`cuda-oxide` 通过自定义 rustc 后端将 SIMT 风格内核直接编译为 PTX；`cutile-rs` 支持 Tile-based GPU 编程，可在 stable Rust 1.89+ 上运行。两者均在编译时强制执行内存安全，cutile-rs 已用于 HuggingFace Grout 推理引擎和 mistral.rs。此举标志着 Rust 在 AI 系统底层编程中的主流化。</p>
+
+<p>📅 2026年9月8日 | 来源：NVIDIA Technical Blog</p>
+<p>🔗 <a href="https://developer.nvidia.com/blog/introducing-cuda-rust-two-tracks-for-writing-gpu-kernels/" target="_blank">https://developer.nvidia.com/blog/introducing-cuda-rust-two-tracks-for-writing-gpu-kernels/</a></p>
+
+<p><strong>2. Dan Luu 发布编程 Agent 测试技术深度评测</strong></p>
+
+<p>知名技术博主 Dan Luu 发布了编程 Agent 测试/验证技术有效性的大型评测，测试了 26 种提示条件（TDD、属性测试、形式化验证、模糊测试等）和 4 个技能包在 Zstd 实现等任务上的表现。TDD 在大多数条件下表现不佳，而形式化方法（Lean 4、Verus、Kani）表现突出。该研究为 &quot;让 Agent 写出更好代码&quot; 提供了数据驱动的实践指南。</p>
+
+<p>📅 2026年9月8日 | 来源：danluu.com</p>
+<p>🔗 <a href="https://danluu.com/agentic-testing/" target="_blank">https://danluu.com/agentic-testing/</a></p>
+
+<p><strong>3. Kimi K3 (2.8T MoE) 在 MacBook Pro 上以 1 token/s 运行</strong></p>
+
+<p>开源项目 Deltafin 实现了将 Kimi K3（2.8T 参数的 MoE 模型）从四块 SSD 流式加载到 Apple Silicon MacBook Pro 上运行，达到约 1 token/s 的推理速度。该项目展示了超大 MoE 模型在消费级硬件上进行本地推理的可行性，对本地 AI 开发者和隐私敏感场景具有重要参考价值。</p>
+
+<p>📅 2026年9月8日 | 来源：GitHub (argonautlabsai/deltafin)</p>
+<p>🔗 <a href="https://github.com/argonautlabsai/deltafin" target="_blank">https://github.com/argonautlabsai/deltafin</a></p>
+
+<hr>
+
+<h2>🌐 其他 AI 动态</h2>
+
+<p><strong>4. OpenAI 声称解出 Navier-Stokes 千禧年难题，NYU 数学家指控「手段肮脏」</strong></p>
+
+<p>OpenAI 宣布其未发布的下一代模型在一周内完整证明了 Navier-Stokes 存在性与光滑性——七大千禧年数学难题之一，消耗 3000 亿输出 token（按 Astra 费率约 $2250 万）。然而 NYU 数学家 Tristan Buckmaster 公开指控 OpenAI 在其团队初步成果基础上&quot;抢跑&quot;，其声明称 OpenAI 在得知其研究进展后加速推进并抢先发布。事件引发学术界对 AI 公司研究伦理的广泛讨论。</p>
+
+<p>📅 2026年9月8日 | 来源：TechCrunch</p>
+<p>🔗 <a href="https://techcrunch.com/2026/09/08/openai-fought-dirty-on-career-making-math-problem-says-nyu-mathematician/" target="_blank">https://techcrunch.com/2026/09/08/openai-fought-dirty-on-career-making-math-problem-says-nyu-mathematician/</a></p>
+
+<p><strong>5. Mistral 完成 €30 亿融资，押注主权开源 AI</strong></p>
+
+<p>法国 AI 公司 Mistral 宣布完成 €30 亿（约 $33 亿）融资，将用于打造主权开源权重的前沿 AI 模型。Mistral 强调欧洲 AI 独立性的战略意义，计划在开源和商业模型双线推进，与 OpenAI 和 Anthropic 的闭源路线形成鲜明对比。</p>
+
+<p>📅 2026年9月8日 | 来源：Mistral AI</p>
+<p>🔗 <a href="https://mistral.ai/news/mistral-makes-sovereign-open-weight-ai-to-frontier/" target="_blank">https://mistral.ai/news/mistral-makes-sovereign-open-weight-ai-to-frontier/</a></p>
+
+<p><strong>6. 美国 NSA/CISA/FBI 联合指控中国 AI 公司系统性蒸馏美国模型</strong></p>
+
+<p>美国国家安全局、网络安全局和 FBI 发布联合网络安全咨询，指控 DeepSeek、Moonshot AI、阿里巴巴、MiniMax、StepFun 等中国 AI 公司自 2024 年底以来，通过数百万次请求系统性蒸馏 Anthropic Claude、OpenAI ChatGPT、Google Gemini 和 xAI Grok 等美国前沿模型。报告称蒸馏是中国 AI 产业政策的&quot;核心而非补充&quot;策略。DeepSeek R1 和 R3 的训练数据据称蒸馏了 4 个版本的 Claude、2 个版本 Gemini、5 个版本 ChatGPT 及 Grok 4。</p>
+
+<p>📅 2026年9月8日 | 来源：CyberScoop</p>
+<p>🔗 <a href="https://cyberscoop.com/us-accuses-chinese-ai-companies-distillation/" target="_blank">https://cyberscoop.com/us-accuses-chinese-ai-companies-distillation/</a></p>
+
+<p><strong>7. Google DeepMind 发布 AlphaGenome Atlas 高分辨率人类 DNA 图谱</strong></p>
+
+<p>Google DeepMind 推出 AlphaGenome Atlas，这是一个高分辨率的人类 DNA 功能图谱，覆盖基因组中所有功能性元件。该成果基于大规模深度学习模型，旨在加速疾病研究和药物发现，标志着 AI 在基因组学领域的又一里程碑。</p>
+
+<p>📅 2026年9月8日 | 来源：Google Blog</p>
+<p>🔗 <a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/alphagenome-atlas/" target="_blank">https://blog.google/innovation-and-ai/models-and-research/google-deepmind/alphagenome-atlas/</a></p>
+
+<p><strong>8. Inception Labs 发布 Mercury 2.5：扩散 LLM 达到 1107 token/s</strong></p>
+
+<p>Inception Labs 发布 Mercury 2.5，其最强大的扩散语言模型，在 NVIDIA GPU 上达到 1107 token/s 的推理速度。质量比 Mercury 2 提升 40%，与 GPT-5.6 Luna (Low)、Gemini 3.5 Flash-Lite 等前沿模型竞争，价格低至 $0.20/M 输入 token。该模型已在搜索、语音和编程产品中投入生产使用。</p>
+
+<p>📅 2026年9月8日 | 来源：Inception Labs</p>
+<p>🔗 <a href="https://www.inceptionlabs.ai/blog/introducing-mercury-2-5" target="_blank">https://www.inceptionlabs.ai/blog/introducing-mercury-2-5</a></p>
+
+<hr>
+
+<h2>📈 值得持续关注的趋势</h2>
+
+<p>1. <strong>AI 攻克数学里程碑的伦理争议</strong>：继 Anthropic 的费马大定理形式化证明后，OpenAI 的 Navier-Stokes 声明再次引发&quot;AI 辅助研究&quot;的学术伦理讨论。AI 公司在数学领域的军备竞赛正从合作走向对抗，研究优先权、透明度和公平性问题亟待行业规范。</p>
+
+<p>2. <strong>模型蒸馏成为地缘政治新战场</strong>：美国首次以联合政府咨询形式公开指控中国 AI 公司系统性蒸馏，标志着 AI 技术竞争正式进入国家安全话语体系。这一趋势可能引发更严格的 API 使用限制和出口管控。</p>
+
+<p>3. <strong>扩散 LLM 的崛起</strong>：Inception Labs 的 Mercury 2.5 证明扩散模型在语言生成领域正快速追赶自回归 Transformer，在推理速度上具有显著优势。结合 NVIDIA 对 Rust GPU 编程的投入，AI 基础设施栈正在经历架构和语言层面的双重变革。</p>
+</body></html>
