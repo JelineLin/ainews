@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日 AI 新闻简报 · 2026-09-16</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>每日 AI 新闻简报 · 2026-09-16</h1>
+
+<p><strong>今日总览</strong>：Coding Agent 生态继续快速迭代——Claude Code 与 Gemini CLI 同日发布新版本，Meta 把 WhatsApp Business 接入 MCP，让编码 Agent 直接接管企业配置。模型侧 Gemini 3.8 Live 上线；行业侧三大实验室被曝已就 AI 安全闭门磋商数周，而 Cohere CEO 公开抨击&quot;减速呼吁&quot;是卡特尔行为。</p>
+
+<hr>
+
+<h2>【AI Coding / Code Models】</h2>
+
+<h3>1. Claude Code v2.1.273 发布：新增网关诊断请求头、支持远程会话分叉</h3>
+<p>Anthropic 发布 v2.1.273，为 LLM 网关新增 `x-claude-code-request-class`、`x-claude-code-agent-type`、`x-claude-code-compaction` 等上下文压缩与工具耗时诊断请求头（需 `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1` 开启）。同时支持从 Claude App 对 `--remote-control` 启动的会话进行分叉（在本机作为后台会话运行），并集中修复了 MCP 断连重连提示、权限校验绕过、Bedrock/Vertex 鉴权 401、上下文计量器重复计数导致 auto-compact 提前触发等大量问题。</p>
+<ul>
+<li><strong>发布日期</strong>：2026-09-15</li>
+<li><strong>来源</strong>：GitHub · anthropics/claude-code Releases</li>
+<li><strong>原文</strong>：<a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.273" target="_blank">https://github.com/anthropics/claude-code/releases/tag/v2.1.273</a></li>
+</ul>
+
+<h3>2. Meta 推出 WhatsApp Business Tools MCP：编码 Agent 可代企业完成接入配置</h3>
+<p>Meta 发布 WhatsApp Business Tools MCP 服务器，把 Claude、Cursor、Codex、ChatGPT 等编码 Agent 直接连接到 WhatsApp Business Platform。此前开发者需在 Developer Console、Business Manager、API 文档与编辑器之间反复切换，现在只需用自然语言向自选 Agent 描述需求即可完成开户与消息配置。这是 Meta 在广告管理、应用配置之外推出的又一个 MCP 服务器，标志着&quot;企业后台配置&quot;正成为 Coding Agent 的正式战场。</p>
+<ul>
+<li><strong>发布日期</strong>：2026-09-15</li>
+<li><strong>来源</strong>：TechCrunch</li>
+<li><strong>原文</strong>：<a href="https://techcrunch.com/2026/09/15/meta-now-lets-ai-agents-handle-the-boring-parts-of-whatsapp-business-setup/" target="_blank">https://techcrunch.com/2026/09/15/meta-now-lets-ai-agents-handle-the-boring-parts-of-whatsapp-business-setup/</a></li>
+</ul>
+
+<h3>3. Gemini CLI 发布 v0.60.0 稳定版与 v0.61.0-preview.0：重点修补提示注入</h3>
+<p>Google 的 gemini-cli 在 9 月 15 日同时发布 v0.60.0 稳定版与 v0.61.0-preview.0 预览版。预览版安全修复是重点：修补了通过构建文件修改与不可信参数实施的<strong>间接提示注入</strong>、加固沙箱文件系统边界与运行时状态隔离，并修复显式版本化 Flash 模型 ID 被覆盖的问题。对把 CLI Agent 接入 CI 与多用户环境的团队而言，这轮沙箱加固值得关注。</p>
+<ul>
+<li><strong>发布日期</strong>：2026-09-15</li>
+<li><strong>来源</strong>：GitHub · google-gemini/gemini-cli Releases</li>
+<li><strong>原文</strong>：<a href="https://github.com/google-gemini/gemini-cli/releases/tag/v0.61.0-preview.0" target="_blank">https://github.com/google-gemini/gemini-cli/releases/tag/v0.61.0-preview.0</a></li>
+<li><strong>附</strong>：<a href="https://github.com/google-gemini/gemini-cli/releases/tag/v0.60.0" target="_blank">https://github.com/google-gemini/gemini-cli/releases/tag/v0.60.0</a></li>
+</ul>
+
+<hr>
+
+<h2>【其他 AI 动态】</h2>
+
+<h3>4. Google DeepMind 发布 Gemini 3.8 Live 与 3.8 Live Extended Thinking</h3>
+<p>DeepMind 推出 Gemini 3.8 Live 及带扩展思考能力的 3.8 Live Extended Thinking 两款实时模型，延续其在&quot;低延迟语音/视频实时交互 + 深度推理&quot;双轨上的产品布局。这是 9 月初 3.8 Flash 系列之后 Gemini 3.8 家族的又一次扩展。</p>
+<ul>
+<li><strong>发布日期</strong>：2026-09-15</li>
+<li><strong>来源</strong>：Google DeepMind 官方博客</li>
+<li><strong>原文</strong>：<a href="https://deepmind.google/blog/introducing-gemini-3-8-live-and-3-8-live-extended-thinking/" target="_blank">https://deepmind.google/blog/introducing-gemini-3-8-live-and-3-8-live-extended-thinking/</a></li>
+</ul>
+
+<h3>5. OpenAI、Anthropic、Google 被曝已就 AI 安全闭门磋商数周</h3>
+<p>OpenAI 全球政策负责人 Chris Lehane 向记者透露，公司已与竞争对手 Anthropic 和 Google DeepMind 在 AI 安全议题上合作数周，其本人正于华盛顿与立法者推进应对&quot;灾难性风险&quot;的工作。该消息紧随 Anthropic CEO Dario Amodei 呼吁全行业协同放缓前沿 AI 节奏的文章之后，显示&quot;竞争 + 安全协作&quot;的双轨格局正在形成。</p>
+<ul>
+<li><strong>发布日期</strong>：2026-09-15</li>
+<li><strong>来源</strong>：TechCrunch（首报：Bloomberg）</li>
+<li><strong>原文</strong>：<a href="https://techcrunch.com/2026/09/15/openai-anthropic-google-have-been-in-talks-on-ai-safety-for-weeks/" target="_blank">https://techcrunch.com/2026/09/15/openai-anthropic-google-have-been-in-talks-on-ai-safety-for-weeks/</a></li>
+</ul>
+
+<h3>6. Cohere CEO：呼吁协同&quot;减速&quot;等同卡特尔行为</h3>
+<p>Cohere CEO Aidan Gomez 公开批评近期 AI 高管集体呼吁放缓前沿模型研发的做法，称多家公司协调放慢节奏已构成&quot;卡特尔行为&quot;。此番表态与 Nvidia、微软及美国政界的反击形成同一声部，是产业内对 Amodei《We Must Pace the Frontier》路线的又一次正面回应。</p>
+<ul>
+<li><strong>发布日期</strong>：2026-09-15</li>
+<li><strong>来源</strong>：The Globe and Mail</li>
+<li><strong>原文</strong>：<a href="https://www.theglobeandmail.com/business/technology/article-cohere-ceo-aidan-gomez-criticizes-calls-for-ai-slowdown/" target="_blank">https://www.theglobeandmail.com/business/technology/article-cohere-ceo-aidan-gomez-criticizes-calls-for-ai-slowdown/</a></li>
+</ul>
+
+<h3>7. AIUC 完成 4000 万美元 A 轮：为企业 Agent 上&quot;承保式&quot;治理</h3>
+<p>由 Anthropic 早期员工 Rune Kvist 与前 METR COO Rajiv Dattani 联合创办的 AIUC（Artificial Intelligence Underwriting Company）宣布完成 4000 万美元 A 轮，由 Ribbit Capital 领投，累计融资 5500 万美元。公司以&quot;承保&quot;思路为企业级 AI Agent 提供风险评级与治理方案，客户包括 Cursor、Lovable、Harvey 和 ElevenLabs。</p>
+<ul>
+<li><strong>发布日期</strong>：2026-09-15</li>
+<li><strong>来源</strong>：TechCrunch</li>
+<li><strong>原文</strong>：<a href="https://techcrunch.com/2026/09/15/early-anthropic-hire-former-metr-coo-have-found-a-way-to-rein-in-rogue-ai-agents/" target="_blank">https://techcrunch.com/2026/09/15/early-anthropic-hire-former-metr-coo-have-found-a-way-to-rein-in-rogue-ai-agents/</a></li>
+</ul>
+
+<h3>8. Google 更新 AI &amp; Economy ATLAS：开放交互式数据体验</h3>
+<p>Google 发布 AI 与经济 ATLAS 数据集的新一批洞察与可视化，并上线开放访问的交互式体验。数据显示：印度创意产业的 AI 使用率高于全球平均，艺术/设计/媒体占其工作相关 AI 使用的 19%（为全球均值 1.6 倍）；美国在技术型 AI 采用上领先，计算机与数学类职业占其工作相关 AI 使用的 30%，是全球其他地区的两倍。</p>
+<ul>
+<li><strong>发布日期</strong>：2026-09-15</li>
+<li><strong>来源</strong>：Google 官方博客</li>
+<li><strong>原文</strong>：<a href="https://blog.google/innovation-and-ai/technology/ai/ai-economy-atlas-september-2026/" target="_blank">https://blog.google/innovation-and-ai/technology/ai/ai-economy-atlas-september-2026/</a></li>
+</ul>
+
+<hr>
+
+<h2>值得持续关注的趋势</h2>
+
+<p>1. <strong>Coding Agent 的&quot;企业后台&quot;入口之争</strong>：Meta 用 MCP 把 WhatsApp Business 配置交给 Claude/Cursor/Codex，叠加 Claude Code 与 Gemini CLI 的密集迭代，MCP 正从&quot;模型上下文协议&quot;演变为厂商争夺企业工作流入口的标准接口。</p>
+<p>2. <strong>Agent 安全从研究走向商品化</strong>：DeepMind 吹哨实验、AIUC 的承保式治理、Gemini CLI 的沙箱与提示注入修补指向同一方向——Agent 的权限边界与相互监督正在形成可商业化的一层。</p>
+<p>3. <strong>&quot;减速&quot;论战的产业分裂</strong>：一边是 OpenAI/Anthropic/Google 的安全磋商，另一边是 Cohere、Nvidia 与政界的明确反击，未来数周监管表态与实验室公告值得跟踪。</p>
+
+<p>*说明：本简报已对照前两日已发布内容去重，未收录 9-14/9-15 已发布的 Claude Code v2.1.271、Anthropic CI 重构、GPT-5.6 Luna 评测、Perplexity×Astra、Apple Siri 接入 Claude 等条目。*</p>
+</body></html>
