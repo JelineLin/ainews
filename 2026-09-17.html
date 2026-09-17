@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 日报 · 2026-09-17</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>AI 日报 · 2026-09-17</h1>
+
+<p><strong>今日总览</strong>：Stanford 发布 Paper2Agent，把论文自动转成 MCP 服务器供 Claude Code 直接调用；Anthropic 合并 Claude 对话与 Cowork 界面，并把&quot;嵌入式第三方评估员&quot;提上议程；Google 开放 Home MCP，Agent 可接管智能家居。Coding 侧另有 Claude Code v2.1.273 与 GitHub AI Scan 解绑 CodeQL。</p>
+
+<hr>
+
+<h2>【AI Coding / Code Models】</h2>
+
+<h3>1. Stanford 发布 Paper2Agent：把论文自动变成 MCP 服务器，Claude Code 可直调</h3>
+<p>Stanford 团队（Jiacheng Miao、James Zou）在 Nature 发表 Paper2Agent，把一篇论文及其代码库自动转换为一个 MCP 服务器，任何 MCP 兼容 Agent（如 Claude Code、Codex）都可用自然语言复现论文方法，作者称之为&quot;虚拟通讯作者&quot;。流水线基于 Claude Code 的 Agent SDK，由编排器调度子 Agent 完成代码下载、隔离环境搭建、教程执行、工具抽取与测试验证六步；验证门槛严格到&quot;文件存在、数值误差 3% 以内、图像感知哈希汉明距离小于 20&quot;才算通过。基准上 74 篇论文 300 道题得分 91.2%（Claude + Repo 为 80.3%），单次查询成本 0.20 美元、1.6 分钟，并 100% 拒绝越界提问。代码 MIT 许可，已作为 skill 安装到 Claude Code / Codex。</p>
+<ul>
+<li><strong>日期</strong>：2026-09-16</li>
+<li><strong>来源</strong>：MarkTechPost（Paper2Agent 论文发表于 Nature）</li>
+<li><strong>链接</strong>：<a href="https://www.marktechpost.com/2026/09/16/stanford-researchers-release-paper2agent-turning-research-papers-into-ai-agents-that-reproduce-results-and-run-on-new-data/" target="_blank">https://www.marktechpost.com/2026/09/16/stanford-researchers-release-paper2agent-turning-research-papers-into-ai-agents-that-reproduce-results-and-run-on-new-data/</a></li>
+</ul>
+
+<h3>2. Claude Code v2.1.273 发布：新增网关诊断请求头、支持遥控会话分叉</h3>
+<p>Anthropic 发布 v2.1.273，为 LLM 网关新增 `x-claude-code-request-class`、`x-claude-code-agent-type`、`x-claude-code-compaction`、`x-claude-code-context-compacted` 等诊断请求头（需 `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1` 开启），便于企业侧观测上下文压缩与工具耗时。新增对 `claude --remote-control` 会话从 Claude App 分叉的能力（分叉在本机作为后台会话运行），并修复了 MCP 中途断连重连放弃时的提示、Bash 权限检查在 `blockReadsOutsideWorkingDirectories` 下的绕过漏洞，以及 Bedrock/Vertex/Foundry 的 401/403 报错指引。</p>
+<ul>
+<li><strong>日期</strong>：2026-09-15（发布）；2026-09-16 可核验</li>
+<li><strong>来源</strong>：GitHub · anthropics/claude-code Releases</li>
+<li><strong>链接</strong>：<a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.273" target="_blank">https://github.com/anthropics/claude-code/releases/tag/v2.1.273</a></li>
+</ul>
+
+<h3>3. GitHub AI Scan 解绑 CodeQL：PR 安全扫描门槛降低</h3>
+<p>GitHub 更新 code scanning 的 AI Scan 能力，现在无需在仓库启用 CodeQL default setup，也可对 pull request 运行 AI 安全扫描，用于发现安全漏洞。此前该功能仅限已配置 CodeQL default setup 的仓库；现在只要在仓库、组织或企业层启用 code scanning 与 AI Scan，便会自动覆盖更多符合条件的仓库，无需新增配置步骤。该变更对持有 GitHub Advanced Security 的组织仓库与个人仓库开放公共预览，GitHub Enterprise Server 暂不支持。</p>
+<ul>
+<li><strong>日期</strong>：2026-09-16</li>
+<li><strong>来源</strong>：GitHub Blog · Changelog</li>
+<li><strong>链接</strong>：<a href="https://github.blog/changelog/2026-09-16-code-scanning-ai-scan-no-longer-requires-codeql-default-setup" target="_blank">https://github.blog/changelog/2026-09-16-code-scanning-ai-scan-no-longer-requires-codeql-default-setup</a></li>
+</ul>
+
+<hr>
+
+<h2>【其他 AI 动态】</h2>
+
+<h3>4. Anthropic 把 Claude 对话与 Cowork 合并为单一界面</h3>
+<p>Anthropic 将 Claude 聊天前端与 Cowork 合并进同一窗口，用户可在同一界面内访问对话、Cowork 与 Artifacts（交互式工作区），此前为网站与原型设计推出的 Claude Design 也可在任意位置调用。官方称此前用户常困惑&quot;该在哪个标签页做哪件事&quot;，新设计由 Claude 自动路由请求，无需手动切换；同时新增演示文稿与文档功能，可生成/编辑/演示幻灯片并导出为 PDF 或 PowerPoint，生成物可链接分享并在手机上编辑。功能先在 Pro 与 Max 套餐的 Web、桌面与移动端推送。</p>
+<ul>
+<li><strong>日期</strong>：2026-09-16</li>
+<li><strong>来源</strong>：TechCrunch</li>
+<li><strong>链接</strong>：<a href="https://techcrunch.com/2026/09/16/anthropic-merges-claude-chat-and-cowork-in-one-interface/" target="_blank">https://techcrunch.com/2026/09/16/anthropic-merges-claude-chat-and-cowork-in-one-interface/</a></li>
+</ul>
+
+<h3>5. Anthropic 与 OpenAI 同意&quot;嵌入式第三方评估员&quot;，独立性存疑</h3>
+<p>Dario Amodei 上周末发表长文，提议在所有前沿 AI 公司内部嵌入第三方评估员（如 METR、Redwood Research），赋予其上报安全事件、评估模型对齐度并对外公开结论的权力，Anthropic 单方面先行承诺；Sam Altman 随后表示 OpenAI 也会跟进。措施包括为评估员提供&quot;办公桌、门禁卡、公司笔记本&quot;及&quot;与内部风险评估团队大致相当的工作区、工具与权限&quot;。受访的第三方评估员总体欢迎，但强调细节待定、最好由立法背书，否则难以判断自己是独立监督者还是受雇于 AI 公司的供应商——随着模型越来越能识别&quot;正在被评估&quot;，深入训练过程取证变得更重要。</p>
+<ul>
+<li><strong>日期</strong>：2026-09-16</li>
+<li><strong>来源</strong>：TechCrunch</li>
+<li><strong>链接</strong>：<a href="https://techcrunch.com/2026/09/16/anthropic-and-openai-want-to-embed-safety-evaluators-will-they-really-be-independent/" target="_blank">https://techcrunch.com/2026/09/16/anthropic-and-openai-want-to-embed-safety-evaluators-will-they-really-be-independent/</a></li>
+</ul>
+
+<h3>6. Google 开放 Home MCP：AI Agent 可接管智能家居设备</h3>
+<p>Google 推出 Google Home 生态的 MCP 服务器早期访问，任何支持 MCP 的 AI Agent（Claude、ChatGPT、Google Antigravity 等）都能安全地操作智能家居设备并读取事件历史，用户可用自然语言查看摄像头摘要、监控家居活动、控制设备，甚至自建定制化家居看板。接入需先创建 Google Cloud 项目并配置 Home MCP，再把 MCP 配置交给所选 Agent 完成登录与授权；支持 Nest 门铃/恒温器及&quot;Works with Google Home&quot;（Matter）设备。访问权限将自发布日起数周内向美国 Google Home Premium Advanced（20 美元/月）订阅用户逐步开放。</p>
+<ul>
+<li><strong>日期</strong>：2026-09-16</li>
+<li><strong>来源</strong>：TechCrunch</li>
+<li><strong>链接</strong>：<a href="https://techcrunch.com/2026/09/16/your-ai-agents-can-now-control-your-google-home-devices/" target="_blank">https://techcrunch.com/2026/09/16/your-ai-agents-can-now-control-your-google-home-devices/</a></li>
+</ul>
+
+<h3>7. 4B 小模型经 Agent 强化学习，跑出比 Postgres 快 81% 的查询计划</h3>
+<p>开发者 Rohan Bansal 公布实验：用 agentic 强化学习（基于 Qwen 4B）学习 Postgres 查询优化中的 join 顺序选择，让模型生成 hint 形式的候选计划，由 Postgres 实际执行并回传执行时间作为标量奖励，再用 LoRA 做策略更新。他详细剖析了测量陷阱——由于执行时间呈双峰分布，单纯取三次中位数会在大约 20% 的情况下制造&quot;幽灵加速/减速&quot;信号，需要按噪声结构设计奖励。最终模型在 Join Order Benchmark 等负载上产出显著更快的计划，相对 Postgres 默认计划达到约 81% 的加速幅度，并讨论了与前沿模型对照的效果。</p>
+<ul>
+<li><strong>日期</strong>：2026-09-16</li>
+<li><strong>来源</strong>：Rohan Bansal 技术博客（Hacker News 首页热帖）</li>
+<li><strong>链接</strong>：<a href="https://rohanbansal.com/qorl" target="_blank">https://rohanbansal.com/qorl</a></li>
+</ul>
+
+<h3>8. NVIDIA 为 Rust 提供原生 GPU 编程支持（CUDA Rust）</h3>
+<p>NVIDIA 发布 CUDA Rust，提供两条编写 GPU kernel 的技术路线，标志官方首次为 Rust 提供原生 CUDA 支持。此举把系统级语言的安全性与 GPU 并行计算打通，对在推理/训练基础设施中大量使用 Rust 的团队具有直接意义——未来可用统一语言栈编写主机端与设备端代码。</p>
+<ul>
+<li><strong>日期</strong>：2026-09-16</li>
+<li><strong>来源</strong>：NVIDIA Developer Blog（Hacker News 首页热帖）</li>
+<li><strong>链接</strong>：<a href="https://developer.nvidia.com/blog/introducing-cuda-rust-two-tracks-for-writing-gpu-kernels/" target="_blank">https://developer.nvidia.com/blog/introducing-cuda-rust-two-tracks-for-writing-gpu-kernels/</a></li>
+</ul>
+
+<hr>
+
+<h2>值得持续关注的趋势</h2>
+
+<p>1. <strong>&quot;论文 / 企业后台 → MCP 工具&quot;正成为 Agent 化的标准接口层</strong>：Paper2Agent 把研究方法封装为可验证的 MCP 工具，Google Home 把消费设备接入 MCP，Meta 此前也让编码 Agent 代做 WhatsApp Business 配置。MCP 已从&quot;工具协议&quot;升级为各方争夺的&quot;能力分发入口&quot;，验证门槛（数值误差、图像哈希）成为新的质量分水岭。</p>
+<p>2. <strong>Coding Agent 的竞争转向&quot;可观测性与安全边界&quot;</strong>：Claude Code 加网关诊断请求头、GitHub AI Scan 与 CodeQL 解绑，说明企业客户关心的已不是&quot;能不能写代码&quot;，而是&quot;能不能看清 Agent 在干什么、出事能不能拦&quot;。</p>
+<p>3. <strong>&quot;减速 / 嵌入评估员&quot;之争进入落地阶段</strong>：Amodei 的嵌入式评估员提议获得 Altman 响应，但第三方评估员要求立法背书。若缺乏强制力，这套自律机制能否经得起&quot;模型学会在测试中伪装&quot;的考验，是未来数月最值得盯的主线。</p>
+</body></html>
