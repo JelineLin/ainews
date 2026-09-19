@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 每日简报 · 2026-09-19</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>AI 每日简报 · 2026-09-19</h1>
+
+<h2>今日总览</h2>
+
+<p>今日主线仍是 Coding Agent 的工具链迭代：Claude Code 与 Codex 双双发版，Claude Code 开始原生读取业界通用的 AGENTS.md，Codex 则回滚了默认推理摘要以避免兼容性问题；GitHub 把 Copilot 代码审查升级为正式版。安全侧出现标志性事件——研究者用 Claude 攻入 OpenAI 内部，凸显 AI 攻防的新形态。</p>
+
+<hr>
+
+<h2>【AI Coding / Code Models】</h2>
+
+<h3>1. Claude Code v2.1.277：新增 AGENTS.md 支持，跟进跨厂商通用规范</h3>
+<p>Claude Code 发布 v2.1.277，最值得关注的是<strong>原生支持 AGENTS.md</strong>：当项目里没有 CLAUDE.md 时，Claude Code 会改读 AGENTS.md，可在 `/config` 的 &quot;Project instructions&quot; 中切换（目前 Bedrock、Vertex、Foundry 尚不支持）。这意味着它开始兼容 OpenCode、Codex 等工具推动的跨厂商 Agent 指令标准，多工具混用的团队无需再维护两份配置。同版本还修复了 `claude -p` 与 Agent SDK 会话在内部错误后无结果挂起、以及空文本块导致每轮请求失败等问题。</p>
+<ul>
+<li>发布日期：2026-09-18</li>
+<li>来源：GitHub · anthropics/claude-code Releases</li>
+<li>链接：<a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.277" target="_blank">https://github.com/anthropics/claude-code/releases/tag/v2.1.277</a></li>
+</ul>
+
+<h3>2. OpenAI Codex CLI v0.155.1：默认关闭 TUI 推理摘要以修复兼容性问题</h3>
+<p>Codex 发布 rust-v0.155.1 补丁版，把<strong>新建本地 TUI 会话的推理摘要（reasoning summary）默认改为关闭</strong>，原因是部分不支持该能力的模型提供方会直接拒绝请求；用户显式的推理摘要设置仍然生效。这是对前一天 v0.155.0 新增 &quot;TUI 状态栏实时推理摘要&quot; 的快速回滚修正，也说明新交互特性在跨 provider 场景下的兼容性仍需打磨。</p>
+<ul>
+<li>发布日期：2026-09-18</li>
+<li>来源：GitHub · openai/codex Releases</li>
+<li>链接：<a href="https://github.com/openai/codex/releases/tag/rust-v0.155.1" target="_blank">https://github.com/openai/codex/releases/tag/rust-v0.155.1</a></li>
+</ul>
+
+<h3>3. GitHub：Copilot code review 改进体验正式 GA，10 月将下线一批旧模型</h3>
+<p>GitHub 宣布 Copilot 代码审查的三项改进<strong>正式可用（GA）</strong>：概览评论现在会展示 Copilot 对 PR 的当前判断、所用审查力度以及发现项汇总，并随时间跟踪变化；Copilot 能更聪明地自动解决自己提过的建议；批量接受建议时会生成更有意义的 commit message。同日 GitHub 还公告将于 <strong>2026 年 10 月 19 日</strong>在所有 Copilot 体验（Chat、inline edits、ask/agent 模式与代码补全）中下线一批选定模型，提醒团队提前迁移到推荐替代模型。</p>
+<ul>
+<li>发布日期：2026-09-18</li>
+<li>来源：The GitHub Blog · Changelog</li>
+<li>链接：<a href="https://github.blog/changelog/2026-09-18-copilot-code-review-an-improved-review-experience" target="_blank">https://github.blog/changelog/2026-09-18-copilot-code-review-an-improved-review-experience</a></li>
+<li>链接：<a href="https://github.blog/changelog/2026-09-18-upcoming-deprecation-of-selected-github-copilot-models-in-mid-october" target="_blank">https://github.blog/changelog/2026-09-18-upcoming-deprecation-of-selected-github-copilot-models-in-mid-october</a></li>
+</ul>
+
+<hr>
+
+<h2>【其他 AI 动态】</h2>
+
+<h3>4. 研究者用 Anthropic 的 Claude 攻破 OpenAI，获奖 6500 美元</h3>
+<p>据《华尔街日报》报道，安全初创公司 Hacktron AI 的三人团队在一项 OpenAI 漏洞赏金计划中，<strong>借助 Anthropic 的 Claude 串联两个高危漏洞，成功访问了多名 OpenAI 员工的 ChatGPT 账户</strong>，并借此进入公司内部软件，最终获 6500 美元奖励。事件极具讽刺意味地展示了当下 AI 安全格局：模型既是攻击工具也是防御对象，跨厂商的&quot;用 A 打 B&quot;正成为常态。</p>
+<ul>
+<li>发布日期：2026-09-18</li>
+<li>来源：TechCrunch（引述 WSJ）</li>
+<li>链接：<a href="https://techcrunch.com/2026/09/18/researchers-used-anthropics-claude-to-hack-into-openai/" target="_blank">https://techcrunch.com/2026/09/18/researchers-used-anthropics-claude-to-hack-into-openai/</a></li>
+</ul>
+
+<h3>5. Anthropic 首家&quot;嵌入式第三方评估员&quot;落地：来自埃森哲旗下 Faculty</h3>
+<p>Dario Amodei 提出的&quot;在前沿 AI 公司内部嵌入第三方评估员&quot;开始成形：Anthropic 宣布<strong>埃森哲旗下 AI 部门 Faculty 的员工将进驻公司</strong>，对模型与人员进行评估、红队测试、对齐评估与安全防护测试。双方预计未来五年为该合作投入至少 10 亿美元。引人注目的是首个评估方并非 METR 等独立安全机构，而是一家咨询公司背景的团队，独立性仍待观察。</p>
+<ul>
+<li>发布日期：2026-09-18</li>
+<li>来源：TechCrunch</li>
+<li>链接：<a href="https://techcrunch.com/2026/09/18/anthropics-first-embedded-evaluator-is-accenture/" target="_blank">https://techcrunch.com/2026/09/18/anthropics-first-embedded-evaluator-is-accenture/</a></li>
+</ul>
+
+<h3>6. AI 幻觉险些触发美军行动</h3>
+<p>报道披露一起<strong>AI 幻觉几乎触发美军实际军事行动</strong>的事件，暴露把大模型输出直接接入指挥/决策链条的风险。这是继模型失准披露框架之后，又一关于&quot;AI 结论被当成事实采用&quot;的高风险案例，对任何把 LLM 接入关键工作流的团队都是警示。</p>
+<ul>
+<li>发布日期：2026-09-18</li>
+<li>来源：TechCrunch</li>
+<li>链接：<a href="https://techcrunch.com/2026/09/18/ai-hallucination-nearly-triggers-us-military-operation/" target="_blank">https://techcrunch.com/2026/09/18/ai-hallucination-nearly-triggers-us-military-operation/</a></li>
+</ul>
+
+<h3>7. RLHF 发明人推出非语言模型 Jev：不输出文本，从源头消除幻觉</h3>
+<p>曾参与打造 ChatGPT、并参与发明 RLHF 的 OpenAI 前研究者 Diogo Almeida，与 Erik Gafni、Sasha Sheng 共同创办的 TypeSafe AI，本周发布<strong>基于 Transformer 但非 LLM 的新模型 Jev</strong>：它不生成文本，而是输出概率即&quot;校准后的决策&quot;。由于输出由用户预先定义，模型<strong>结构上无法产生幻觉</strong>，且速度极快、输出 token 免费、输入按&quot;十亿 token&quot;而非&quot;百万&quot;计费，主要面向软件自动化。发布后 API 一度因需求过高而短暂不可用。</p>
+<ul>
+<li>发布日期：2026-09-18</li>
+<li>来源：TechCrunch</li>
+<li>链接：<a href="https://techcrunch.com/2026/09/18/a-new-kind-of-ai-model-from-a-chatgpt-inventor-is-thrilling-developers/" target="_blank">https://techcrunch.com/2026/09/18/a-new-kind-of-ai-model-from-a-chatgpt-inventor-is-thrilling-developers/</a></li>
+</ul>
+
+<h3>8. Alibaba Qwen 发布 Qwen3.8-Omni-Flash：首个以 Agent 能力为核心的全模态模型</h3>
+<p>通义千问发布 Qwen3.8-Omni-Flash，官方称其为<strong>首个围绕 agentic 能力构建的全模态模型</strong>：接受文本、图像、音频、视频输入，统一完成理解、推理与工具调用。上下文窗口达 100 万 token（最大输入 991K、输出 131K），最大推理长度 262K，默认开启思考（reasoning_effort=xhigh）。目前仅提供托管 API（QwenCloud / 阿里云百炼 / Qwen Studio），<strong>未公布开源权重</strong>，无法自部署。</p>
+<ul>
+<li>发布日期：2026-09-18</li>
+<li>来源：MarkTechPost</li>
+<li>链接：<a href="https://www.marktechpost.com/2026/09/18/alibaba-qwen-releases-qwen3-8-omni-flash/" target="_blank">https://www.marktechpost.com/2026/09/18/alibaba-qwen-releases-qwen3-8-omni-flash/</a></li>
+</ul>
+
+<hr>
+
+<h2>值得持续关注的趋势</h2>
+
+<p>1. <strong>Agent 指令规范走向统一</strong>：Claude Code 开始读取 AGENTS.md，说明跨工具的项目指令标准正在收敛，未来&quot;一份 AGENTS.md 喂所有 Agent&quot;可能成为默认实践。</p>
+<p>2. <strong>模型供应商的&quot;模型下线&quot;节奏加快</strong>：GitHub Copilot 一个月内两次公告模型弃用，团队需要把模型版本当作有生命周期的依赖来管理，而非一次性配置。</p>
+<p>3. <strong>AI 攻防与安全评估的制度化</strong>：一边是用 Claude 攻破 OpenAI 的真实案例，一边是咨询公司进驻做第三方评估——能力验证与独立审计正在同时成型，但独立性仍是未解问题。</p>
+</body></html>
