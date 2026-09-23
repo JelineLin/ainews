@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日 AI 简报 · 2026-09-23</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>每日 AI 简报 · 2026-09-23</h1>
+
+<p><strong>今日总览</strong>：模型发布进入&quot;价格战&quot;阶段——OpenAI 与 Anthropic 同日出手，GPT-6 Sol/Luna 与 Claude Opus 5.5 双双降价且性能对标更高端型号；编码侧 NVIDIA 开源 SoL-Pi，把 Coding Agent 的 token 消耗砍掉近一半；小米 MiMo-V2.6 登顶开源榜首但被 Anthropic 指控数据挪用。</p>
+
+<h2>【AI Coding / Code Models】</h2>
+
+<h3>1. OpenAI 发布 GPT-6 Sol 与 Luna：价格腰斩、面向编码与知识工作</h3>
+<p>OpenAI 将 GPT-6 家族扩展到更小的 Sol 和 Luna，性能与前代持平但 API 价格直接砍半：Sol 为 $2/$10 每百万输入/输出 token，Luna 仅 $0.10/$0.50，Luna 成为 OpenAI 史上最便宜的模型之一。官方称降价源于缓存与推理优化，并把节省直接让给用户；同系列旧款 Terra 已下架。Sol 定位复杂任务与编码，Luna 面向高并发文档处理类工作。</p>
+<ul>
+<li>日期：2026-09-22</li>
+<li>来源：TechCrunch / OpenAI</li>
+<li>原文：<a href="https://techcrunch.com/2026/09/22/openai-launches-gpt-6-sol-and-luna/" target="_blank">https://techcrunch.com/2026/09/22/openai-launches-gpt-6-sol-and-luna/</a> ｜ <a href="https://openai.com/index/introducing-gpt-6-sol-and-luna" target="_blank">https://openai.com/index/introducing-gpt-6-sol-and-luna</a></li>
+</ul>
+
+<h3>2. Anthropic 发布 Claude Opus 5.5：编码与 Agent 能力对标 Fable 5.1，成本降 40%</h3>
+<p>Opus 5.5 是 Claude 5.5 家族首款模型，官方称在 agentic coding、computer use 与知识工作上刷新 SOTA，多数基准追平更大的 Fable 5.1。运行成本比 Opus 5 低约 40%，输出价格从 $25 降至 $20 每百万 token，同时推理更快、行文更少术语。已通过 Claude Platform、AWS、Google Cloud 等托管 API 提供，未开源权重。</p>
+<ul>
+<li>日期：2026-09-22</li>
+<li>来源：Anthropic / MarkTechPost / TechCrunch</li>
+<li>原文：<a href="https://www.marktechpost.com/2026/09/22/anthropic-claude-opus-5-5-release/" target="_blank">https://www.marktechpost.com/2026/09/22/anthropic-claude-opus-5-5-release/</a> ｜ <a href="https://techcrunch.com/2026/09/22/anthropic-releases-opus-5-5-with-lower-prices-and-fable-level-performance/" target="_blank">https://techcrunch.com/2026/09/22/anthropic-releases-opus-5-5-with-lower-prices-and-fable-level-performance/</a></li>
+</ul>
+
+<h3>3. NVIDIA 联合 NTU/MIT 开源 SoL-Pi：Coding Agent token 流量最高降 49%</h3>
+<p>研究团队发布 SoL-Pi，用&quot;harness 层自动研究循环&quot;找到 4 个效率机制，加在开源 Pi coding agent 之上。在 51 任务的 EdgeBench 上，token 流量较 Pi 下降 44.7%–49.0%，API 成本降低约 33%，得分在 GPT-5.6 Sol 与 Opus 5 上仍贴近原版。项目以 MIT 许可发布在 GitHub NVlabs 下，运行于未修改的 Pi 0.85.1 与 Node.js 22.19+。</p>
+<ul>
+<li>日期：2026-09-21</li>
+<li>来源：MarkTechPost（引述 NVIDIA/NTU/MIT 论文）</li>
+<li>原文：<a href="https://www.marktechpost.com/2026/09/21/nvidia-researchers-have-released-sol-pi/" target="_blank">https://www.marktechpost.com/2026/09/21/nvidia-researchers-have-released-sol-pi/</a></li>
+</ul>
+
+<h2>【其他 AI 动态】</h2>
+
+<h3>4. 小米 MiMo-V2.6-Pro 登顶开源模型榜首，但被 Anthropic 指控挪用 Claude 数据</h3>
+<p>小米发布 MiMo-V2.6 系列，旗舰 Pro 在 Artificial Analysis 智能指数拿到 46 分，成为当前最强开源可用模型，超过 Kimi K3 与 Qwen。价格极具杀伤力：输入 $0.435、输出 $0.87 每百万 token，单任务成本约 $0.13，落在智能—成本帕累托前沿上。但同一时间，Anthropic 指责小米通过 Claude 模型不当抽取数据用于自身训练。</p>
+<ul>
+<li>日期：2026-09-22</li>
+<li>来源：The Decoder</li>
+<li>原文：<a href="https://the-decoder.com/xiaomis-affordable-flagship-ai-leads-the-open-models-and-anthropic-says-claude-helped-get-it-there/" target="_blank">https://the-decoder.com/xiaomis-affordable-flagship-ai-leads-the-open-models-and-anthropic-says-claude-helped-get-it-there/</a></li>
+</ul>
+
+<h3>5. Snorkel AI 估值翻三倍至 35 亿美元，训练数据需求爆发</h3>
+<p>Snorkel AI 完成 3.5 亿美元 E 轮融资，估值达 35 亿美元，由 Insight Partners 与 S32 领投，较 17 个月前 13 亿美元估值近乎三倍。公司已从数据标注工具转向&quot;数据即服务&quot;，直接向客户交付成品数据集与仿真环境，反映 AI 实验室对高质量训练数据的旺盛需求。</p>
+<ul>
+<li>日期：2026-09-22</li>
+<li>来源：TechCrunch</li>
+<li>原文：<a href="https://techcrunch.com/2026/09/22/snorkel-ai-triples-valuation-to-3-5b-as-demand-for-ai-training-data-booms/" target="_blank">https://techcrunch.com/2026/09/22/snorkel-ai-triples-valuation-to-3-5b-as-demand-for-ai-training-data-booms/</a></li>
+</ul>
+
+<h3>6. 蚂蚁集团发布金融专用开源模型 Ling-3.0-flash-Fin</h3>
+<p>蚂蚁集团推出面向金融领域的开源权重模型 Ling-3.0-flash-Fin，构建于 Ling-3.0-flash 之上，主打金融研究、来源核查、估值表格与报告撰写。在 Artificial Analysis 智能指数得 23 分、金融会计指数 24 分，以约一半激活参数（5.1B）追平 MiniMax-M2.7。但复杂 Agent 任务仍是短板，商业知识幻觉率也偏高（33%）。</p>
+<ul>
+<li>日期：2026-09-16（Artificial Analysis 评测发布；Hacker News 09-22 讨论）</li>
+<li>来源：Artificial Analysis</li>
+<li>原文：<a href="https://artificialanalysis.ai/articles/ant-group-releases-finance-focused-ling-3-0-flash-fin" target="_blank">https://artificialanalysis.ai/articles/ant-group-releases-finance-focused-ling-3-0-flash-fin</a></li>
+</ul>
+
+<h2>值得持续关注的趋势</h2>
+
+<p>1. <strong>前沿模型进入&quot;同质化 + 价格战&quot;阶段</strong>：GPT-6 Sol/Luna 与 Claude Opus 5.5 同日发布、性能提升有限但价格大幅下探，比拼焦点正从&quot;最强&quot;转向&quot;每任务成本&quot;，这对开发者与 Agent 应用的规模化落地是直接利好。</p>
+<p>2. <strong>编码 Agent 的优化重心转向 Harness 层</strong>：NVIDIA SoL-Pi 用自动研究循环改 harness，把 token 消耗砍掉近一半，说明在模型之外，&quot;外围系统&quot;（上下文、工具、委派）已成为降本增效的主战场。</p>
+<p>3. <strong>开源模型能力快速逼近、争议同步上升</strong>：小米 MiMo-V2.6 登顶开源榜却伴随数据挪用指控，提示&quot;开源性能&quot;与&quot;训练数据合规&quot;之间的张力将成为后续监管与行业争论焦点。</p>
+
+<hr>
+<p>*本简报由自动化流程生成，仅收录 2026-09-22 前后 24 小时内可核验的重要公开信息。*</p>
+</body></html>
