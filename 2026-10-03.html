@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-10-03</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-10-03</h1>
+
+<h2>Executive Summary</h2>
+<p>Today&#x27;s news clusters around three themes: the maturation of coding agents into platform infrastructure, the security reckoning forced by always-on desktop AI agents, and a broadening of who builds and reasons with AI. GitHub shipped the most concrete developer news — programmatic Copilot code review and a wave of model deprecations that reorders its default model lineup. Apple responded to agent-driven privacy fears by tightening macOS Full Disk Access, signaling that OS vendors are now treating autonomous agents as a distinct threat class. Anthropic committed $100 million to train 10,000 enterprise &quot;frontier deployed engineers,&quot; while Meta open-sourced the hardware layer for its Muse agent and Amazon pushed a small open decision model into the agent stack. Meanwhile, a founding AlphaGo researcher argued that today&#x27;s LLMs still don&#x27;t truly reason — a useful counterweight to product hype.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>GitHub Opens Copilot Code Review to REST and GraphQL APIs, Makes &quot;Balanced&quot; the Default</h3>
+<p>GitHub made Copilot code review requestable programmatically: developers can now trigger a review through supported REST and GraphQL APIs, and optionally specify a review effort level per request. The change is generally available to Copilot Pro, Pro+, Max, Business, and Enterprise plans. GitHub frames the value as embedding automated review into existing scripts, CI workflows, and internal developer tooling rather than confining it to the GitHub UI.</p>
+
+<p>Separately, GitHub confirmed that &quot;Balanced&quot; is now the default review effort level, taking effect September 28, 2026 for new and existing repositories and organizations. Users who had explicitly chosen &quot;Lite&quot; keep that setting. Effort level can be configured at enterprise, organization, repository, or personal level, with each tier able to override the one above it.</p>
+
+<p>The two changes together move Copilot code review from a UI feature toward a service other systems can call, a prerequisite for treating AI review as a pipeline gate rather than a suggestion.</p>
+
+<p>Published October 2, 2026 · GitHub Changelog · <a href="https://github.blog/changelog/2026-10-02-copilot-code-review-api-support-and-new-default-effort-level/" target="_blank">https://github.blog/changelog/2026-10-02-copilot-code-review-api-support-and-new-default-effort-level/</a></p>
+
+<h3>GitHub Retires Four Models Across All Copilot Surfaces</h3>
+<p>GitHub deprecated four models across every Copilot experience — Chat, inline edits, ask and agent modes, and code completions — and named the recommended replacements. Gemini 3.5 Flash and Gemini 3.6 Flash are both replaced by Gemini 3.8 Flash; Kimi K2.7 Code gives way to Kimi K3; and Claude Opus 4.7 is superseded by Claude Opus 5.5. All four carry a deprecation date of October 2, 2026.</p>
+
+<p>Enterprise administrators may need to enable access to the alternative models through model policies in Copilot settings, since deprecated models are removed with no user action required. GitHub advises checking individual Copilot settings to confirm a given model policy is enabled; once enabled, it appears in the Copilot Chat model selector in VS Code and on github.com.</p>
+
+<p>The cleanup illustrates how fast the underlying model churn has become: a code-specialized model (Kimi K2.7 Code) was retired within roughly one release cycle of its replacement, and administrators now bear ongoing responsibility for keeping model policies current.</p>
+
+<p>Published October 2, 2026 · GitHub Changelog · <a href="https://github.blog/changelog/2026-10-02-selected-models-in-github-copilot-deprecated/" target="_blank">https://github.blog/changelog/2026-10-02-selected-models-in-github-copilot-deprecated/</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>Apple Tightens macOS &quot;Full Disk Access&quot; as AI Agents Raise the Stakes</h3>
+<p>Apple announced additional controls around macOS &quot;Full Disk Access,&quot; the setting originally intended so backup tools could function, saying AI agents have increased &quot;the risks associated with this level of access.&quot; In a developer-facing post, Apple warned that &quot;some developers are using Full Disk Access in ways that could put users at risk, exposing everything on their systems… without users&#x27; full knowledge and understanding.&quot;</p>
+
+<p>The move follows an Inc. columnist&#x27;s claim that Meta&#x27;s Muse app on Mac knew the content of his private messages despite, he said, never granting permission (Meta disputes this), and a Wired report that a flaw in ChatGPT&#x27;s Mac app could have exposed sensitive data. Apple said future controls will require &quot;very explicit user action&quot; before an app receives what it calls an extraordinary level of access.</p>
+
+<p>The broader signal is that desktop agents, which read files, mail, messages, and browsing history, are pushing OS vendors to rethink permission models built for passive applications rather than autonomous ones.</p>
+
+<p>Published October 2, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/" target="_blank">https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/</a></p>
+
+<h3>Anthropic Puts $100M Behind a Residency to Train 10,000 Enterprise AI Engineers</h3>
+<p>Anthropic launched Claude Frontier Academy, backed by a $100 million commitment to train 10,000 &quot;Frontier Deployed Engineers&quot; by the end of 2027. The first cohorts include engineers from Accenture, Bain, Capgemini, Commonwealth Bank of Australia, Deloitte, McKinsey, Morgan Stanley, and Novo Nordisk. Anthropic positions the program as the first of its kind from an AI company, built from its own enterprise deployment work.</p>
+
+<p>The flagship Frontier Deployed Engineer Residency borrows the medical training model: engineers learn from practitioners, practice on realistic cases, and are assessed before earning a credential. The stated goal is agentic systems that change how a business runs, spanning redesigned processes and new products. Anthropic&#x27;s Steve Corfield argued that a small team of high-agency people with the right skills can transform an entire company, and that the hard part is building that talent depth.</p>
+
+<p>The investment reflects a growing industry bet that implementation talent, not model access, is now the bottleneck to enterprise AI value.</p>
+
+<p>Published October 2, 2026 · Anthropic · <a href="https://www.anthropic.com/news/claude-frontier-academy" target="_blank">https://www.anthropic.com/news/claude-frontier-academy</a></p>
+
+<h3>Meta Open-Sources the Hardware Layer for Its Muse AI Agent</h3>
+<p>Meta released open-source code that lets users build their own &quot;Muse gadgets&quot; around its new AI agent. Meta suggests projects like loading Muse onto a color E Ink display for reminders, putting it on an HDMI stick to show Muse on a large screen, or running it on a small touchscreen to approximate a DIY Muse Charm. &quot;Muse gadgets are open source devices you build yourself,&quot; Meta said, describing support for off-the-shelf ESP32 boards or Raspberry Pi setups via its SDKs, connecting Muse to displays, buttons, sensors, and actuators.</p>
+
+<p>Meta also manufactured 5,000 Muse Home Link devices for giveaway. Using community-built skills, the Home Link lets the agent control lights, a TV, or a printer depending on the setup. Meta cautions users to &quot;proceed at your own risk.&quot;</p>
+
+<p>The release is notable for pushing an assistant out of the phone and into physical, user-owned hardware — a hedge against platform lock-in and a test of whether agent ecosystems can grow around open components.</p>
+
+<p>Published October 2, 2026 · The Verge · <a href="https://www.theverge.com/tech/1004330/meta-muse-ai-gadgets-home-link" target="_blank">https://www.theverge.com/tech/1004330/meta-muse-ai-gadgets-home-link</a></p>
+
+<h3>AWS Ships an Open &quot;Decision Model&quot; as Small Specialists Proliferate</h3>
+<p>Amazon Web Services released Strands Decider 2B, an open-source &quot;decision model&quot; inspired by TypeSafe&#x27;s Jev. Instead of generating text, it sorts between pre-decided options and returns calibrated confidence in its choice — a fast, low-cost primitive for agentic workflow steps. It is fully open-sourced, available now, and small enough to run locally.</p>
+
+<p>Distinguished engineer Marc Brooker built the project after seeing Jev; it briefly topped the Jevbench ranking for its size class, prompting AWS to clean it up and release it through Strands Labs. Strands Decider is built on the &quot;torso&quot; of Qwen3.5-2B and targets cases where agent workflows don&#x27;t need a full LLM&#x27;s capability or cost. Brooker described it as a reliable decider for &quot;what is the next thing for me to do here.&quot;</p>
+
+<p>The story reflects a widening split in AI infrastructure: frontier models for open-ended reasoning, and cheap specialized models for the narrow branching decisions that agent pipelines make constantly.</p>
+
+<p>Published October 1, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/10/01/amazon-releases-its-own-jev-clone-as-decision-models-flood-the-web/" target="_blank">https://techcrunch.com/2026/10/01/amazon-releases-its-own-jev-clone-as-decision-models-flood-the-web/</a></p>
+
+<h3>An AlphaGo Author Argues Today&#x27;s LLMs Still Don&#x27;t Reason</h3>
+<p>MIT Technology Review published an essay by Thore Graepel, who helped build AlphaGo, arguing that ten years after the match against Lee Sedol, today&#x27;s AI still isn&#x27;t tapping the machinery that made the win possible. He attributes AlphaGo&#x27;s famous &quot;move 37&quot; not to machine intuition but to search: the policy network rated the move as roughly a one-in-10,000 expert choice, while explicit game-tree search weighing future consequences selected it.</p>
+
+<p>Graepel contends LLMs operate as System 1 only — fast, associative next-token prediction. Chain-of-thought gained real ground in math and coding, but he says it is the same prediction process iterated longer, not a separate reasoning mechanism. He cites three shortcomings: no persistent, inspectable epistemic state; no clean separation between stored knowledge and its manipulation; and chains of thought that research shows are often fabricated after an answer is reached.</p>
+
+<p>He notes he recently left Google DeepMind to pursue reasoning architectures inspired by AlphaGo&#x27;s explicit search, a pointed critique from inside the field.</p>
+
+<p>Published October 2, 2026 · MIT Technology Review · <a href="https://www.technologyreview.com/2026/10/02/1145639/dont-be-fooled-llms-dont-reason/" target="_blank">https://www.technologyreview.com/2026/10/02/1145639/dont-be-fooled-llms-dont-reason/</a></p>
+
+<h3>Sean Parker Rebuilds Stability AI Around Music, With Major Label Deals</h3>
+<p>Sean Parker, the Napster co-founder, is repositioning Stability AI — the image-generation startup he helped rescue with an $80 million round two years ago after overspending and founder Emad Mostaque&#x27;s ouster — around professional music tools. He and longtime friend CEO Prem Akkaraju told The Information they want Stability to become the go-to AI toolmaker for music professionals, this time with licensed content rather than the Napster-era approach.</p>
+
+<p>In late August the company announced $76 million in funding including from Sony, Warner, and Universal, which also licensed their catalogs for training. Stability has since released three audio models and AI music-editing software; the system can generate full instrumental tracks or short snippets from text prompts, and Parker says an upcoming update will let users hum a melody.</p>
+
+<p>The pivot is a test case for whether AI media startups can scale through label partnership rather than litigation, a contrast Parker himself concedes with the Napster comparison.</p>
+
+<p>Published October 2, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/10/02/sean-parker-is-rebuilding-stability-ai-around-music/" target="_blank">https://techcrunch.com/2026/10/02/sean-parker-is-rebuilding-stability-ai-around-music/</a></p>
+
+<h3>OpenAI Parts Ways With Three Safety Researchers Over Data Handling</h3>
+<p>OpenAI has ended its relationship with three members of its safety team who allegedly shared confidential company information with a third-party AI safety organization, The Wall Street Journal reported. An OpenAI spokesperson said the company &quot;parted ways with three individuals for violating our policies on accessing and handling sensitive company information,&quot; adding that an internal investigation confirmed the individuals &quot;mishandled sensitive information outside established company procedures.&quot;</p>
+
+<p>The report did not name the researchers, the organization, or the information involved. OpenAI did not immediately respond to TechCrunch&#x27;s request for comment. Posts on X named individuals some users believe were dismissed, who had also publicly voiced AI-risk concerns while at OpenAI; TechCrunch said it could not confirm those identities.</p>
+
+<p>The episode sharpens questions about how frontier labs balance internal dissent and external safety collaboration against confidentiality, at a moment when independent oversight of AI risk is already under scrutiny.</p>
+
+<p>Published October 1, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/10/01/openai-cuts-ties-with-three-safety-researchers-wsj-reports/" target="_blank">https://techcrunch.com/2026/10/01/openai-cuts-ties-with-three-safety-researchers-wsj-reports/</a></p>
+
+<h2>What to Watch</h2>
+<ul>
+<li><strong>Desktop agent permission models.</strong> Apple&#x27;s Full Disk Access changes are an early OS-level response to agents that read files and messages. Watch whether Microsoft and Linux distributions follow with comparable guardrails, and whether it slows agent adoption or forces richer consent UX.</li>
+<li><strong>The &quot;decision model&quot; category.</strong> AWS, OpenAI, and dozens of researchers are converging on small calibrated choosers that sit beside frontier LLMs. If these commoditize the branching logic in agent pipelines, cost structures for agentic products could shift materially.</li>
+<li><strong>Copilot&#x27;s model churn cadence.</strong> Retiring a code-specialized model (Kimi K2.7 Code) within roughly a release cycle signals that Copilot&#x27;s lineup is now a fast-moving surface. Enterprise admins should expect recurring model-policy maintenance rather than a stable default set.</li>
+</ul>
+</body></html>
