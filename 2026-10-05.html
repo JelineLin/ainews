@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-10-05</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-10-05</h1>
+
+<h2>Executive Summary</h2>
+
+<p>The last 24–48 hours were dominated by the collision between increasingly autonomous AI agents and the systems they touch. Apple moved to harden macOS after reports that desktop agents accessed data beyond what users understood they had granted, tightening the consent flow for &quot;Full Disk Access.&quot; GitHub pushed agent capability further in the opposite direction, shipping computer-use control of desktop apps and code-defined &quot;dynamic workflows&quot; across Copilot surfaces. AWS open-sourced a small &quot;decision model&quot; tuned for agentic workflow steps rather than open-ended text. On the enterprise side, Anthropic committed $100M to train 10,000 deployment engineers, while Shopify let merchants build stores by chatting with an agent. Behind it all, OpenAI&#x27;s safety org faced fresh scrutiny with three researchers departing and a senior safety author resigning publicly.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>GitHub Copilot Can Now Drive Desktop Apps With &quot;Computer Use&quot;</h3>
+
+<p>GitHub shipped computer use in public preview for its Copilot CLI and the standalone GitHub Copilot app on macOS and Windows, letting the agent operate graphical applications on a user&#x27;s behalf. According to the changelog, Copilot can read accessible app content and visual context, click controls, enter and edit text, press keys, scroll, drag, and navigate multi-application workflows. The company frames the target as GUI-only or legacy software that exposes no API, command-line interface, or MCP integration — for example, moving information through an expense-report tool in a browser.</p>
+
+<p>Control safeguards are explicit: Copilot requests approval before taking over an app, users can review or reset apps set to &quot;always allow,&quot; and organization-managed settings can disable the feature outright. In the CLI it is toggled with `/computer on`, `/computer show`, and `/computer off`; in the app it is enabled under Settings → Computer Use. GitHub notes results are best when users describe the desired outcome, the applications involved, and any constraints. The move extends the agentic reach of Copilot beyond repositories and into the general desktop, which raises obvious permission and audit questions even with consent gates in place.</p>
+
+<p>Published October 1, 2026 · GitHub Changelog · <a href="https://github.blog/changelog/2026-10-01-github-copilot-can-now-interact-with-desktop-apps" target="_blank">https://github.blog/changelog/2026-10-01-github-copilot-can-now-interact-with-desktop-apps</a></p>
+
+<h3>GitHub Adds Code-Defined &quot;Dynamic Workflows&quot; to Copilot CLI, App, and SDK</h3>
+
+<p>GitHub introduced dynamic workflows, a way to define multi-agent orchestration in code, now available across Copilot CLI, the GitHub Copilot app, and the Copilot SDK. A dynamic workflow is a program that specifies how a task is carried out — which steps run sequentially or in parallel, when to invoke one or more agents, and how to combine their results — while agents handle the parts that require judgment. The program lives inside a Copilot extension, giving it access to Copilot&#x27;s extensibility APIs.</p>
+
+<p>GitHub contrasts this with `/fleet`, where Copilot delegates to and coordinates subagents; a dynamic workflow instead executes a repeatable process. Illustrative uses include incident investigation (gathering logs and telemetry, assigning agents to different systems, then merging findings into a timeline), pausing at checkpoints for human review, sweeping a codebase for a pattern, or gating a result on two models agreeing. The feature is in public preview: the app enables it by default, while CLI users need the `--experimental` flag or `/experimental on`. Copilot can also author workflows on request.</p>
+
+<p>Published October 1, 2026 · GitHub Changelog · <a href="https://github.blog/changelog/2026-10-01-dynamic-workflows-in-copilot-cli-and-the-copilot-app" target="_blank">https://github.blog/changelog/2026-10-01-dynamic-workflows-in-copilot-cli-and-the-copilot-app</a></p>
+
+<h3>AWS Open-Sources &quot;Strands Decider 2B,&quot; a Small Decision Model for Agentic Steps</h3>
+
+<p>AWS released Strands Decider 2B, an open-source decision model designed to pick among pre-decided options and return a calibrated confidence score, rather than generate free-form text. Reporting notes it targets a growing niche: intelligence tuned for computer automation, where a full frontier LLM is overkill in cost and latency. The model builds on the &quot;torso&quot; of Qwen3.5-2B, is fully open sourced, available now, and small enough to run locally. It ships from Strands Labs, AWS&#x27;s group developing tools and protocols for deploying AI agents.</p>
+
+<p>The project began as a homebrew effort by AWS distinguished engineer Marc Brooker after TypeSafe&#x27;s Jev inspired the category; it briefly topped the Jevbench ranking for models of its size. Brooker said the need emerged from customer conversations in which agentic workflows didn&#x27;t always require a full LLM — a decider offering a closed answer domain, confidence scores, lower latency, and potentially lower cost fits steps like &quot;what should happen next?&quot; Dozens of similar models have appeared since TypeSafe introduced the idea, which underscores interest but also raises the question of how differentiated any single entry can be.</p>
+
+<p>Published October 1, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/10/01/amazon-releases-its-own-jev-clone-as-decision-models-flood-the-web/" target="_blank">https://techcrunch.com/2026/10/01/amazon-releases-its-own-jev-clone-as-decision-models-flood-the-web/</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>Apple Tightens macOS &quot;Full Disk Access&quot; Consent as Desktop AI Agents Proliferate</h3>
+
+<p>Apple announced new controls around macOS&#x27;s Full Disk Access setting, citing elevated risk from AI agents that read files, messages, mail, and browsing history. In a developer-facing blog post, the company said &quot;some developers are using Full Disk Access in ways that could put users at risk,&quot; and that it will require &quot;very explicit user action&quot; from anyone who &quot;genuinely wish[es] to grant an app this extraordinary level of access.&quot; Apple framed the change as preserving informed consent rather than removing the capability.</p>
+
+<p>The announcement followed reporting that Meta&#x27;s Muse app on Mac surfaced the contents of a journalist&#x27;s private messages — a claim Meta disputed — and a Wired report that a flaw in ChatGPT&#x27;s Mac app could have exposed sensitive data. Because desktop agents commonly request broad permissions to function, the episode crystallizes a trust question for the whole category. TechCrunch later corrected its own framing to clarify the change reflects consent, not a new hard limit. Apple did not respond to a request for comment.</p>
+
+<p>Published October 2, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/" target="_blank">https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/</a></p>
+
+<h3>Anthropic Commits $100M to Train 10,000 &quot;Frontier Deployed Engineers&quot;</h3>
+
+<p>Anthropic launched Claude Frontier Academy, backed by a $100 million commitment to train 10,000 Frontier Deployed Engineers (FDEs) by the end of 2027. The first cohorts draw engineers from Accenture, Bain, Capgemini, Commonwealth Bank of Australia, Deloitte, McKinsey, Morgan Stanley, Novo Nordisk and others. Anthropic says the program is built from its own experience deploying Claude inside large enterprises and the professional-services firms that serve them, addressing a shortage of people who can move AI from an idea to a production system.</p>
+
+<p>The flagship Frontier Deployed Engineer Residency borrows the medical-training model: engineers learn from practitioners, practice on simulated enterprise deployments, and are assessed before practicing alone. Participants start with a multi-day in-person program, complete a graded practical, earn a Claude Resident Engineer badge, then run a real Claude use case at their own organization during a 12-week residency supported by Anthropic engineers. A second assessment yields the Frontier Deployed Engineer badge, with the first expected in early 2027. Cohorts run in San Francisco, New York and London; participation is by nomination.</p>
+
+<p>Published October 2, 2026 · Anthropic · <a href="https://www.anthropic.com/news/claude-frontier-academy" target="_blank">https://www.anthropic.com/news/claude-frontier-academy</a></p>
+
+<h3>OpenAI Safety Ranks Shake as Three Researchers Depart and a Senior Author Resigns</h3>
+
+<p>OpenAI parted ways with three safety-team researchers who allegedly shared confidential company information with a third-party AI safety organization, The Wall Street Journal reported. &quot;We have parted ways with three individuals for violating our policies on accessing and handling sensitive company information,&quot; a spokesperson said, adding that an investigation found they &quot;mishandled sensitive information outside established company procedures.&quot; The report did not name the researchers, the organization, or the information involved.</p>
+
+<p>Days later, David Robinson — who said he led writing the safety reports accompanying OpenAI&#x27;s major launches and was among its longest-tenured employees — resigned in an essay in The Atlantic, calling the company&#x27;s &quot;culture is broken.&quot; He argued that OpenAI&#x27;s trial-and-error &quot;iterative deployment&quot; guarantees periodic failures whose scale grows with capability, and that frontier labs should operate like nuclear plants or busy airports, with redundancy and deliberate planning. The events follow a New York Times report that executives brushed aside internal safety warnings, and a string of incidents involving rogue agents. An OpenAI spokesperson said the company continues to strengthen safeguards and pauses training or holds back models when needed.</p>
+
+<p>Published October 1–3, 2026 · TechCrunch (via WSJ and The Atlantic) · <a href="https://techcrunch.com/2026/10/03/openai-safety-employee-resigns-claiming-the-companys-culture-is-broken/" target="_blank">https://techcrunch.com/2026/10/03/openai-safety-employee-resigns-claiming-the-companys-culture-is-broken/</a></p>
+
+<h3>Shopify&#x27;s Canvas Lets Merchants Build Entire Stores by Chat</h3>
+
+<p>Shopify introduced Canvas, a storefront-building product that lets merchants construct and edit their shop by chatting with the company&#x27;s AI agent, Sidekick. Prior no-code tooling required rearranging theme sections and blocks, with deeper customization demanding code or a developer. With Canvas, Sidekick works directly with the theme&#x27;s files while the storefront renders in real time — not a static preview, but the actual code behind the store — so merchants can test interactivity and animation and view responsive layouts across screen sizes. Sidekick also takes screenshots so it can see what the merchant sees as changes land.</p>
+
+<p>Merchants can still click individual elements to edit directly, but the intended workflow is conversational. Sidekick already handled writing code, building apps, and customizing themes; Canvas assembles those abilities into a full site-building surface. To make it work, Shopify simplified its theme architecture so the store&#x27;s structure, logic, and design are easier for Sidekick to interpret and modify. The launch places Shopify alongside Wix, Squarespace, Webflow, and Framer, as well as vibe-coding platforms like Lovable and Replit, in the rush toward AI-native site creation.</p>
+
+<p>Published October 1, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/10/01/shopify-debuts-canvas-a-way-to-build-online-stores-by-chatting-with-ai/" target="_blank">https://techcrunch.com/2026/10/01/shopify-debuts-canvas-a-way-to-build-online-stores-by-chatting-with-ai/</a></p>
+
+<h2>What to Watch</h2>
+
+<ul>
+<li><strong>Desktop-agent permission design.</strong> Apple&#x27;s Full Disk Access overhaul and GitHub&#x27;s computer-use rollout land the same week, signaling that consent UX and audit trails for GUI-controlling agents will be a defining battleground. Watch whether other OS vendors and app developers follow Apple&#x27;s lead.</li>
+<li><strong>Decision models vs. frontier LLMs.</strong> AWS&#x27;s Strands Decider 2B joins a fast-multiplying class of small, task-specific models. Track whether benchmarks like Jevbench mature enough to tell genuinely useful deciders from me-too releases, and whether cost/latency wins translate into production adoption.</li>
+<li><strong>OpenAI&#x27;s safety organization and GPT-6.1 Astra.</strong> With three researchers out, a public resignation, and a launch reportedly scrapped over safety concerns, the next signal will be whether OpenAI ships new governance or evaluation commitments — or continues to absorb departures without structural change.</li>
+</ul>
+</body></html>
