@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-10-09</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-10-09</h1>
+
+<h2>Executive Summary</h2>
+
+<p>Today&#x27;s developments cluster around three themes: the agentic turn, model economics, and safety governance. Google brought agentic capabilities to Gemini Enterprise, giving its AI a workplace identity so it can plan and execute tasks across business systems, while JetBrains and StepFun pushed fast, cheap open models tuned specifically for coding agents. On the business side, OpenAI told investors its annualized revenue is roughly $50 billion — about $20 billion below the figure widely reported last month — sending AI infrastructure stocks lower and intensifying scrutiny ahead of a possible 2027 IPO. Anthropic published its annual Usage Policy update, codifying new curbs on election interference, weapons software, and surveillance, and separately launched a free AI vulnerability-scanning service for open-source projects. Meanwhile, three fired OpenAI safety researchers publicly disputed the company&#x27;s misconduct claims, warning of a chilling effect on safety work.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>JetBrains Open-Sources Mellum2.1, a Fast Coding-Agent Model for Local Hardware</h3>
+
+<p>JetBrains released Mellum2.1, the next version of the 12-billion-parameter mixture-of-experts model it open-sourced in June. The architecture is unchanged — compact, with 2.5B active parameters under an Apache 2.0 license — but nearly all of the work went into post-training, primarily reinforcement learning with millions of sandboxed runs across thousands of environments. Where the earlier Mellum2 struggled to operate inside a repository, the new model can explore a codebase, edit files, and check its own changes.</p>
+
+<p>JetBrains say the biggest gain is in agentic coding, with broader improvements in coding, competitive programming, math, tool calling, and general knowledge. Benchmarked against Qwen3.5-9B and Gemma 4 E4B using the same evaluation setup, Mellum2.1 is described as the fastest model in the group under heavy load, serving almost twice as many tokens as Qwen3.5-9B, with multi-token prediction making single requests about 1.6× faster. It is aimed at developers building coding agents and sub-agents that run on their own infrastructure.</p>
+
+<p>Mellum2.1 is available on Hugging Face now; GGUF builds for llama.cpp, Ollama, and LM Studio, plus an MTP head for vLLM speculative decoding, are promised soon.</p>
+
+<p>Published October 8, 2026 · JetBrains AI Blog · <a href="https://blog.jetbrains.com/ai/2026/10/mellum2-1-gets-to-work-a-fast-open-model-for-coding-agents/" target="_blank">https://blog.jetbrains.com/ai/2026/10/mellum2-1-gets-to-work-a-fast-open-model-for-coding-agents/</a></p>
+
+<h3>StepFun&#x27;s Step 5 Preview Hits OpenRouter With a 1M-Token Context</h3>
+
+<p>StepFun&#x27;s flagship agentic model, Step 5 Preview, appeared on OpenRouter on October 8. It uses a sparse mixture-of-experts architecture with 27B active and 600B total parameters, and is pitched for software engineering and professional knowledge work — with particular strength claimed in finance. It is priced at $1 per million input tokens and $2.70 per million output tokens, with cache reads at $0.05, and carries a 1,000,000-token context window with up to 64,000 output tokens.</p>
+
+<p>The model is designed for extended tasks that span large codebases and documents, using tools and refining results over multiple steps. OpenRouter reports a single hosting provider, 56 tokens/second throughput, and roughly 100% uptime over three days at the time of listing. Its combination of a very large context window and low price places it in direct competition with other long-context open-weight models aimed at coding and agent workloads.</p>
+
+<p>For developers, the practical appeal is cost-per-token at scale: a million-token window at commodity pricing lowers the barrier to whole-repository agentic workflows, though no independent benchmark results were posted alongside the release.</p>
+
+<p>Published October 8, 2026 · OpenRouter (StepFun model listing) · <a href="https://openrouter.ai/stepfun/step-5-preview" target="_blank">https://openrouter.ai/stepfun/step-5-preview</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>Google Brings Agentic AI to Gemini, Starting With Businesses</h3>
+
+<p>At a Google Cloud event on October 8, Google announced a unified Gemini agent that can plan and execute tasks, not just answer questions. CEO Sundar Pichai noted Gemini has over 1 billion monthly active users and that nearly 90% of Fortune 100 businesses use Gemini Enterprise. Google Cloud CEO Thomas Kurian said the agent can be given &quot;objectives, not just instructions,&quot; allowing it to plan work, use custom skills, and connect to internal systems.</p>
+
+<p>The agent picks a model by default but lets users override — including third-party models, starting with Anthropic&#x27;s Claude. It connects to Google Workspace, Microsoft 365, Slack, Jira, Confluence, Git, BigQuery, Databricks, Postgres, Snowflake, and any Model Context Protocol (MCP) server. A &quot;tasks inbox&quot; shows its reasoning, subagent delegation, and progress. Notably, the agent gets its own Workspace account with an email address, calendar context, and an audit trail attributed to the agent rather than a person. Google is focusing on businesses first, then consumers, to address security, scale, and performance challenges.</p>
+
+<p>Published October 8, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/10/08/google-brings-agentic-ai-to-gemini-starting-with-businesses/" target="_blank">https://techcrunch.com/2026/10/08/google-brings-agentic-ai-to-gemini-starting-with-businesses/</a></p>
+
+<h3>OpenAI&#x27;s Annualized Revenue Reported Near $50B, Below Earlier $68B Figure</h3>
+
+<p>OpenAI told investors its annualized revenue reached roughly $50 billion at the end of September, CNBC confirmed — lower than the ~$68 billion figure widely reported in late September. A person familiar said the higher number included gross revenue from OpenAI&#x27;s partners, a calculation meant to make a more direct comparison with Anthropic. The Financial Times first reported the $50 billion figure.</p>
+
+<p>OpenAI also touted 77% total run-rate growth in Q3 and 107% run-rate growth for its enterprise business. The disclosure hit AI infrastructure stocks: Nvidia fell 3%, Oracle nearly 6%, CoreWeave nearly 8%, with AMD, Broadcom, Intel, and Super Micro also dropping. OpenAI faces pressure to justify an $852 billion valuation ahead of a widely expected 2027 IPO; it confidentially filed its prospectus in June. Rival Anthropic, which reported a $65 billion annualized run rate in July, is also preparing for a major IPO.</p>
+
+<p>Published October 8, 2026 · CNBC · <a href="https://www.cnbc.com/2026/10/08/open-ai-revenue-nvidia-oracle-coreweave.html" target="_blank">https://www.cnbc.com/2026/10/08/open-ai-revenue-nvidia-oracle-coreweave.html</a></p>
+
+<h3>Anthropic Updates Usage Policy to Ban Election Interference and Model Abuse</h3>
+
+<p>Anthropic published its 2026 Usage Policy update on October 8, summarizing a set of changes taking effect November 12. The company said most updates clarify existing rules while adding examples reflecting Claude&#x27;s longer, more independent work. A new section, &quot;Do Not Engage in Deceptive Campaigns or Artificial Activity,&quot; consolidates rules against fake accounts and fabricated news sites; a renamed &quot;Do Not Undermine Democratic Processes&quot; section focuses on deceiving voters or disrupting elections. New language also explicitly covers weapons software and components, and tightens prohibitions on surveillance.</p>
+
+<p>The most attention-getting change is a prohibition on persistently abusive behavior toward the model, applicable only in extreme cases of repeated cruelty &quot;with no discernible purpose,&quot; and explicitly not covering ordinary frustration or model testing. Anthropic also removed a blanket ban on personalized vote and campaign targeting to permit legitimate civic work. The company said the updates refine rather than change what it enforces in practice.</p>
+
+<p>Published October 8, 2026 · Anthropic · <a href="https://www.anthropic.com/news/2026-usage-policy-update" target="_blank">https://www.anthropic.com/news/2026-usage-policy-update</a></p>
+
+<h3>Anthropic Launches Free AI Security Scans for Open-Source Projects</h3>
+
+<p>Anthropic unveiled OSS Scanner, an opt-in service offering open-source projects &quot;thorough, periodic security scans by our strongest models at no cost.&quot; The company says reports will be fully model-generated without human review or triage — a trade-off that enables faster, more frequent scanning but means reports &quot;may be incorrect or invalid.&quot; The scans use Anthropic&#x27;s most capable models, including Claude Mythos.</p>
+
+<p>The launch follows a period in which AI tools have surfaced major open-source flaws, notably the &quot;Copy Fail&quot; bug that affected nearly every Linux distribution in May. It also lands amid growing strain on maintainers: some projects, including those overseen by Linus Torvalds and Google, are struggling to keep up with a surge of AI-generated bug reports. OSS Scanner&#x27;s lack of human triage is a notable limitation, since noisy or invalid findings could add to maintainer workloads rather than relieve them.</p>
+
+<p>Published October 8, 2026 · The Verge · <a href="https://www.theverge.com/ai-artificial-intelligence/1008521/anthropic-open-source-oss-scanner" target="_blank">https://www.theverge.com/ai-artificial-intelligence/1008521/anthropic-open-source-oss-scanner</a></p>
+
+<h3>Fired OpenAI Safety Researchers Dispute Misconduct Claims in Open Letter</h3>
+
+<p>Jasmine Wang, Tomek Korbak, and Mikita Balesni — three safety researchers OpenAI fired in the prior week — published an open letter denying the company&#x27;s claim that they mishandled sensitive information. The researchers said their dismissal signals a chilling effect, writing that colleagues are now &quot;afraid to speak and operate in ways that, until last week, were an integral part of working at OpenAI.&quot;</p>
+
+<p>OpenAI said they violated policies by &quot;accessing and handling sensitive company information.&quot; The researchers denied leaking to The Information about less-monitorable architectures and said they relied on collaboration with outside experts as an essential safety mechanism. OpenAI shared an internal memo with TechCrunch from a research leader denying retaliation, and a spokesperson cited a &quot;pattern of misconduct.&quot; OpenAI did not specify which policies were allegedly violated or how it protects employees who work with external evaluators.</p>
+
+<p>Published October 8, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/10/08/fired-openai-safety-researchers-dispute-misconduct-claims-warn-of-chilling-effect/" target="_blank">https://techcrunch.com/2026/10/08/fired-openai-safety-researchers-dispute-misconduct-claims-warn-of-chilling-effect/</a></p>
+
+<h3>Arena (LMArena) Raises $200M at $3.1B, Adds Alignment Leaderboard</h3>
+
+<p>Arena, the company behind the crowdsourced LMArena model leaderboard, raised a $200 million Series B at a $3.1 billion valuation, it announced October 8 — nearly double its $1.7 billion Series A valuation from January. Lightspeed Venture Partners and Khosla Ventures led, joined by Salesforce Ventures, Dell Technologies Capital, a16z, Felicis, and others. The company said it reached $100 million in annualized run-rate revenue in June.</p>
+
+<p>Arena&#x27;s timing reflects a shift in how labs and enterprises evaluate models: as awareness grew that models could game static benchmarks, demand rose for crowdsourced, real-world ratings and enterprise-specific analytics. Arena also added an alignment category to its leaderboard, ranking models on unauthorized actions, false attribution, and &quot;deceptive completion.&quot; In preliminary results, OpenAI models top the alignment rankings, with Claude Opus 5.5 and Claude Fable sixth and ninth.</p>
+
+<p>Published October 8, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/10/08/popular-ai-leaderboard-arena-nearly-doubles-valuation-to-3-1b-valuation-in-10-months/" target="_blank">https://techcrunch.com/2026/10/08/popular-ai-leaderboard-arena-nearly-doubles-valuation-to-3-1b-valuation-in-10-months/</a></p>
+
+<h2>What to Watch</h2>
+
+<ul>
+<li><strong>OpenAI&#x27;s revenue narrative and IPO timing.</strong> The gap between the $68B and $50B figures, plus pressure to justify an $852B valuation, will shape how investors price both OpenAI and Anthropic as each moves toward a 2027 listing.</li>
+<li><strong>Adoption and accuracy of AI-powered vulnerability scanning.</strong> Anthropic&#x27;s human-review-free OSS Scanner and similar tools could speed up patching, but the risk of false positives landing on already-strained open-source maintainers is a real open question.</li>
+<li><strong>Whether small open coding-agent models gain real traction.</strong> Both JetBrains&#x27; Mellum2.1 and StepFun&#x27;s Step 5 Preview target cost-sensitive, self-hosted agent workloads; watch benchmark adoption and community feedback in the coming weeks.</li>
+</ul>
+</body></html>
