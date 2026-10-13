@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-10-13</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-10-13</h1>
+
+<h2>Executive Summary</h2>
+<p>Meta entered the frontier race with its first serious frontier model, Muse Wonder and Muse Wonder Full, which post top-tier scores — especially on coding and math — but at roughly triple the cost per task of their predecessor. Coding agents remained a live frontier: Meta&#x27;s Wonder Full ties Claude Code with Sonnet 5.5 on the Coding Agents Index, while GitHub shipped durable push attribution to fight commit forgery. Microsoft advanced on two fronts, unveiling a plan to run in-house Maia chips at multi-gigawatt scale for inference starting in 2027, and publishing research showing that clearing an agent&#x27;s chat history (while keeping its workspace) helps it escape unproductive &quot;idea basins.&quot; Google DeepMind&#x27;s AlphaProof Nexus solved dozens of open math problems — peer-reviewed — contrasting with an ongoing backlash over OpenAI&#x27;s unvetted proof dumps. Policy also shifted: the White House restored the UK AI Security Institute&#x27;s early access to frontier models.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>Meta&#x27;s Muse Wonder Debuts as a Frontier Coding Model — at Triple the Cost</h3>
+<p>Meta&#x27;s Superintelligence Lab released two frontier models, Muse Wonder and Muse Wonder Full, its first attempt at frontier-class systems after the lighter Muse Spark line. Both post major coding gains: Muse Wonder Full hits 68 points on the Coding Agents Index, tying Claude Code with Sonnet 5.5, while Muse Wonder scores 63, up from its predecessor&#x27;s 54. On Terminal-Bench 4.0, performance jumped from 33 to 57 percent, and Full doubled its Terminal-Bench score while using roughly 30 percent fewer output tokens.</p>
+
+<p>The gains come with higher prices. Accessed via the Meta Model API, Muse Wonder costs $4 per million input tokens and $20 per million output, up from $1.25 and $4.25. Artificial Analysis pegs it at $4.52 per task on its Intelligence Index — nearly three times Muse Spark 1.3&#x27;s $1.60. Muse Wonder Full is limited to Muse Code subscribers and is not served through the API; Muse Wonder will also power the Muse agent app, starting with paying subscribers. Both support a one-million-token context window and text, image, video, and audio input.</p>
+
+<p>Meta frames the models around two features — &quot;Active Memory&quot; for cross-session recall and &quot;Active Focus&quot; for persistence on hard tasks — aimed at a personal agent that can access calendars, messages, and documents. Factual knowledge remains a weak spot: only 30 points on AA-Omniscience versus Claude Opus 5.5&#x27;s 46, though hallucination rates fell from 33 to 23 percent. Meta says the models were trained at its Prometheus data center at gigawatt scale.</p>
+
+<p>*Published 2026-10-12 · The Decoder / TechCrunch · <a href="https://the-decoder.com/metas-new-frontier-model-muse-wonder-full-breaks-into-the-ai-top-tier/*" target="_blank">https://the-decoder.com/metas-new-frontier-model-muse-wonder-full-breaks-into-the-ai-top-tier/*</a></p>
+
+<h3>GitHub Adds Durable Push Attribution to Fight Commit Forgery</h3>
+<p>GitHub launched push attribution in limited public preview, now durably recording the authenticated user who pushed each commit and surfacing that &quot;pusher&quot; identity in the UI and API next to the existing author and committer fields. The motivation is security: author and committer fields are just strings supplied by the pushing client, so anyone with write access can set them to any name or email — letting an attacker who compromises a low-privilege account forge commits that appear to come from a trusted maintainer, evading review policies and muddying audit trails.</p>
+
+<p>Because GitHub already authenticates pushes, the new per-commit pusher attribution gives maintainers a verified identity to spot-check suspicious activity or speed security investigations. Enterprises can also enforce stricter requirements by adding a &quot;Committer must match pusher&quot; rule to a repository ruleset. Push attribution is available now as a limited public preview for GitHub Enterprise customers, who can request access through their account team.</p>
+
+<p>*Published 2026-10-12 · GitHub Changelog · <a href="https://github.blog/changelog/2026-10-12-push-attribution-public-preview/*" target="_blank">https://github.blog/changelog/2026-10-12-push-attribution-public-preview/*</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>Microsoft to Scale In-House Maia Chips to Multi-Gigawatt Inference by 2027</h3>
+<p>Microsoft plans to make its Azure Maia AI chips the main inference system across its products starting in 2027, deploying them at multi-gigawatt scale, executive Scott Guthrie writes. Maia 200 already runs Microsoft Copilot in the US, Europe, and Australia, with GitHub Copilot and Foundry following by year&#x27;s end. CEO Satya Nadella called it &quot;our biggest bet yet on our own silicon.&quot;</p>
+
+<p>The chip handles OpenAI, MAI, and open-source models. Microsoft claims Maia 200 pushes up to 1.7 times more tokens per watt than leading GPUs in Teams. Its successor, Maia 300, ships in 2027 and targets long inputs, fast chats, and agentic tasks, with Microsoft claiming 40 percent more tokens per megawatt than leading GPU systems; a 96-chip rack should deliver up to seven times the tokens of a Maia 200 rack. A technical report covers details, with more coming at Ignite 2026 in November. The move deepens Microsoft&#x27;s effort to reduce reliance on external GPU supply for inference.</p>
+
+<p>*Published 2026-10-12 · The Decoder · <a href="https://the-decoder.com/microsoft-plans-to-scale-its-own-maia-ai-chips-to-gigawatt-levels-by-2027/*" target="_blank">https://the-decoder.com/microsoft-plans-to-scale-its-own-maia-ai-chips-to-gigawatt-levels-by-2027/*</a></p>
+
+<h3>Microsoft Research: Clearing Chat History Helps AI Agents Escape &quot;Idea Basins&quot;</h3>
+<p>Long-running AI research agents can plateau despite more compute, a Microsoft Research study found. Accumulated conversation context constrains their search, keeping them circling similar solutions. Testing &quot;autoresearch agents&quot; — systems that repeatedly propose, evaluate, and refine solutions — the researchers ran eight independent runs of the same agent on the same task and found final scores ranged from 68.3 to 100.0, with gaps persisting even under substantially more compute.</p>
+
+<p>Plotting solutions on a two-dimensional map, they found each run&#x27;s outputs almost always stayed within a small region, which they call an &quot;idea basin.&quot; Agents spend much of their remaining budget refining within a less productive region instead of finding better approaches discovered by other runs — a pattern that persists even when agents periodically compress their histories. Their proposed &quot;Fork-and-Flush&quot; method forks the agent into K parallel branches inheriting the workspace and files, then flushes each branch&#x27;s chat context so it starts fresh while keeping prior work. On 13 long-running tasks — including polyomino packing, job-shop scheduling, cryptanalysis, and CIFAR classifier compression — runs lasting hours to over 100 hours showed improved results under the same compute budget.</p>
+
+<p>*Published 2026-10-12 · The Decoder · <a href="https://the-decoder.com/clearing-chat-history-helps-ai-agents-find-better-solutions/*" target="_blank">https://the-decoder.com/clearing-chat-history-helps-ai-agents-find-better-solutions/*</a></p>
+
+<h3>Google DeepMind&#x27;s AlphaProof Nexus Solves Open Math Problems — and Passes Peer Review</h3>
+<p>Google DeepMind&#x27;s AlphaProof Nexus solved dozens of open math problems, according to a study published in Science. It cracked nine of 353 open Erdős problems — two of them unsolved for 56 years — proved 44 conjectures from the OEIS integer sequence database, resolved an open question in algebraic geometry, and improved a known bound in min-max optimization, a technique used to train some AI models. The team shared the Erdős solutions online ahead of publication.</p>
+
+<p>The system is built around Gemini 3.1 Pro, which drafts and revises proofs in the formal language Lean; Lean checks each draft after every edit and its error messages guide the next attempt. For harder sub-problems it can call AlphaProof, a specialized tool — though DeepMind reports it solved the nine Erdős problems even without it. The peer-reviewed publication lands amid a heated dispute: OpenAI recently posted hundreds of AI-generated proofs to GitHub instead of submitting them to journals, prompting the Association for Human Mathematics, chaired by Terence Tao, to call for a boycott. DeepMind, by contrast, put its work through formal review.</p>
+
+<p>*Published 2026-10-12 · The Decoder · <a href="https://the-decoder.com/google-deepminds-alphaproof-nexus-solved-dozens-of-open-math-problems-and-actually-got-peer-reviewed/*" target="_blank">https://the-decoder.com/google-deepminds-alphaproof-nexus-solved-dozens-of-open-math-problems-and-actually-got-peer-reviewed/*</a></p>
+
+<h3>White House Restores UK AI Security Institute&#x27;s Access to Frontier Models</h3>
+<p>The White House reversed its decision to block the UK&#x27;s AI Security Institute (AISI) from accessing new AI models, restoring the agency&#x27;s early access to systems from Anthropic, Google DeepMind, and OpenAI, The Daily Telegraph reports. In September, the Trump administration had told the companies to stop sharing models with the British agency; Anthropic subsequently restricted access to its new Claude Mythos 5.1 model.</p>
+
+<p>The reversal followed diplomatic pressure from UK AI Minister Kanishka Narayan. Narayan plans to announce new AI safety measures in an upcoming speech, including stricter reporting requirements for AI-related security incidents involving critical infrastructure. The episode plays into a broader transatlantic debate: Prime Minister Andy Burnham had pushed for international AI regulation at the UN General Assembly, while Trump warned at the same event that &quot;globalist&quot; organizations should stay out of American AI development. UK intelligence chiefs had also warned ministers that AI was empowering hostile actors and terrorists.</p>
+
+<p>*Published 2026-10-12 · The Decoder · <a href="https://the-decoder.com/white-house-reverses-course-and-restores-uk-ai-safety-institutes-access-to-frontier-models/*" target="_blank">https://the-decoder.com/white-house-reverses-course-and-restores-uk-ai-safety-institutes-access-to-frontier-models/*</a></p>
+
+<h3>Sakana AI&#x27;s MASS Lets One Model Improve Itself — But Shared Blind Spots Persist</h3>
+<p>Researchers from Sakana AI and UC Berkeley introduced &quot;Multi-Agent Self-Supervision&quot; (MASS), a method for recursive self-improvement in which a single language model handles the task, optimizes how the work is done, and evaluates the results — without a stronger teacher model. At the research frontier, the authors argue, even experts struggle to judge results because verification can require costly evidence; a single plasma study can take over 120 million CPU hours. The model itself may therefore be the best available judge, even though it can miss its own mistakes.</p>
+
+<p>In MASS, a workflow — text appended to the prompt — defines each sub-agent&#x27;s role, a &quot;contract&quot; specifies required information and checks, and a &quot;hop&quot; sets call order, with an orchestrator distributing work. During the inner loop, weights stay frozen as the evaluator compares candidate workflows against a &quot;champion&quot;; in the outer loop, the champion runs 18 times per task and the model ranks results, selecting up to 15 runs for LoRA fine-tuning. Using Qwen3.6-27B with Qwen Code, MASS reached a nearly 70 percent win rate against the base model after two rounds. But when the model missed the same errors across all three roles, it could mistake them for progress and reinforce them — a core limitation of self-supervised improvement.</p>
+
+<p>*Published 2026-10-12 · The Decoder · <a href="https://the-decoder.com/sakana-ais-self-improving-model-gets-better-at-solving-and-judging-but-cant-catch-its-own-blind-spots/*" target="_blank">https://the-decoder.com/sakana-ais-self-improving-model-gets-better-at-solving-and-judging-but-cant-catch-its-own-blind-spots/*</a></p>
+
+<h3>Odyssey Opens Its Odyssey-3 World Model to Public Preview</h3>
+<p>California-based Odyssey launched a public research preview of Odyssey-3, a world model that generates interactive environments in real time from text prompts and lets users explore them. The free online demo runs on Odyssey-3 Flash and supports first-person and third-person perspectives, letting users move through generated worlds, trigger events, and watch the model respond in real time; developers can apply for API access. Founders Oliver Cameron and Jeff Hawke first unveiled the model on September 15, targeting robotics, autonomous driving, and video games — the public release adds technical detail and benchmark results.</p>
+
+<p>Odyssey-3 is built on an autoregressive diffusion transformer that continuously generates new video frames from previous frames and user actions, learning physical relationships and cause-and-effect from visual observations. Training data included internet videos with event descriptions, gameplay footage paired with keyboard and mouse inputs, and simulated physical interactions, with an extra technique reducing compute steps to enable real-time generation. The base model has 14 billion parameters and outputs 832×480 video; Odyssey-3 Pro supports 1280×720 and scores 66.1 points on Physics-IQ Verified&#x27;s video-to-video benchmark.</p>
+
+<p>*Published 2026-10-12 · The Decoder · <a href="https://the-decoder.com/odyssey-3-is-a-new-generative-world-model-that-you-can-try-for-free/*" target="_blank">https://the-decoder.com/odyssey-3-is-a-new-generative-world-model-that-you-can-try-for-free/*</a></p>
+
+<h2>What to Watch</h2>
+<ul>
+<li><strong>Meta&#x27;s cost-efficiency problem for the Wonder series.</strong> Muse Wonder&#x27;s per-task cost ($4.52) is roughly triple its predecessor&#x27;s and sits above several competitors. If Meta cannot drive down token costs, its frontier ambitions may hinge on Muse Code and the consumer Muse app rather than API economics. Watch for Muse Wonder Full pricing and independent benchmark replication.</li>
+<li><strong>Agent-memory and context research converging.</strong> Microsoft&#x27;s Fork-and-Flush and Meta&#x27;s &quot;Active Memory&quot; both treat context as a resource to be managed rather than accumulated — one by flushing it, the other by persisting it. Expect more work on when agents should forget versus remember.</li>
+<li><strong>The AI-for-math norms fight.</strong> DeepMind&#x27;s peer-reviewed AlphaProof Nexus results sharpen the contrast with the OpenAI boycott over unvetted proof dumps. Watch whether journals, funders, or the Association for Human Mathematics formalize standards for AI-generated mathematical results.</li>
+</ul>
+</body></html>
