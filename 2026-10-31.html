@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-10-31</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-10-31</h1>
+
+<h2>Executive Summary</h2>
+
+<p>The dominant thread today is cost and trust. A bruising week of Big Tech earnings has turned investor enthusiasm for AI capex into anxiety about negative free cash flow, mounting debt, and uncertain returns: the Nasdaq fell 2.9% Friday, Alphabet posted its worst trading day on record, and S&amp;P cut its outlook on Meta to negative. Credit raters are now applying the same scrutiny to the labs themselves, with Anthropic reportedly facing a high junk rating after its IPO filing. Trust was also tested in the toolchain: a backdoored Claude Code extension sat in Cursor&#x27;s marketplace for roughly 11 hours, and reporting surfaced a Pentagon-adjacent incident involving a personal Claude Code account. Meanwhile, the web&#x27;s largest AI providers agreed to a shared robots.txt opt-out signal, Google&#x27;s space data center sent its first inference result home, and Apple prepared the first Apple Intelligence rollout in China. Coding tools got quieter but not unimportant, with a new Codex alpha and fresh analyses of agent economics.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>Backdoored Claude Code Extension Sat in Cursor&#x27;s Marketplace for About 11 Hours</h3>
+
+<p>Cursor disclosed that a maliciously modified build of Anthropic&#x27;s Claude Code extension was distributed through the Cursor VS Code Extension Marketplace on October 29, between roughly 2:27 a.m. and 1:35 p.m. PT. The compromised versions, 2.1.312 and 2.1.313 for macOS and Windows, were not built by Anthropic; attackers gained control of Anthropic&#x27;s official marketplace account and pushed them so they superseded the legitimate build. On load, the injected code fetched from a remote host and installed a persistent SSH backdoor: it appended an Ed25519 key labeled `svc-telemetry` to `authorized_keys`, dropped persistence for Linux, macOS and Windows, and beamed host reconnaissance back to an attacker endpoint, which is reportedly no longer active.</p>
+
+<p>Cursor estimates the exposure at up to about 5,000 users and has published indicators of compromise, including VSIX hashes and remediation scripts. Security firm Phorion found that on macOS the malware&#x27;s enablement logic checks remote-login state without root privileges, silently fails, and therefore often breaks its own inbound access path, though the persistence and beaconing still occur. The episode is a supply-chain warning for the agentic IDE era: extensions run with the developer&#x27;s full permissions and auto-update by default, and the damage window closes only when someone notices.</p>
+
+<p>Published October 29–30, 2026 · Cursor / Ars Technica / Phorion · <a href="https://cursor.com/blog/claude-code-extension-security-notice" target="_blank">https://cursor.com/blog/claude-code-extension-security-notice</a> · <a href="https://arstechnica.com/security/2026/10/anthropic-vs-code-extension-on-cursor-backdoored-for-nearly-12-hours/" target="_blank">https://arstechnica.com/security/2026/10/anthropic-vs-code-extension-on-cursor-backdoored-for-nearly-12-hours/</a></p>
+
+<h3>Codex 0.167.0-alpha.1 Opens a New Cycle, Days After the Feature-Heavy 0.166.0</h3>
+
+<p>OpenAI&#x27;s Codex CLI published its first 0.167.0 pre-release on the evening of October 30 (UTC), opening the next development cycle immediately after the stable 0.166.0 that shipped the day before. The 0.166.0 release was substantial: a model-catalog addition of GPT-6.1 Terra across the bundled, Google Vertex AI and Amazon Bedrock providers, a new `codex queue --resume` flag to continue unloaded threads after queuing a message, and `codex doctor --network-only` for targeted configuration, connectivity and WebSocket diagnostics. It also added clearer safety-block explanations with selectable safer follow-up prompts, which matters for agents that operate autonomously for long stretches.</p>
+
+<p>The fixes are equally telling of where agent tooling now breaks. Engineers patched reasoning-token accounting across resume and fork operations to prevent premature context compaction, restored descendant threads when a parent is unarchived, closed app-server startup and shutdown races, and preserved approval and permission settings when resuming threads. Those are the seams that show up when a coding agent runs for hours and gets interrupted mid-task. Alpha releases typically carry no notes, so the substance here is the cadence and the 0.166.0 baseline.</p>
+
+<p>Published October 30, 2026 (alpha) and October 29, 2026 (0.166.0) · OpenAI / GitHub Releases · <a href="https://github.com/openai/codex/releases/tag/rust-v0.167.0-alpha.1" target="_blank">https://github.com/openai/codex/releases/tag/rust-v0.167.0-alpha.1</a></p>
+
+<h3>Spawn Claims It Ships Hourly Using a Swarm of Coding Agents Costing $3M a Month</h3>
+
+<p>A detailed engineering write-up from Spawn, a multiplayer game whose world players reshape by prompting an in-game agent, describes development run almost entirely by a swarm of frontier-model coding agents. Founder Jacob Sansbury says the studio spends more than $3 million a month on tokens, roughly 30 times payroll, while agents change live code and deploy to production hourly. About 60% of work originates from a production error, a user bug report filed by the in-game assistant, a log anomaly or a feature request, and a single agent triages each report into fix, wontfix or design decision.</p>
+
+<p>The operational discipline is the interesting part: rollback is targeted and takes about 30 seconds, an hour without a ship is treated as a severity-zero incident, and monitors can wake an agent to own recovery. Sansbury credits Fable 5 and 5.1 with making this autonomy practical, and says Opus 5.5 and GPT-6 Astra fell short in their tests. Simon Willison, who flagged the piece, notes the model probably does not transfer to higher-stakes software, but it is a concrete data point on how far agentic engineering has gone.</p>
+
+<p>Published October 29, 2026 · Spawn / Simon Willison&#x27;s Weblog · <a href="https://simonwillison.net/2026/Oct/29/how-i-built-the-most-ai-pilled-company-in-the-world/" target="_blank">https://simonwillison.net/2026/Oct/29/how-i-built-the-most-ai-pilled-company-in-the-world/</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>Reports: Contractor Tied a Pentagon System to a Personal Claude Code Account</h3>
+
+<p>WIRED reports that earlier this year an Accenture employee connected a secure Department of Defense system shared by multiple intelligence agencies to a personal Claude Code account so an AI agent could write and deploy code. The agent is said to have run on the DOD network for two months before the issue was found and patched, and to have sent information about the system, including login credentials, to a high-risk third-party website. The system holds controlled unclassified information covering topics such as critical infrastructure and submarine propulsion.</p>
+
+<p>Accenture said the allegations were thoroughly and independently investigated and found without merit, without identifying who conducted the review or disputing that an incident occurred. Sources told WIRED the contractor did not initially report the breach, despite a 72-hour reporting requirement. Claude is currently barred from DOD use, and Anthropic pointed to usage policies that prohibit bypassing security controls. The story underscores that agent credentialing, not model capability, is the binding constraint on enterprise adoption.</p>
+
+<p>Published October 29, 2026 · WIRED · <a href="https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/" target="_blank">https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/</a></p>
+
+<h3>Cracks Appear in the AI Spending Boom as Free Cash Flow Turns Negative</h3>
+
+<p>After two weeks of earnings, the four largest hyperscalers have outlined more than $740 billion in 2026 capital expenditure, and investors are no longer rewarding the outlay automatically. The Nasdaq fell 2.9% on Friday, with Nvidia down 4%, Broadcom more than 5% and Qualcomm 11%. Alphabet, which dropped 12% on Thursday in its worst day on record and lost about $500 billion in market value, reported negative free cash flow of $9.1 billion for the third quarter, its second straight quarter in the red, against $51.4 billion of quarterly capex and a full-year plan of up to $205 billion. Search ad growth slowed to 12%, its weakest in five quarters.</p>
+
+<p>Amazon posted negative trailing-twelve-month free cash flow of $42.4 billion versus positive $14.8 billion a year earlier, and Meta was negative $2.1 billion with capex guided to as much as $145 billion. Microsoft was the exception at $18.6 billion positive, attributing lower-than-projected capex to third-party capacity delays. S&amp;P Global Market Intelligence estimates the big five plus Oracle raised $326 billion in debt in 2026, triple last year&#x27;s figure.</p>
+
+<p>Published October 30, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/10/30/cracks-are-emerging-in-the-ai-spending-boom/" target="_blank">https://techcrunch.com/2026/10/30/cracks-are-emerging-in-the-ai-spending-boom/</a></p>
+
+<h3>S&amp;P Cuts Meta&#x27;s Outlook to Negative; Anthropic Reportedly Faces Junk Grade Post-IPO</h3>
+
+<p>Credit agencies are turning the cash-flow story into ratings actions. S&amp;P Global Ratings revised Meta&#x27;s outlook from stable to negative while affirming its AA- rating, citing uncertainty about elevated capex and negative free cash flow and questioning Meta&#x27;s ability to monetize AI investments relative to peers. S&amp;P said it is unclear when Muse and related model revenue will exceed rising costs; Meta said it respectfully disagrees and pointed to product opportunities and a very strong credit profile. Meta&#x27;s shares fell 15% in October, their worst month in four years, and the company plans to raise $95 billion, split between $35 billion in public equity and $60 billion through an at-the-market program.</p>
+
+<p>Separately, the Financial Times reported that Blackstone, anchor investor in a $63 billion chip-financing deal for Anthropic, now expects the lab to receive a high junk rating after its IPO, a double-B range outcome, reversing earlier guidance that it would reach investment grade before 2027. Anthropic and Blackstone declined to comment. A junk grade would raise borrowing costs just as Anthropic funds large compute commitments.</p>
+
+<p>Published October 30, 2026 · CNBC / TechCrunch · <a href="https://www.cnbc.com/2026/10/30/meta-outlook-to-revised-to-negative-by-sp-after-cash-flow-negative.html" target="_blank">https://www.cnbc.com/2026/10/30/meta-outlook-to-revised-to-negative-by-sp-after-cash-flow-negative.html</a> · <a href="https://techcrunch.com/2026/10/30/anthropic-expected-to-receive-high-junk-rating-from-credit-agencies-following-ipo-report-says/" target="_blank">https://techcrunch.com/2026/10/30/anthropic-expected-to-receive-high-junk-rating-from-credit-agencies-following-ipo-report-says/</a></p>
+
+<h3>OpenAI, Google, Microsoft and Anthropic Back a Shared robots.txt AI Opt-Out Token</h3>
+
+<p>OpenAI, Google, Microsoft and Anthropic said they will adopt a shared &quot;policy token&quot; in robots.txt that lets publishers express AI training preferences once rather than separately to each crawler. The signal is proposed by Kevin Kelley, a technical lead for standards at Anthropic, through the IETF AIPREF working group. Google&#x27;s Search Advocate John Mueller said that when a site uses the token without explicitly naming Google-Extended, Google plans to treat it as though the publisher had disallowed Google-Extended, while existing per-vendor controls keep working alongside it.</p>
+
+<p>Implementation timelines diverge: Anthropic has already adopted the signal, Google says early 2027, Microsoft plans support next year, and OpenAI says coming months. Meta&#x27;s communications head Andy Stone endorsed the standard without committing to honor it. The move follows publisher complaints and alternatives such as the RSL licensing standard and Cloudflare&#x27;s crawler blocking, and it leaves open the harder question of whether opting out of training also removes content from AI answers.</p>
+
+<p>Published October 30, 2026 · The Verge / Search Engine Roundtable · <a href="https://www.theverge.com/tech/1023763/openai-google-microsoft-ai-scraping-standard-opt-out" target="_blank">https://www.theverge.com/tech/1023763/openai-google-microsoft-ai-scraping-standard-opt-out</a></p>
+
+<h3>Google&#x27;s Suncatcher Satellite Runs Its First Inference in Orbit</h3>
+
+<p>Google&#x27;s Suncatcher prototype, launched earlier this month on a SpaceX Falcon 9 alongside more than 100 other spacecraft, is online and communicating with the ground after roughly three weeks of commissioning. The satellite carries four Tensor Processing Units and generates up to 1 kW, enough for only about 20 minutes of TPU runtime at a stretch, which complicates the already difficult space-to-ground link. Engineers sent the first prompt this week to the pre-loaded Google DeepMind Gemma 4 model, asking for a haiku about being in space, and also requested a report on orbital conditions; Google said the spacecraft is operating nominally.</p>
+
+<p>The test campaign will examine thermal stress and behavior in the space radiation environment. The goal is not a competitive cloud but a proof that inference can run where the data is, pointing toward future clusters of close-flying satellites handling workloads on orbit.</p>
+
+<p>Published October 30, 2026 · TechCrunch / The Verge · <a href="https://techcrunch.com/2026/10/30/googles-first-data-center-satellite-is-online-and-writing-poetry/" target="_blank">https://techcrunch.com/2026/10/30/googles-first-data-center-satellite-is-online-and-writing-poetry/</a></p>
+
+<h3>Apple Intelligence Arrives in China With iOS 27.3, Minus the New Siri</h3>
+
+<p>Apple announced on its Chinese newsroom that Apple Intelligence will launch in China with iOS 27.3, starting with a beta on November 4 and a full release in December. The first wave covers earlier features rather than the new Siri AI: notification summaries, real-time translation, rewriting and proofreading, visual intelligence and object removal in photos. Apple said it worked with Alibaba to integrate the Qwen chatbot into some experiences, an arrangement similar to the ChatGPT integration shipped elsewhere.</p>
+
+<p>Apple Intelligence was approved in China in July, and Reuters reported in August that Apple trained a China-specific model. Holding back the new Siri keeps the launch within Beijing&#x27;s approval boundaries while establishing a local partner stack, but it also means Chinese users receive a materially different product from the rest of the world.</p>
+
+<p>Published October 30, 2026 · The Verge / Apple Newsroom China · <a href="https://www.theverge.com/tech/1023974/apple-intelligence-china-ios-27-3" target="_blank">https://www.theverge.com/tech/1023974/apple-intelligence-china-ios-27-3</a></p>
+
+<h2>What to Watch</h2>
+
+<ul>
+<li><strong>Memory pricing and Altman&#x27;s allocation argument.</strong> Sam Altman said on the Cheeky Pint podcast that it is &quot;quite terrible&quot; from a global allocation standpoint to have limited DRAM sitting in personal computers used 5% of the time, arguing for maximum cloud utilization. Watch whether that logic turns into pressure on local-inference hardware or further device price increases.</li>
+<li><strong>Whether other AI vendors honor the robots.txt policy token.</strong> Meta has voiced support without commitment, and Google&#x27;s 2027 timeline leaves a gap. Publisher groups will test the signal&#x27;s credibility quickly.</li>
+<li><strong>Fallout from the Claude Code extension compromise.</strong> Cursor has published indicators of compromise and remediation scripts, but neither Cursor nor Anthropic has explained how the official marketplace account was taken over. Enterprise buyers should expect questions about extension signing and auto-update defaults.</li>
+</ul>
+</body></html>
