@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-01</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-01</h1>
+
+<h2>Executive Summary</h2>
+
+<p>A nervous chill settled over AI markets this week: OpenAI quietly cut the target for its latest funding round, Anthropic&#x27;s IPO preparation landed junk-grade credit ratings, and tech stocks slid on fears that capital spending has outrun revenue. The commodity underpinning it all — memory — became a policy debate, with Sam Altman arguing that DRAM belongs in data centers, not laptops. On the technical side, agents continued to colonize real engineering workflows: DeepSeek published a research prototype of a &quot;proactive&quot; coding agent, and Cisco put a 27-year-old founder in charge of rewriting nearly all of its legacy code on an unlimited token budget. Security remained the weak seam: an exploit chain against ChatGPT&#x27;s HTML previews earned only a $5,000 bounty, and a fresh malware family now uses a multi-model fallback chain to rank stolen victims by resale value.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>DeepSeek Open-Sources a Proactive Coding Agent Prototype, Largely Written by Agents</h3>
+
+<p>DeepSeek published `dsh-superagent` on GitHub on October 31, described as a &quot;proactive coding agent&quot; for a single GitHub repository, packaged as a bundle for the company&#x27;s open-source DeepSeek Harness. It listens to GitHub (and optionally Feishu); when an authorized person requests work, it opens a work item, executes it in an isolated agent session and directory, and replies in the original conversation — typically with a pull request — while a web panel surfaces only items that need human action.</p>
+
+<p>The design is deliberately conservative. The agent acts only when addressed by an approved person, or when a written team rule allows it; unrequested proactive work starts in a dry-run mode that merely records what it would have done. Documentation states the guiding principle as &quot;take as little human attention as possible, and give as much value as possible,&quot; with concrete requirements such as one question at a time, honest reporting of failures, and not raising limits to avoid asking.</p>
+
+<p>DeepSeek is careful about status: it calls the repo a research prototype, adapted for publication, not an official product, and notes that much of the engineering was done by coding agents. It also says some designs from the accompanying article were not implemented. MIT-licensed, it requires the DeepSeek Harness runtime, and the README recommends having a coding agent walk through the multi-step setup.</p>
+
+<p>Published October 31, 2026 · GitHub (DeepSeek) · <a href="https://github.com/deepseek-ai/dsh-superagent-prototype" target="_blank">https://github.com/deepseek-ai/dsh-superagent-prototype</a></p>
+
+<h3>Cisco Hands a 27-Year-Old Founder an Unlimited Token Budget to Rewrite 98% of Its Legacy Code</h3>
+
+<p>Cisco president and chief product officer Jeetu Patel has tasked Padmanabhan &quot;Paddy&quot; Krishnamurthy, a 27-year-old engineer who joined through Cisco&#x27;s acquisition of translation startup EzDubs, with rewriting 98% of the company&#x27;s legacy code within 24 months, with a four-week proof of concept. Krishnamurthy had been placed in a role five levels below his experience; he pitched Patel on doing the work with a team of just two people. Patel&#x27;s response, as reported by Fortune: &quot;I&#x27;ve given him unlimited tokens because he&#x27;s going to refactor code,&quot; adding that he told him to &quot;go nuts.&quot;</p>
+
+<p>The arrangement inverts the usual entry-level story of AI-driven layoffs, and Patel frames it as a hiring philosophy: bringing early-career, &quot;AI-native&quot; founders into tension with long-tenured engineers to challenge internal norms. It is also an unusually explicit test of whether agentic coding scales to decades of accumulated enterprise code, a much harder target than greenfield prototypes. The risks are well documented — agents that overstep their instructions have deleted databases and broken production setups — and 24 months is an aggressive horizon for a codebase of Cisco&#x27;s age and breadth.</p>
+
+<p>Published October 30, 2026 (Fortune report) · Tom&#x27;s Hardware · <a href="https://www.tomshardware.com/tech-industry/big-tech/cisco-gives-27-year-old-engineer-unlimited-ai-tokens-to-rewrite-98-percent-of-the-companys-legacy-code-in-24-months-president-plucks-former-startup-founder-telling-him-to-go-nuts" target="_blank">https://www.tomshardware.com/tech-industry/big-tech/cisco-gives-27-year-old-engineer-unlimited-ai-tokens-to-rewrite-98-percent-of-the-companys-legacy-code-in-24-months-president-plucks-former-startup-founder-telling-him-to-go-nuts</a></p>
+
+<h3>Prospero: A Native C++ Coding Harness Built Around Deadlines and Clean Process Trees</h3>
+
+<p>Longtime systems programmer Chris Wellons (nullprogram) released Prospero, a coding harness for local and API-served models that is written in C++ with an ImGui docking interface and, he claims, uses roughly two orders of magnitude fewer resources than mainstream harnesses. His argument: a harness is essentially `curl` glued to `popen()`, so shipping it as a web-stack application that consumes gigabytes of RAM is a design failure — particularly when the model is small enough to run locally alongside it.</p>
+
+<p>Prospero bundles no model providers; users point it at llama.cpp, a workplace endpoint, OpenRouter, or vendor APIs (a Claude subscription will not work). It supports subagents, remote headless deployment over SSH or WSL, and vision-based desktop control for clicking through and debugging GUI applications. Two design choices stand out for long autonomous runs: every operation has a deadline, so an unattended agent gets an explicit denial rather than hanging for hours, and shell timeouts are promoted to background jobs while the entire process tree is killed together — preventing the duplicate, interfering builds that plague other harnesses.</p>
+
+<p>Published October 31, 2026 · nullprogram.com · <a href="https://nullprogram.com/blog/2026/10/31/" target="_blank">https://nullprogram.com/blog/2026/10/31/</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>OpenAI Reportedly Trims Its Funding Target to $20 Billion as Investors Turn Cautious</h3>
+
+<p>OpenAI&#x27;s latest private fundraising has fallen short of earlier expectations, according to reports cited by TechCrunch. The company had been reported raising $30 billion at a $1.4 trillion valuation, later revised to $1.25 trillion, ahead of a planned IPO. The Financial Times reported Friday that the target is now $20 billion, with an even smaller first close, led by a group of investors from the United Arab Emirates; a subsequent retail offering for wealthy individuals could bring the total to the target.</p>
+
+<p>The Wall Street Journal added that $11 billion has been secured so far and that some large investors responded tepidly. TechCrunch attributes part of the difficulty to timing: public-market investors have grown wary of AI infrastructure spending, triggering a broad technology selloff, and Anthropic&#x27;s own IPO preparation is reportedly meeting headwinds as well. For a company whose compute commitments are enormous and multi-year, a lower private valuation puts pressure on the IPO narrative that both frontier labs are now testing.</p>
+
+<p>Published October 31, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/10/31/openai-reportedly-lowers-funding-target-for-new-round/" target="_blank">https://techcrunch.com/2026/10/31/openai-reportedly-lowers-funding-target-for-new-round/</a></p>
+
+<h3>Sam Altman Says Personal PCs Shouldn&#x27;t Hold the World&#x27;s Scarce DRAM</h3>
+
+<p>Asked about the global memory shortage during an appearance on the Cheeky Pint podcast, OpenAI CEO Sam Altman argued that local inference is the wrong allocation of a constrained resource. &quot;From a global allocation perspective, actually, it&#x27;s quite terrible to have everybody have a bunch of the world&#x27;s limited supply of DRAM sitting in their own computer and being used five percent of the time,&quot; he said, arguing that maximum utilization in the cloud is the better answer and that many people&#x27;s intuition is &quot;the opposite of that.&quot;</p>
+
+<p>The remark lands in the middle of a severe price squeeze: Samsung and SK Hynix have locked up much of the world&#x27;s memory output through long-term deals with cloud operators and projects such as Stargate, and consumer devices — laptops, phones, and upgrades — are getting more expensive as a result. It also cuts against a popular argument that capable open-weight models capable of running locally will relieve pressure on data-center demand.</p>
+
+<p>Published October 30, 2026 · The Verge · <a href="https://www.theverge.com/ai-artificial-intelligence/1023820/sam-altman-ram-shortage-cloud-servers" target="_blank">https://www.theverge.com/ai-artificial-intelligence/1023820/sam-altman-ram-shortage-cloud-servers</a></p>
+
+<h3>OpenAI, Google, Microsoft and Anthropic Back a Shared robots.txt Opt-Out Signal</h3>
+
+<p>The four largest AI developers say they will adopt a new &quot;policy token&quot; for robots.txt that lets publishers express AI-training preferences once, rather than negotiating with each provider separately. The proposal comes from Kevin Kelley, a technical lead for standards at Anthropic, and is being developed within the IETF; it is intended to sit alongside existing crawler directives rather than replace them. Meta&#x27;s communications head Andy Stone signaled support but did not commit to honoring the signal.</p>
+
+<p>Implementation timelines differ materially. Anthropic has already adopted it; Google and Microsoft plan to support it next year; OpenAI says it will implement it in the &quot;coming months.&quot; Microsoft said it will offer granular controls separating AI training from AI grounding while keeping sites in Bing search results. The announcement arrives as publishers escalate countermeasures — the RSL licensing standard and Cloudflare&#x27;s default AI-crawler blocking — and as courts and regulators scrutinize whether robots.txt-style signals carry any legal weight.</p>
+
+<p>Published October 30, 2026 · The Verge · <a href="https://www.theverge.com/tech/1023763/openai-google-microsoft-ai-scraping-standard-opt-out" target="_blank">https://www.theverge.com/tech/1023763/openai-google-microsoft-ai-scraping-standard-opt-out</a></p>
+
+<h3>Google&#x27;s Project Suncatcher Satellite Returns the First AI Inference From Orbit</h3>
+
+<p>Google says its Project Suncatcher prototype satellite, launched October 1, has completed commissioning and produced the first AI response from a data-center-class TPU in orbit. During a ground-station pass near Svalbard, Norway, the team uplinked a prompt to an onboard Gemma 4 open model asking for a haiku about being in space; the downlinked poem confirmed the payload worked. Google followed with space-themed limericks and telemetry prompts reporting payload status.</p>
+
+<p>The milestone is early but consequential for the company&#x27;s long-term thesis that solar-powered orbital compute could eventually relieve terrestrial data-center constraints. Next come tests of TPU behavior under thermal stress and radiation exposure — the failure modes that matter most for multi-year orbital operation. Google frames success there as the precondition for its next milestone: a pair of interconnected satellites in 2027, the first real test of whether space-based inference clusters are practical rather than merely possible.</p>
+
+<p>Published October 30, 2026 · Google Research (The Keyword) · <a href="https://blog.google/innovation-and-ai/models-and-research/google-research/project-suncatcher-satellite-response/" target="_blank">https://blog.google/innovation-and-ai/models-and-research/google-research/project-suncatcher-satellite-response/</a></p>
+
+<h3>Security Researcher Details a ChatGPT Account-Takeover Chain Patched for a $5,000 Bounty</h3>
+
+<p>Parameter Labs disclosed an exploit chain against ChatGPT&#x27;s HTML-preview artifacts, which render interactive user-built apps inside sandboxed iframes. The chain began with MathLive, a JavaScript math library OpenAI uses for graph support whose virtual keyboard can be triggered from a sandboxed iframe via `postMessage()`. The parent-page handler used `innerHTML`, and nothing prevented other frames — including preview frames — from calling it, so untrusted code could inject an unsandboxed iframe.</p>
+
+<p>OpenAI&#x27;s Content-Security-Policy blocked inline scripts and restricted script origins to a handful of domains, but one allowed origin was YouTube, whose oEmbed endpoint could reflect JavaScript that executed in the ChatGPT page. From there, an attacker could call private APIs and exfiltrate data through an image reference — meaning a crafted share URL, opened by a signed-in user, could steal their data or act on their behalf. OpenAI patched the issue and paid $5,000; Simon Willison called the bounty &quot;a bit cheap for a vulnerability this serious.&quot;</p>
+
+<p>Published October 31, 2026 · Simon Willison&#x27;s Weblog · <a href="https://simonwillison.net/2026/Oct/31/how-we-took-over-chatgpt-accounts/" target="_blank">https://simonwillison.net/2026/Oct/31/how-we-took-over-chatgpt-accounts/</a></p>
+
+<h3>Cisco Talos Documents an Infostealer That Uses LLMs to Rank Victims by Resale Value</h3>
+
+<p>Cisco Talos published research on VOLTA, a self-deleting Windows infostealer that adds an AI-driven post-theft stage. After harvesting browser credentials and cookies, payment cards, crypto wallet seed phrases, Discord, Telegram, Steam and Roblox sessions, OAuth tokens, SSH and cloud keys, Wi-Fi profiles and screenshots, VOLTA assembles a structured &quot;evidence bundle&quot; about the person behind the machine: geolocation and home address, employer, inferred birth year, Slack workspaces and document metadata, corroborated by searching Gmail for purchase receipts and pulling UberEats and DoorDash order histories.</p>
+
+<p>That bundle is POSTed to OpenRouter with a system prompt instructing the model to act as a &quot;forensic intelligence analyst drafting a target assessment,&quot; producing a section titled &quot;WHAT THEY&#x27;RE WORTH&quot; that tiers valuables by monetization potential. If a model refuses, VOLTA fails over through a chain of three models — evidence, Talos argues, of deliberate engineering against guardrails. The case illustrates a shift from stealing everything to letting a model triage what is worth pursuing, and it uses no attacker-owned infrastructure at all.</p>
+
+<p>Published October 31, 2026 · Cisco Talos · <a href="https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/" target="_blank">https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/</a></p>
+
+<h2>What to Watch</h2>
+
+<ul>
+<li><strong>Whether the AI capital-markets correction deepens.</strong> OpenAI&#x27;s reduced raise and Anthropic&#x27;s reportedly weak credit ratings arrive alongside a broad tech selloff tied to infrastructure spending; watch for the first close size and any IPO pricing signals, since both labs&#x27; compute commitments depend on it.</li>
+<li><strong>Adoption of the robots.txt policy token.</strong> With Anthropic already live and Google and Microsoft promising support next year, the standard&#x27;s credibility depends on whether crawlers actually honor it — and whether regulators treat the signal as meaningful consent.</li>
+<li><strong>Enterprise-scale legacy refactors.</strong> Cisco&#x27;s two-person, 24-month, unlimited-token experiment is the clearest public test yet of whether coding agents can handle decades-old codebases rather than greenfield projects; the four-week proof of concept should be the first real data point.</li>
+</ul>
+</body></html>
