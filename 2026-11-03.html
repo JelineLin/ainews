@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-03</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-03</h1>
+
+<h2>Executive Summary</h2>
+
+<p>November 2 was a Monday of disclosure, litigation, and infrastructure politics rather than model launches. Anthropic&#x27;s revised S-1/A warned that the company may imminently cross its own Responsible Scaling Policy threshold for &quot;dramatically accelerated progress attributable to AI&quot; — the closest a frontier lab has come to formally invoking recursive self-improvement — while its Claude Code team quietly narrowed what the coding agent will build. On the legal front, the New York Times and three Tribune newspapers sued Brave Software, alleging it sells an index of paywalled journalism to Anthropic, Perplexity, Mistral, xAI, and Cohere. OpenAI, meanwhile, spent the day on grid politics and product consolidation: a &quot;Grid Protectors&quot; pilot in Georgia, a plan to merge ChatGPT&#x27;s Chat and Work tabs, and a macOS app retirement date. Smaller signals — a continual-learning startup, a behavioral world model, and throttled Grok Bot limits — point to the economics of always-on agents.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>Anthropic Narrowed Claude Code&#x27;s Prompt to Refuse Game Clones</h3>
+
+<p>Anthropic has updated Claude Code&#x27;s system prompt so the coding agent refuses to recreate specific existing video games, while still permitting original games, genre games, and games built from a user&#x27;s own designs and assets. The change surfaced after a user posted a screenshot of two alleged new prompt sentences; Anthropic&#x27;s Addy Osmani did not confirm the exact wording but said the company &quot;added two sentences to Claude Code&#x27;s prompt on Opus 5.5&quot; to steer the agent away from recreating someone else&#x27;s game, because &quot;using Claude to infringe IP is against our usage policy.&quot;</p>
+
+<p>The context is an explosion of AI-assisted decompilations, recompilations, and web ports of retro titles, a genre of work that has historically been legally fraught even when done by hand. Osmani framed the edit as a boundary-setting measure rather than a prohibition on game development, adding that Anthropic will &quot;continue to iterate&quot; and asking users to report false refusals of their own IP. The Verge notes it has asked whether other Claude system prompts will receive the same guidance.</p>
+
+<p>The practical takeaway for developers: system prompts inside commercial coding agents are increasingly policy surfaces that can change the capability envelope of a tool mid-project. Anyone building pipelines around Claude Code for asset conversion, porting, or ROM-adjacent work should expect refusal behavior to shift without a version bump or changelog entry.</p>
+
+<p>Published November 2, 2026 · The Verge · <a href="https://www.theverge.com/ai-artificial-intelligence/1024632/anthropic-claude-ai-video-game-clones" target="_blank">https://www.theverge.com/ai-artificial-intelligence/1024632/anthropic-claude-ai-video-game-clones</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>[Follow-up] Anthropic&#x27;s Revised S-1 Warns It May Be Near Its Own Recursive Self-Improvement Threshold</h3>
+
+<p>Anthropic&#x27;s amended S-1/A, filed Monday, carried updated financials that drew most of the attention, but its revised Risk Factors section contained a more consequential admission. The company wrote that its &quot;increasing use of AI systems to accelerate our own research and development may cause the capabilities of our models to advance more rapidly than our ability to develop, validate, and implement corresponding safety, alignment, and security measures,&quot; and that it has &quot;in the past not identified, and may in the future not identify, a significant acceleration in our rate of development until after it has occurred.&quot;</p>
+
+<p>More pointedly, Anthropic said its internal estimates and expectations for future models — not its current ones — &quot;indicate that we may imminently meet our Responsible Scaling Policy&#x27;s definition of &#x27;dramatically accelerated progress attributable to AI.&#x27;&quot; It stressed that no current model has been designated as exceeding that threshold, that it continues to assess the underlying data, and that it intends to keep humans in the R&amp;D loop for the foreseeable future.</p>
+
+<p>Recursive self-improvement has been treated by many as a slogan too vague to define or prove. A filed securities document is a different register: it is a statement of material risk to investors, made under legal exposure for misstatement. That raises the stakes for how Anthropic&#x27;s RSP thresholds are audited — and it comes as the company has begun giving METR employee-like access to evaluate its models.</p>
+
+<p><strong>What changed:</strong> Anthropic&#x27;s public positioning has moved from general caution about AI-assisted R&amp;D (previously reported alongside its IPO filing) to a specific, filing-level statement that it may imminently cross its RSP threshold.</p>
+
+<p>Published November 2, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/11/02/anthropic-warns-that-its-very-close-to-rsi-capability-aka-self-building-ai/" target="_blank">https://techcrunch.com/2026/11/02/anthropic-warns-that-its-very-close-to-rsi-capability-aka-self-building-ai/</a></p>
+
+<h3>New York Times and Tribune Papers Sue Brave, Alleging It Fenced Paywalled Journalism to AI Labs</h3>
+
+<p>The New York Times sued Brave Software in federal court in Manhattan on Monday, alleging the privacy-focused browser company scraped its copyrighted content and unlawfully distributed it to customers it names as Anthropic, Perplexity, Mistral, xAI, and Cohere. Separately, the New York Daily News, Chicago Tribune, and Orlando Sentinel filed a similar suit, also in Manhattan federal court. The Times has previously sued both OpenAI and Perplexity on comparable theories.</p>
+
+<p>Central to the complaints is Brave&#x27;s index — reportedly more than 30 billion pages, built with an unidentified crawler — which the papers say Brave monetizes by selling AI companies paid access to &quot;real-time online content from the Brave Index&quot; for training, query answering, or both. The suits also target Brave&#x27;s paywall-bypass capability, which the company advertises as reaching &quot;hundreds of top publishers,&quot; and its practice of blocking publishers&#x27; ads while selling its own. The Times&#x27; complaint describes Brave as both &quot;a burglar that misappropriates the content of publishers&quot; and &quot;an AI &#x27;fence&#x27; that sells stolen content to third parties.&quot;</p>
+
+<p>The Times seeks an injunction and damages. Brave, Anthropic, Mistral, xAI, and Cohere did not immediately comment. The case is notable because it targets the data broker layer of the AI supply chain rather than a model developer, and because a ruling on whether indexing-for-resale is distinguishable from crawling-for-training would reshape how licensing deals are priced.</p>
+
+<p>Published November 2, 2026 · The Verge (reporting first by Reuters) · <a href="https://www.theverge.com/tech/1024588/brave-lawsuit-ai-scraping-new-york-times" target="_blank">https://www.theverge.com/tech/1024588/brave-lawsuit-ai-scraping-new-york-times</a></p>
+
+<h3>OpenAI Will Pilot &quot;Grid Protectors&quot; — Up to 1 GW of Curtainable Load — in Georgia</h3>
+
+<p>OpenAI said Monday it will pilot a &quot;Grid Protectors Program&quot; at an upcoming data center in Effingham County, Georgia, pledging to free up to 1,000 megawatts of power during extreme weather or grid emergencies — enough for air conditioning in roughly 700,000 homes. The company frames the arrangement as making its on-site generation &quot;a resource that utilities can call on when communities need it most.&quot;</p>
+
+<p>The announcement lands amid broad local opposition to data center construction. In Utah, residents protested after Box Elder County commissioners approved a project expected to consume more than double the state&#x27;s 2025 peak electricity demand. Tennessee, Florida, Oklahoma, Oregon, and other states have passed laws aimed at preventing AI companies from passing energy costs to residents, alongside moratoriums and other restrictions; a Houston Advanced Research Center study found powering proposed Texas projects could undo decades of air-quality gains in five years.</p>
+
+<p>OpenAI, which has begun calling its facilities &quot;compute campuses,&quot; argues that year-round demand spreads the grid&#x27;s fixed costs across more electricity sales while load flexibility lets it shed demand at peak. The claim is verifiable in principle: the pilot&#x27;s value depends on contractual terms — notice periods, compensation, and whether curtailment covers training runs or only discretionary inference.</p>
+
+<p>Published November 2, 2026 · The Verge · <a href="https://www.theverge.com/ai-artificial-intelligence/1024604/openai-data-center-grid-protection-program" target="_blank">https://www.theverge.com/ai-artificial-intelligence/1024604/openai-data-center-grid-protection-program</a></p>
+
+<h3>OpenAI to Merge ChatGPT&#x27;s Chat and Work Tabs and Pool Tokens With Codex</h3>
+
+<p>OpenAI is preparing to merge the Chat and Work tabs inside the ChatGPT app, according to an email sent to users. The consolidated experience will first go to select users for feedback before wider rollout. In OpenAI&#x27;s description, the merge lets a user &quot;move from exploring an idea to having ChatGPT carry it through, all in one place,&quot; bringing in files and plugins and asking ChatGPT to build a website, create a presentation, or act on the web while the user reviews and steers the work.</p>
+
+<p>Two constraints are worth noting. Codex &quot;will remain a separate experience in the ChatGPT desktop app,&quot; so the coding surface is not being folded into the general chat surface. And ChatGPT and Codex will now draw tokens from a single allowance pool; OpenAI says this won&#x27;t affect most users, but depending on usage and model choice, some may hit resets more frequently.</p>
+
+<p>The move mirrors Anthropic&#x27;s September consolidation of Claude&#x27;s chat and Cowork functions into one screen, and reflects a broader industry convergence: chat, agentic task execution, and coding are being treated as one continuous workflow with one budget. For heavy Codex users, the pooled allowance is the actionable detail — coding sessions and long chat threads now compete for the same quota.</p>
+
+<p>Published November 2, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/11/02/openai-is-finally-merging-chatgpts-chat-and-work-tabs/" target="_blank">https://techcrunch.com/2026/11/02/openai-is-finally-merging-chatgpts-chat-and-work-tabs/</a></p>
+
+<h3>Trajectory Raises $45M to Automate Continual Post-Training for Domain Experts</h3>
+
+<p>Trajectory, an 18-person startup founded about a year ago by three Stanford classmates with experience at Google DeepMind and Apple, announced a $45 million Series A at a $300 million valuation, led by Sequoia with participation from Nvidia, Bessemer Venture Partners, and Bain Capital Ventures. The company is also making its post-training platform publicly available.</p>
+
+<p>The premise: general models don&#x27;t learn from their mistakes without further training, and firms adapting them to law, finance, or medicine typically need internal research teams or forward-deployed engineers to fine-tune. Trajectory instead starts from an open-source model, connects to a customer&#x27;s applications to collect feedback on performance, and retrains on that signal so the model improves at specialized tasks over time. Co-founder Ronak Malde likened base models to &quot;a very smart PhD student who&#x27;s always starting a new job,&quot; versus what the economy values — &quot;someone who worked on the job for 30 years.&quot; Harvey and Rogo are already using the platform to post-train open-source models for legal and financial work; Decagon, Mercor, and Nvidia are also customers.</p>
+
+<p>Trajectory&#x27;s approach resembles recursive self-improvement, but co-founder Michael Elabd argues keeping humans in the training loop makes it safer than autonomous self-improvement. The real test will be whether feedback loops from messy production data reliably beat hand-curated fine-tuning sets.</p>
+
+<p>Published November 2, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/11/02/trajectory-raises-45m-to-make-ai-model-training-accessible-to-nontechnical-experts/" target="_blank">https://techcrunch.com/2026/11/02/trajectory-raises-45m-to-make-ai-model-training-accessible-to-nontechnical-experts/</a></p>
+
+<h3>42AI Emerges With $62.5M for a &quot;Behavioral World Model&quot; That Predicts Individual Decisions</h3>
+
+<p>Israeli startup 42AI came out of stealth with $62.5 million in seed funding for what it calls a &quot;behavioral world model&quot; — a system that predicts how a specific person will act, including in situations it has not observed them in. The company says it is initially running the system at a handful of financial brokerages, where it forecasts how individual traders will respond to volatile conditions.</p>
+
+<p>Co-founder and CEO Amit Gal-Or argues behavior &quot;is not deterministic; it&#x27;s constantly probabilistic,&quot; and that people retain underlying tendencies even as circumstances change. Rather than extrapolating from past actions alone, 42AI claims to infer internal motivations from seemingly unrelated signals — sentiment and voice on support or sales calls, onboarding and KYC steps, transfer patterns, timing of trades, and the market state at each interaction. Those observations become mathematical representations of traits fed into a transformer-based world model that outputs probability distributions over decisions; a separate language model generates explanations. Training rewards are structured so a person&#x27;s simulated tendencies stay consistent — if a risk-averse trader is modeled as a risk-taker, &quot;the target is off,&quot; CTO Ehud Ezra said.</p>
+
+<p>The product raises obvious questions about consent, financial-privacy regulation, and whether &quot;predicting human behavior&quot; survives contact with adversarial users who know they are being modeled. 42AI says it spent three years developing the approach.</p>
+
+<p>Published November 2, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/11/02/42ai-comes-out-of-stealth-with-62-5m-and-a-world-model-that-can-predict-human-behavior/" target="_blank">https://techcrunch.com/2026/11/02/42ai-comes-out-of-stealth-with-62-5m-and-a-world-model-that-can-predict-human-behavior/</a></p>
+
+<h3>Musk Caps Grok Bot Usage After &quot;Unsustainably High&quot; Serving Costs</h3>
+
+<p>Over Halloween weekend, some Grok Bot subscribers found their weekly usage limits unexpectedly exhausted — some reporting jumps from as low as 50% to 100% — without heavy use of the agent. SpaceX CEO Elon Musk confirmed on X on Sunday that it was not a glitch: &quot;The cost of serving Grok Bot was unsustainably high relative to revenue.&quot;</p>
+
+<p>The admission is striking given Grok Bot&#x27;s positioning as a success story for the newly public SpaceX. The company said in a filing last month that AI now accounts for 52% of its income, and its renamed &quot;Super Intelligence&quot; division posted a $431 million profit — rare in the industry — which would have been higher without $1.2 billion in one-time costs tied to its acquisition of Cursor. Musk has called Grok Bot the fastest-growing product he has ever seen. He has not said how subscriber limits will change going forward.</p>
+
+<p>The episode is a useful counterpoint to the assumption that agentic products scale gracefully. Long-horizon agents multiply token consumption per user in ways flat-rate subscriptions struggle to absorb, and the correction here landed on existing subscribers with no advance notice.</p>
+
+<p>Published November 2, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/11/02/elon-musk-throttles-grok-bot-limits-due-to-unsustainably-high-costs/" target="_blank">https://techcrunch.com/2026/11/02/elon-musk-throttles-grok-bot-limits-due-to-unsustainably-high-costs/</a></p>
+
+<h2>What to Watch</h2>
+
+<ul>
+<li><strong>Anthropic&#x27;s RSP threshold and third-party verification.</strong> If Anthropic designates a model as crossing &quot;dramatically accelerated progress attributable to AI,&quot; the question becomes who can audit that determination — METR&#x27;s employee-like access, announced in October, is the obvious candidate, and its first published risk assessment will set the precedent.</li>
+<li><strong>Whether the Brave suits reach the model developers.</strong> The complaints name Anthropic, Perplexity, Mistral, xAI, and Cohere as recipients but sue only Brave; a ruling that buying a scraped index is itself infringement would convert data-supply contracts into a liability channel across the industry.</li>
+<li><strong>Post-training economics.</strong> Trajectory&#x27;s public launch and 42AI&#x27;s seed round both bet that narrow, continuously updated models beat general frontier models on cost and task fit; watch whether Harvey and Rogo can show measurable gains over base-model prompting.</li>
+</ul>
+</body></html>
