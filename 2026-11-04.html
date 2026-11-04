@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-04</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-04</h1>
+
+<h2>Executive Summary</h2>
+
+<p>The past 24 hours were defined less by new frontier models than by the messy operational and institutional consequences of putting AI agents into production. Postman admitted that its desktop client had silently installed Codex and Claude Code plugins, then promised clearer opt-in after a public backlash. Revolut disclosed that it now runs a self-hosted Chinese open-weight model (GLM) as its default coding assistant, cutting its AI coding bill by roughly 90%. Security was another thread: Binance said attackers used a fake job interview, a malware-laden coding exercise and compromised internal AI tools to reach its wallet infrastructure before a record $6.34 billion theft. On the research side, Anthropic published FlashProve, a zero-knowledge proving system for LLM inference, and reported that the 400B-parameter Llama 4 Maverick model could be verified at about 110 tokens per second on a single H100 — far slower than normal inference but orders of magnitude faster than prior open systems. Apple and Nvidia also made agent-infrastructure moves.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>Postman&#x27;s Silent Plugin Install Sparks a Consent Fight Over Coding Agents</h3>
+
+<p>A GitHub issue filed on October 25 against Postman&#x27;s desktop client reached the top of Hacker News on November 3, laying out evidence that the app had automatically installed plugins for OpenAI&#x27;s Codex and Anthropic&#x27;s Claude Code, created a user-wide `~/.codex/config.toml` entry, and registered a Codex session-start hook that pre-trusted its own content hash. The hook instructs the agent to route &quot;any non-trivial API engineering task&quot; through Postman&#x27;s plugin, and the issue&#x27;s logs record an `auto-existing-upgrade` event reporting `claude-code:installed,codex:installed`. The poster described the behavior as a &quot;severe consent and trust-boundary problem.&quot;</p>
+
+<p>In a reply posted late on November 3, a Postman staff member said the CLI and agent plugins are bundled because &quot;many users had trouble installing and wiring them up separately,&quot; that this is mentioned on the download page and in the update flow, and that components can be uninstalled in-app. Postman said it would &quot;make the opt-in clearer, especially for existing users&quot; and review the hook approval behavior — stopping short of committing to opt-in by default, which commenters demanded. A later commenter reported the same silent install after an update from 12.31.3 to 12.35.1, suggesting the behavior persisted in fresh builds.</p>
+
+<p>The episode matters beyond one API client: as coding agents become the main surface for developer tooling, vendors now have a way to write into an agent&#x27;s global configuration, hooks and MCP settings — a privilege set that grants persistent influence over a developer&#x27;s workflow. Independent testers in the thread found Codex does gate hooks, but that the trust record lives in a plaintext config the installer can compute for itself, meaning host-side approval only helps if the installer cannot pre-authorize.</p>
+
+<p>*Published November 3, 2026 · GitHub (postmanlabs/postman-app-support, issue #14370) · <a href="https://github.com/postmanlabs/postman-app-support/issues/14370" target="_blank">https://github.com/postmanlabs/postman-app-support/issues/14370</a>*</p>
+
+<h3>Revolut Replaces Claude Code and Codex With Self-Hosted GLM, Cutting Coding Costs ~90%</h3>
+
+<p>At the AI Engineer conference in New York, Revolut&#x27;s head of AI operations and infrastructure, David Abitbol, described moving the fintech&#x27;s roughly 2,000 engineers from Anthropic&#x27;s Claude Code and OpenAI&#x27;s Codex to GLM, an open-weight model from Chinese lab Z.ai, which Revolut hosts itself on about 56 Nvidia B200 GPUs at a blended cost of roughly $0.30 per million tokens. Revolut says its AI coding bill is now about a tenth of what it paid the US labs. Abitbol reported about 60% shorter coding time and 70% shorter lead time from task pickup to merge, though those figures are the company&#x27;s own and do not isolate the model change from side effects such as removing per-engineer token budgets.</p>
+
+<p>The path there matters: Revolut first deployed Gemini, then Claude Code under strict budgets, and Abitbol said rationed tokens made engineers hoard AI for hard problems. Flat, self-hosted pricing removed the cap. He acknowledged the &quot;stigma&quot; of using a Chinese open-weight model at a regulated bank but said Revolut uses only the weights, running them on its own US infrastructure rather than Z.ai&#x27;s hosted service; image work still routes to Gemini, and Claude Code and Codex remain available for the hardest tasks, inside sandboxed agents with human approval.</p>
+
+<p>The fine print is substantial. The 90% saving excludes cloud, staffing and monitoring costs and depended on heavy tuning — Abitbol said out-of-the-box inference was &quot;terrible&quot; until time to first token fell from about 14 seconds to 1.7 seconds. Smaller teams without Revolut&#x27;s infrastructure staff may not reproduce it.</p>
+
+<p>*November 3, 2026 · Dealroom (reporting Abitbol&#x27;s AI Engineer conference talk) · <a href="https://dealroom.co/news/169124-revolut-swaps-claude-code-for-a-chinese-open-weight-model-cutting-its-ai/" target="_blank">https://dealroom.co/news/169124-revolut-swaps-claude-code-for-a-chinese-open-weight-model-cutting-its-ai/</a>*</p>
+
+<h2>Other AI Developments</h2>
+
+<h3>Binance Says a Fake Job Interview and Internal AI Tools Helped Hackers Reach a $6.3B Wallet Heist</h3>
+
+<p>Binance co-CEO Richard Teng told CNBC that the October 29 breach, which drained $6.34 billion in assets, was the product of a months-long intrusion rather than a single compromised laptop. According to Teng and a Binance security report, attackers began in June by luring a Binance Wallet DevOps engineer into installing a tampered Homebrew package while the engineer searched for a popular AI coding tool. In September they posed as recruiters, ran interviews with a second engineer, and ended with a &quot;coding exercise that contained hidden malware designed to evade security,&quot; Teng said. From there the intruders moved through Binance&#x27;s internal AI tools to the system that authorized wallet transactions.</p>
+
+<p>Binance says it detected suspicious activity early, replaced the first engineer&#x27;s device and rotated credentials, but that the employee&#x27;s role and colleagues on the wallet-infrastructure team had already been exposed. Teng said Binance has replenished 98% of affected assets, rebuilt the wallet system and internal AI tool, and commissioned an independent review; about $3 billion in assets has reportedly been frozen with partners including Tether and Ripple. He did not attribute the attack himself, but said the FBI has linked it to North Korean actors associated with the TraderTraitor group.</p>
+
+<p>The case is a concrete example of AI-adjacent supply-chain risk: malicious &quot;AI tooling&quot; searches, recruiter pretexting, and internal AI systems as lateral movement paths.</p>
+
+<p>*November 3, 2026 · CNBC · <a href="https://www.cnbc.com/2026/11/03/binance-co-ceo-teng-says-hackers-used-fake-job-interviews-to-steal-6point3-billion-in-crypto.html" target="_blank">https://www.cnbc.com/2026/11/03/binance-co-ceo-teng-says-hackers-used-fake-job-interviews-to-steal-6point3-billion-in-crypto.html</a>*</p>
+
+<h3>Anthropic&#x27;s FlashProve Makes Zero-Knowledge Proofs of LLM Inference Roughly 70–95x Cheaper Than Running the Model</h3>
+
+<p>Anthropic published research, with academic co-authors from EPFL, MIT and StarkWare, on cryptographically proving that a response came from the model a provider claims to be serving. The motivation is practical: users currently cannot tell whether a routing service quietly swapped in a cheaper model or an attacker altered the token stream, and judging by output quality is unreliable. The team&#x27;s system, FlashProve, uses zkSNARKs because they hide the prover&#x27;s inputs while producing short, fast-to-check proofs.</p>
+
+<p>The headline result: for a 400B-parameter mixture-of-experts model (Llama 4 Maverick) with 4-bit quantized weights, a single H100 generates proofs at about 110 tokens per second, with a proof of roughly 19 MB per 1,024-token request. That costs about 70–95x the GPU time of running the model on vLLM — far too slow for ordinary chat, but orders of magnitude faster than prior open-source proving systems. The proofs hide model weights and the inference computation; they do not hide the architecture. Anthropic also released Lean formalizations of the top-level security statements and the code under Apache 2.0, and characterized the work as intermediate progress rather than a finished product.</p>
+
+<p>Potential uses include independent evaluators verifying pre- and post-release models, customers auditing third-party routers, and compliance regimes that need to confirm which model produced an output.</p>
+
+<p>*November 3, 2026 · Anthropic · <a href="https://www.anthropic.com/research/provable-inference" target="_blank">https://www.anthropic.com/research/provable-inference</a>*</p>
+
+<h3>Apple Opens Siri AI to Every App Through a Developer Preview</h3>
+
+<p>With the iOS, iPadOS, macOS and visionOS 27.3 betas, Apple began a Developer Preview that lets any app expose its content and actions to Siri AI through App Intents — the first time the rebuilt assistant is broadly extensible by third parties. Developers can surface app entities, support custom actions such as checking a delivery or booking a reservation, and define &quot;skills&quot; that chain multiple actions into one request; Siri can also surface any entity in the Spotlight semantic index, not just those matching an existing schema. Apple says Siri AI is live in English, French, Japanese, Korean, Portuguese and Spanish, with Traditional Chinese, Norwegian, Turkish and Vietnamese coming.</p>
+
+<p>The timeline is deliberately staged: this is a preview ahead of customer shipping &quot;in a few months,&quot; with App Store submissions for these experiences opening in the spring. Apple said terms and usage policies for Siri AI-enabled experiences will follow. Limitations are explicit — Siri AI remains unavailable in the EU on iOS, iPadOS and watchOS while Apple negotiates with regulators, is not available to users under 13, and server-side features are subject to daily usage limits.</p>
+
+<p>For developers, the move turns Siri into a distribution channel analogous to an app store surface, and makes App Intents adoption a competitive question rather than an accessibility nicety.</p>
+
+<p>*November 3, 2026 · Apple Developer News · <a href="https://developer.apple.com/news/?id=gdk2umrf" target="_blank">https://developer.apple.com/news/?id=gdk2umrf</a>*</p>
+
+<h3>Nvidia Open-Sources Auto Ontology to Give Agents a Trusted Semantic Layer Over Enterprise Data</h3>
+
+<p>Nvidia released Auto Ontology, an Apache-licensed Python framework that builds a semantic, graph-based layer over enterprise metadata and exposes it to any agent harness via MCP, CLI and API. The premise is that agentic analytics fails not on retrieval speed but on correctness: an agent that answers a revenue question quickly with the wrong definition is worse than useless. Auto Ontology generates an ontology from existing metadata, connects existing semantic models, reconciles inconsistent metric definitions across systems, and validates generated queries against certified definitions and lineage, returning provenance with each answer. Corrections and usage are folded back into the ontology.</p>
+
+<p>The stack includes a Next.js/Prisma application, an ingestion service, a vector store, and a text-to-SQL benchmark path (BIRD) powered by Nvidia NIM endpoints. Documentation flags a notable deployment caveat: database connection objects can be stored unencrypted in the catalog unless Vault is configured.</p>
+
+<p>The project landed near the top of Hacker News, reflecting broad interest in grounding agents in governed data definitions rather than raw schemas — the same problem &quot;context engineering&quot; vendors are racing to solve.</p>
+
+<p>*November 3, 2026 · GitHub (NVIDIA/auto-ontology) · <a href="https://github.com/NVIDIA/auto-ontology" target="_blank">https://github.com/NVIDIA/auto-ontology</a>*</p>
+
+<h3>Google Researchers Press for the Right to Publish AI Safety Concerns</h3>
+
+<p>The Washington Post reported that Google researchers, including staff at Google DeepMind, are asking the company to loosen contract language they say chills public discussion of AI risk — specifically non-disparagement and confidentiality terms that can outlast employment. According to the report, a former employee published criticism without consequence and executives indicated the clause would not be enforced against departed staff. A Google spokesperson told the Post that the company has &quot;always encouraged an open dialogue about safety and responsibility,&quot; that it recently updated terms for new hires to remove the post-termination aspect of non-disparagement clauses, and that it maintains internal channels for escalating concerns to leadership.</p>
+
+<p>The dispute is narrower than some framing suggested — it centers on contract wording rather than a claim that employees hold suppressed evidence of imminent catastrophe — but it lands at an awkward moment, with frontier labs under scrutiny over deployment decisions and staff at several companies having publicly departed over safety disagreements. How Google words these clauses will be watched across the industry, since its HR terms tend to propagate through Silicon Valley.</p>
+
+<p>*November 3, 2026 · The Washington Post · <a href="https://www.washingtonpost.com/technology/2026/11/03/google-deepmind-staff-protest-lifetime-ban-criticizing-company/" target="_blank">https://www.washingtonpost.com/technology/2026/11/03/google-deepmind-staff-protest-lifetime-ban-criticizing-company/</a>*</p>
+
+<h3>xAI Is Running a Mississippi Data Center on Eight Converted Jet Engines</h3>
+
+<p>Tom&#x27;s Hardware reported that xAI has installed eight converted jet-engine turbines to power a Mississippi data center. The generators hold state permits, but those permits allow a 25% higher limit for volatile organic compounds, and environmental groups warn that combining VOCs with carbon monoxide emissions makes jet-derived power a step backward. The Southern Environmental Law Center has already challenged Mississippi&#x27;s approval, arguing xAI has not demonstrated that the turbines meet standards for pollutants including formaldehyde and that projected emissions tied to the site&#x27;s power source were undercounted.</p>
+
+<p>The story is a concrete data point in the growing conflict between AI compute buildout and local air-quality regulation. On-site generation lets operators move faster than grid interconnection allows, but shifts emissions and permitting fights to the communities hosting the facilities — and invites litigation that can delay or reshape projects after construction has begun.</p>
+
+<p>*November 3, 2026 · Tom&#x27;s Hardware · <a href="https://www.tomshardware.com/tech-industry/data-centers/elon-musks-xai-installs-eight-converted-jet-engines-to-power-mississippi-data-center-permits-allow-25-percent-higher-limit-for-pollutants-concerns-raised-over-carbon-monoxide" target="_blank">https://www.tomshardware.com/tech-industry/data-centers/elon-musks-xai-installs-eight-converted-jet-engines-to-power-mississippi-data-center-permits-allow-25-percent-higher-limit-for-pollutants-concerns-raised-over-carbon-monoxide</a>*</p>
+
+<h2>What to Watch</h2>
+
+<p>1. <strong>Postman&#x27;s follow-through on opt-in.</strong> The company promised clearer consent and a review of hook approval, but not opt-in by default. Watch whether it ships a change that retroactively disables auto-installed plugins and hooks on existing installs — and whether other dev-tool vendors writing into `~/.codex` or Claude Code configs get the same scrutiny.</p>
+<p>2. <strong>Whether &quot;good enough and cheap&quot; spreads beyond Revolut.</strong> Revolut&#x27;s result depends on 56 B200s, a large infra team and heavy serving tuning. Watch for other regulated enterprises publishing comparable numbers — or for the US labs&#x27; enterprise pricing to respond, particularly around cache-read costs that dominate agentic coding bills.</p>
+<p>3. <strong>Provable inference moving from research to product.</strong> FlashProve is still 70–95x the cost of plain inference and does not hide architecture. The next signals to watch are whether third-party routers or model providers begin offering proofs on sampled requests, and whether regulators treat cryptographic attestation as a viable compliance tool.</p>
+
+<hr>
+
+<p>*Sources were verified against the linked pages or their publishers&#x27; syndicated content on November 4, 2026 (UTC). Stories already covered in the November 2–3 briefings — Anthropic&#x27;s Claude Code prompt change for game clones and the Codex 0.167.0 alpha cadence — were excluded; no substantive new development in either was found within the window.*</p>
+</body></html>
