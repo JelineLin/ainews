@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-06</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-06</h1>
+
+<h2>Executive Summary</h2>
+
+<p>The day&#x27;s defining motif is competition at the low end of the agentic-coding market. Cognition shipped SWE-2 Flash, a 276B-parameter mixture-of-experts model that holds the price-competitive &quot;small but strong&quot; slot in Devin, while Moonshot released open weights for its 2.8T-parameter Kimi K3.1 Pro — evidence that frontier-scale open releases are still arriving. OpenAI put security models at the centre of its product lineup: GPT-6 Cyber, launched into the limited Daybreak Red program, is its first officially &quot;Critical&quot;-graded cybersecurity model, and it is already being used to triage real kernel and browser bugs. Anthropic added read-only bank account access to Claude through Plaid, opening a new consumer surface with obvious privacy stakes. Two independent, less comfortable data points arrived alongside: METR&#x27;s high-access audit of Anthropic found capability progress running roughly twice its historic rate, with Anthropic redacting much of the supporting evidence, and a YC startup published five materials-science grand challenges after frontier agents spent days on them without breakthroughs.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>Cognition&#x27;s SWE-2 Flash bets on mid-training and a 20% price point</h3>
+
+<p>Cognition introduced SWE-2 Flash, a coding model it calls &quot;fully American&quot; and a new bar for intelligence at low cost and high speed. Post-trained on Thinking Machines&#x27; Inkling-Small (276B total / 12B active, mixture-of-experts), it is Cognition&#x27;s first model with a mid-training stage before reinforcement learning. That stage lifted Terminal-Bench 4.0 from 0.9% to 20.0% and FrontierCode 2.0 from 3.2% to 24.0% over the base model; it scores 60.1 on DeepSWE 1.1 and 89.2 on Terminal-Bench 2.1.</p>
+
+<p>Cognition says Flash beats all American open-weight models even at a third of their size, though it trails its own 2.8T-parameter SWE-2 (27.3 on Terminal-Bench 4.0, 73.0 on DeepSWE 1.1). The pitch is economics: one-fifth the price and 3x the speed (~200 tok/s versus ~60 tok/s), aimed at automations, code review, and docs.</p>
+
+<p>It ships in Devin Desktop and CLI, free through November 30. Weights stay private: cyber training raised ExploitBench from 11.3% to 34.8%, so Cognition plans gated sharing with partners and researchers instead.</p>
+
+<p>November 4, 2026 · Cognition · <a href="https://www.cognition.ai/blog/swe-2-flash" target="_blank">https://www.cognition.ai/blog/swe-2-flash</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>OpenAI ships GPT-6 Cyber as its first Critical-tier security model</h3>
+
+<p>OpenAI released GPT-6 Cyber, a model built for finding exploitable vulnerabilities and developing fixes, claiming it stays within authorized scope more reliably than its predecessor. It scores 48.5% on ExploitGym, about 16 points above GPT-5.6 Cyber (32.1%) and ahead of flagship GPT-6 Astra (42.4%). On ExploitGym HoneyPot, an out-of-bounds test modeled on the Hugging Face incident, OpenAI says it stayed in scope over 99% of the time versus about 95% before. It also helped surface 81 previously unknown Firefox vulnerabilities.</p>
+
+<p>The classification matters: GPT-6 Cyber is rated Critical under OpenAI&#x27;s Preparedness Framework — able to develop zero-day exploits &quot;of all severity levels in many hardened real-world critical systems without human intervention&quot; — up from High. OpenAI says new checks block high-risk activity such as attacks on power plants and water systems. Access is limited to select Daybreak Red customers, expanding in coming weeks.</p>
+
+<p>This lands amid an escalating security debate: OpenAI separately reported using a cyber model to patch 948 Linux kernel privilege-escalation flaws, and researchers are finding severe bugs with commercial models in hours. Evaluation awareness remains an acknowledged open problem.</p>
+
+<p>November 5, 2026 · OpenAI (reporting via The Verge) · <a href="https://www.theverge.com/ai-artificial-intelligence/1027599/openai-gpt-6-cyber-launch" target="_blank">https://www.theverge.com/ai-artificial-intelligence/1027599/openai-gpt-6-cyber-launch</a></p>
+
+<h3>METR: Anthropic&#x27;s capability gains are accelerating, but key evidence is redacted</h3>
+
+<p>METR published a high-access evaluation at Anthropic, conducted August 12 to October 29, 2026 from internal data on pretraining, reinforcement learning, compute allocation, and benchmark trajectories. Its headline judgment: Anthropic is likely improving capabilities on well-specified tasks at about twice the March 2024–October 2025 rate, plausibly 1.3x to 3x. Scores have grown at 1.9x that baseline, roughly two years of historical progress in one year, and METR says faster compute scaling does not explain it. It credits a majority of the acceleration to internal AI-for-R&amp;D use, noting late-2025 gains likely had other causes and that fully autonomous research is not yet the driver.</p>
+
+<p>The caveat is transparency. Anthropic exercised contractual redaction over &quot;a majority of the evidence we found most informative,&quot; citing risk of accelerating other developers, so the public &quot;has to rely on METR&#x27;s judgment much more than would be ideal.&quot; A companion review of Anthropic&#x27;s August 2026 Risk Report argues the public document understates acceleration.</p>
+
+<p>November 5, 2026 · METR · <a href="https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/" target="_blank">https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/</a></p>
+
+<h3>Claude gains read-only access to bank accounts via Plaid</h3>
+
+<p>Anthropic launched Personal Finance in Claude, a beta feature that connects bank and credit card accounts through Plaid so users can ask questions about their own money. Access is read-only: Claude can see institution names, account types, last four digits, balances, credit limits, and up to two years of transaction history, but cannot move, manage, or invest funds. Because Plaid mediates the connection, users do not hand over banking credentials.</p>
+
+<p>The feature handles category breakdowns (&quot;where did my money go this month&quot;), duplicate-charge and rising-bill detection, affordability questions, and explanations of terms like APR.</p>
+
+<p>Rollout is limited to Claude Pro, Max, and Ultra subscribers in the US. The launch follows ChatGPT&#x27;s similar Plaid-based feature from May, so Anthropic is playing catch-up where trust, not capability, is the differentiator — the company stresses there are no ads or sponsored recommendations and no financial products of its own. Personal Finance is framed as a first step, with Anthropic exploring partnerships for bigger money decisions.</p>
+
+<p>November 5, 2026 · Anthropic (reporting via The Verge) · <a href="https://www.theverge.com/ai-artificial-intelligence/1027652/anthropic-claude-plaid-personal-finance" target="_blank">https://www.theverge.com/ai-artificial-intelligence/1027652/anthropic-claude-plaid-personal-finance</a></p>
+
+<h3>Llama.cpp v0.9.0 adds native FP8 and multi-node tensor parallelism</h3>
+
+<p>The llama.cpp project, the most widely used local inference stack, shipped a v0.9.0 release with native FP8 (E4M3) support, multi-node tensor parallelism via NCCL, and model support for Mistral Large 4 and Nemotron 3.5 Transcribe. It was reported in Latent Space&#x27;s November 5 roundup.</p>
+
+<p>The significance lies in deployment shape rather than any single model. Native FP8 removes a dequantization step for models trained or quantized in that format, improving memory efficiency and throughput on FP8-capable hardware. NCCL tensor parallelism moves llama.cpp beyond single-node multi-GPU setups toward serving one large model across machines, the configuration self-hosting enterprises need for frontier-scale open weights.</p>
+
+<p>Together with Day-0 vLLM and SGLang support for large open releases, this reinforces a pattern: open-weight distribution increasingly arrives with same-week serving support. The llama.cpp release was published November 4; the upstream repository&#x27;s public tags are currently date-stamped builds, so these notes are not independently verifiable there.</p>
+
+<p>November 4, 2026 · llama.cpp (release; via Latent Space) · <a href="https://github.com/ggml-org/llama.cpp/releases" target="_blank">https://github.com/ggml-org/llama.cpp/releases</a></p>
+
+<p>*(Note: the upstream repository&#x27;s public tags are currently date-stamped builds, so these release notes could not be independently verified there. Context and coverage: <a href="https://latent.space/p/ainews-it-s-swapping-season" target="_blank">https://latent.space/p/ainews-it-s-swapping-season</a>)*</p>
+
+<h3>Discovered Materials posts five materials-science grand challenges worth $1M</h3>
+
+<p>Discovered Materials, a San Francisco startup from Y Combinator&#x27;s spring 2026 batch that uses AI to find new substances for advanced chips, announced a $1 million prize pool for five open materials-science problems drafted with academic advisers: a theory of cuprate superconductivity; a numerical method to predict silicon/silicon-dioxide interfaces; a method mapping grain structure to thermal properties; a theory of light-induced changes in material behavior; and a method to improve density functional theory.</p>
+
+<p>The framing is diagnostic. The company says materials science lacks a Millennium-Prize equivalent because problems are harder to specify than in mathematics, so checkable targets are needed to judge whether AI is progressing. Before announcing, it let frontier models run autonomously for days with internet access on each problem; they made little headway.</p>
+
+<p>That negative result is the story. It marks a boundary for the &quot;AI for science&quot; narrative carried by recent mathematics and biology results, and offers an external yardstick for frontier labs.</p>
+
+<p>November 5, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/11/05/a-yc-startup-is-putting-1m-behind-five-unsolved-materials-science-problems-for-ai/" target="_blank">https://techcrunch.com/2026/11/05/a-yc-startup-is-putting-1m-behind-five-unsolved-materials-science-problems-for-ai/</a></p>
+
+<h3>Meta warns that data-center backlash will slow AI buildout</h3>
+
+<p>Meta president Dina Powell McCormick said the Democratic midterm wins will make building data centers &quot;harder,&quot; conceding the industry &quot;has not done as good a job as we needed to explain the benefits of these investments.&quot; Speaking at the WSJ Tech conference, she argued the backlash proxies broader unease about AI: &quot;The visible sort of manifestation of AI is a data center, and it&#x27;s something that people can say, &#x27;I don&#x27;t want this in my community.&#x27;&quot;</p>
+
+<p>Meta operates data centers in 23 states, five of them planned at 1 gigawatt or more, and she said expanding existing sites will be easier than greenfield construction. The company believes it can shift sentiment by demonstrating local benefits such as jobs and power arrangements.</p>
+
+<p>The comments are among the clearest public acknowledgments from a hyperscaler that local politics, rather than capital or chips, is becoming the binding constraint on capacity. They follow a midterm cycle in which data-center opposition appeared on ballots in multiple states, and echo Google&#x27;s framing for a $17 billion Wyoming project that includes paying for all the power it uses and forming a community council.</p>
+
+<p>November 5, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/11/05/metas-warns-that-election-backlash-against-data-centers-could-make-ai-expansion-harder/" target="_blank">https://techcrunch.com/2026/11/05/metas-warns-that-election-backlash-against-data-centers-could-make-ai-expansion-harder/</a></p>
+
+<h2>What to Watch</h2>
+
+<ul>
+<li><strong>Open-weight frontier releases with gated serving support.</strong> Moonshot published open weights for Kimi K3.1 Pro (2.8T total, 104B active, 1M context) on November 4, with vLLM and SGLang shipping Day-0 support. Watch whether independent evaluations confirm the coding and long-horizon agentic gains Moonshot claims, and whether Western labs respond with comparable openness.</li>
+<li><strong>Whether GPT-6 Cyber&#x27;s Critical rating changes norms for frontier access.</strong> A model that can autonomously produce zero-day exploits across hardened systems is now available behind a program that, by one researcher&#x27;s account, required only a driver&#x27;s license upload. Watch for pressure to formalize verification requirements for offensive-capability models.</li>
+<li><strong>Follow-through on Anthropic&#x27;s promised counter-analysis.</strong> Anthropic co-founder Sam McCandlish says the company will publish its own analysis of the pace of progress inside Anthropic. That document, and any relaxation of redaction in future METR reviews, will determine whether independent acceleration assessments remain credible.</li>
+</ul>
+</body></html>
