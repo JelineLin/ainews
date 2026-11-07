@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-07</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-07</h1>
+
+<h2>Executive Summary</h2>
+
+<p>The post-election mood is reshaping AI&#x27;s balance sheet. After Democrats swept the 2026 midterms, investors hammered AI-linked equities—Nvidia −9.3%, AMD −17.3%, Micron −17.5% on Thursday—and triggered warnings that the data-centre buildout now faces local ballot measures and a less friendly Congress. In that jittery market, OpenAI was reported to have raised $11 billion of an unfinished round at a $1.25 trillion valuation, while Anthropic&#x27;s IPO buyers were said to be eyeing valuations far below earlier targets. On the capability side, independent evaluator Vals found open-weight Chinese models closing in on closed frontier models at network-hacking tasks for a fraction of the token cost, and published the first close read of Thinking Machines&#x27; Inkling 2 Small agent workstreams. GitHub shipped Copilot into Slack, Teams and Xcode. The through-line: capability is commoditising faster than the revenue and infrastructure models that underwrite it.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>GitHub Puts Copilot Agents Inside Slack, Teams and Xcode</h3>
+
+<p>GitHub made @GitHub in Slack and Microsoft Teams generally available on November 6, letting teams investigate bugs, file issues, implement changes and open pull requests directly from a conversation thread. In Teams, a new Canvas view lets users review implementation plans, diffs and live previews alongside the discussion, refine them with teammates, and then hand the work to an agent. Issues and pull requests created this way are now tagged &quot;Created from a Slack/Teams conversation with @username&quot; for provenance, and GitHub fixed a bug that could drop follow-up replies mid-thread.</p>
+
+<p>Alongside it, the company&#x27;s weekly Copilot release added a public preview of Copilot inside Xcode&#x27;s built-in coding assistant (starting with Xcode 27.3 beta), support for Copilot in JetBrains Air with local and cloud &quot;Air Teams&quot; agent sessions, and a unified `/settings` dashboard for plugins, MCP servers and configuration search.</p>
+
+<p>The direction of travel is clear: the IDE is no longer the assumed home of the coding agent. Chatops-style interfaces are being positioned as a first-class surface, which lowers the barrier for non-specialist stakeholders to trigger and review code changes—and raises questions about review discipline when agents can open PRs straight out of a thread.</p>
+
+<p>Published November 6, 2026. Sources: GitHub Changelog — <a href="https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available/" target="_blank">@GitHub in Slack and Teams GA</a>, <a href="https://github.blog/changelog/2026-11-06-github-copilot-weekly-releases-november-2/" target="_blank">Copilot weekly releases, November 2</a></p>
+
+<h3>What a Frontier Agent Looks Like When It Is Failing: Inkling 2 Small Under the Microscope</h3>
+
+<p>Vals AI published a forensic read of 2,655 agent runs by Thinking Machines&#x27; Inkling 2 Small across 13 benchmarks, focused on the reasoning traces users never see. The model wrote &quot;fuck&quot; in 50 runs, 316 times in total, but 241 of those occurrences came from just two runaway runs—one produced a single reply over 500,000 characters long that looped through the same sentences until it filled the context window, then kept going for 37 more steps.</p>
+
+<p>The pattern matters more than the profanity: 48 of the 50 swearing runs were 200 steps or longer and none was under 100; 95 of 112 swearing replies landed in the second half of a run. Vals is careful to note that swearing does not predict failure—46 of 48 graded swearing runs failed, but roughly 75% of all graded runs fail and 96% of failures never swore. The finding is a rare public window onto long-horizon agent degeneracy: context exhaustion and self-reinforcing loops, not just wrong answers, are the failure modes that will define coding-agent reliability.</p>
+
+<p>Published November 6, 2026. Source: Vals AI — <a href="https://www.vals.ai/blogs/inkling-2-small-swears" target="_blank">Inkling 2 Small: An Inkling of Profanity</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>OpenAI Said to Have Raised $11B at a $1.25T Valuation, as Anthropic&#x27;s IPO Math Slips</h3>
+
+<p>OpenAI has reportedly raised $11 billion so far in a new round valuing the company at $1.25 trillion, per Bloomberg, cited by TechCrunch and The Verge. The round has not closed; sources said it could total roughly $20 billion within weeks—well short of the $30 billion OpenAI was reported to be seeking in late September.</p>
+
+<p>The timing is awkward. Hours earlier, Bloomberg reported that prospective Anthropic IPO buyers were contemplating a valuation as low as $1.1 trillion, against expectations of about $2 trillion a month ago; Anthropic filed its S-1 on October 26 and plans to list on Nasdaq under &quot;ANT&quot;. Both data points land in a market spooked by the Democratic midterm landslide, voter hostility to data centres, and the prospect of tougher regulation. TechCrunch frames the broader problem bluntly: the valuations being negotiated assume continued hypergrowth that spending data no longer clearly supports.</p>
+
+<p>Published November 6, 2026. Sources: TechCrunch — <a href="https://techcrunch.com/2026/11/06/openai-reportedly-raises-an-additional-11-billion-at-a-1-25-trillion-valuation/" target="_blank">OpenAI reportedly raises $11B at $1.25T valuation</a>; Anthropic — <a href="https://www.anthropic.com/news/s1-sec" target="_blank">S-1 filing</a></p>
+
+<h3>Ramp Data: Token Volumes Are Climbing but AI Spend Has Flatlined</h3>
+
+<p>A Ramp report found that corporate token spend grew just 1.5% across August and September, down from 42% month-over-month growth in July, even as usage volumes rose. October showed a partial rebound—8.9% growth between September 23 and October 23—but Ramp&#x27;s lead economist Ara Kharazian describes the headwinds as strong.</p>
+
+<p>The concentration is the crux. Almost all AI spend comes from venture-backed, high-growth tech firms; the top 1% of &quot;AI-pilled&quot; companies were spending just under $10,000 per employee per month at summer peaks and have since dipped. Median firms spend $12–$15 per employee monthly; the top 10% spend $600–$1,000. Kharazian argues the slowdown is competitive, not demand-driven: price competition and savvier procurement are compressing revenue per token, and it is unclear a doctor&#x27;s office or car dealership will ever match a software company&#x27;s per-employee spend. If top-cohort spend stalls, aggregate revenue can fall even while volumes rise—an uncomfortable input for the IPO valuations above.</p>
+
+<p>Published November 6, 2026. Source: TechCrunch — <a href="https://techcrunch.com/2026/11/06/ramp-data-shows-ai-spending-stalling-just-as-anthropic-nears-its-ipo/" target="_blank">Ramp data shows AI spending stalling</a></p>
+
+<h3>Open-Weight Models Nearly Match Closed Labs at Network Hacking—at a Fraction of the Cost</h3>
+
+<p>Research by evaluation firm Vals, reported by WIRED, tested how well models could execute complex multi-step attacks against mock corporate networks, including a public-facing site and a two-network scenario requiring pivoting. Open-weight models, notably DeepSeek and GLM, came close to OpenAI&#x27;s most advanced cyber model, which is not publicly released—undercutting the premise that gated access meaningfully slows proliferation of offensive cyber capability.</p>
+
+<p>Cost is the striking detail. Vals estimates an attack costs $17–$46 in tokens with GPT-6-Sol versus $2–$3 with DeepSeek, because open models can run on owned hardware—an incentive for defenders as much as attackers. Outside experts urge caution: closed labs likely hold unreleased models above this bar, and real-world criminal activity still leans on older, cheaper models. The practical implication is that capability gating buys time, not a moat.</p>
+
+<p>Published November 6, 2026. Source: WIRED — <a href="https://www.wired.com/story/free-chinese-ai-models-are-getting-scary-good-at-hacking/" target="_blank">Free Chinese AI Models Are Getting Scary Good at Hacking</a></p>
+
+<h3>Meta&#x27;s Muse Gains &quot;Spaces&quot;—App-Like Surfaces the Assistant Builds for You</h3>
+
+<p>Meta began rolling out &quot;spaces&quot; to all Muse users: custom, app-like experiences generated from a description—a shopping hub, school dashboard, music tracker or trivia game—that run directly inside the Muse app. When external services such as Gmail, Google Calendar, OpenTable or Notion are connected, Muse continuously pulls data to refresh prices, dates and status in the background, and users can check items off, annotate and edit elements in place.</p>
+
+<p>Spaces can be pinned to the sidebar, promoted to a main tab, or scheduled—Meta&#x27;s example being a weekly planner on weekdays swapped for weekend plans on Saturday. Meta also brought &quot;Active Memory&quot; and &quot;Active Focus&quot; capabilities from its Muse Wonder model into Muse and the Meta AI chatbot, aimed at recalling relevant past context mid-conversation and staying oriented toward goals. Sharing and collaboration are under exploration.</p>
+
+<p>The release pushes the assistant from answering questions toward generating small personal applications on demand—a pattern that compresses the distance between &quot;chat&quot; and &quot;software,&quot; with familiar attendant questions about where the generated logic actually runs and who can see the data it pulls in.</p>
+
+<p>Published November 6, 2026. Source: The Verge — <a href="https://www.theverge.com/tech/1028871/meta-muse-ai-spaces" target="_blank">Meta&#x27;s Muse AI can create custom &#x27;spaces&#x27;</a></p>
+
+<h3>Microsoft Moves to Shrink Its Neocloud Roster as Buildout Pressure Mounts</h3>
+
+<p>Microsoft is consolidating its third-party AI capacity suppliers, evaluating which neoclouds to drop from a list that includes CoreWeave, Nebius, Crusoe/Chronoscale, IREN, Lambda, Nscale and Oracle, according to CNBC. The company reportedly declined to renew one Oracle deal and intends to prioritise its own data-centre footprint; a spokesperson said the strategy is &quot;built on flexibility and choice&quot; and that investments are regularly reviewed against demand.</p>
+
+<p>The signal lands on a fragile corner of the market. Neocloud shares—CoreWeave, Nebius and IREN—are down roughly half over the past month amid rising borrowing costs and debt-load concerns, and one industry review counted 323 such providers, with experts predicting consolidation. IREN disclosed that Microsoft asked for a networking upgrade on capacity handed over in August, pushing it online to January or February rather than this year.</p>
+
+<p>For customers, fewer but deeper supplier relationships may mean better-coordinated capacity; for the neocloud sector, it reinforces that demand from a handful of hyperscalers is a concentrated, renegotiable lifeline.</p>
+
+<p>Published November 6, 2026. Source: CNBC — <a href="https://www.cnbc.com/2026/11/06/microsoft-moves-to-consolidate-its-relationships-with-neoclouds-in-ai.html" target="_blank">Microsoft plans to use fewer neoclouds</a></p>
+
+<h3>AI Stocks Slide After the Midterms as Data Centres Become a Ballot-Box Issue</h3>
+
+<p>The Democratic sweep in the 2026 midterms triggered a broad technology sell-off, with investors modelling a less accommodating Congress and dozens of local data-centre restrictions passed in ten states. Nvidia fell 9.3%, AMD 17.3%, Micron 17.5%, Broadcom 10.4%, Microsoft 3.6% and Tesla 10.8% on Thursday, while neoclouds were hit harder still: IREN −17%, Nebius −15%, CoreWeave −10%. US tech stocks showed partial recovery by Friday morning.</p>
+
+<p>Executives are publicly holding the line. OpenAI&#x27;s CFO told CNBC the company will keep investing in data centres despite the results, and OpenAI, Arm and Qualcomm leaders offered measured reactions to the sell-off. But the episode exposed how much of the AI trade now rests on political permission for physical infrastructure: power, land and local consent, not just chips and models. The Verge&#x27;s Nilay Patel put the consumer side sharply—costs imposed on neighbours have to be justified by products people actually find useful.</p>
+
+<p>Published November 6, 2026. Sources: CNBC — <a href="https://www.cnbc.com/2026/11/06/ai-data-center-midterms-selloff.html" target="_blank">AI stocks hammered by midterm shock</a>; CNBC — <a href="https://www.cnbc.com/2026/11/06/open-ai-data-centers-election.html" target="_blank">OpenAI will keep investing despite election results</a></p>
+
+<h3>The Quiet Boom in Buying Corporate Work Product to Train Models</h3>
+
+<p>WIRED&#x27;s Steven Levy documented a fast-growing data-acquisition trade in which brokers approach companies and individuals to license internal artefacts—documents, emails, Slack messages, tickets, call transcripts—for AI training. Pitches seen by Levy cited one-time fees of $350,000 to $1.8 million for a media company&#x27;s archives, with one reaching $2 million, and claimed labs are spending over $45 billion on private data now that public corpora are exhausted. Firms including Mercor, Handshake and Micro1 are central; one investor claimed 40 of 65 companies in a recent YC batch are data startups.</p>
+
+<p>The practice has an uncomfortable edge. Bankrupt Spirit Airlines put its digital assets—80,000 email accounts, 500 million internal messages, 20.6 million SharePoint files—up for sale, drawing a $10 million bid from Google and a higher one from Micro1 before the sale stalled over a flight-attendants&#x27; union objection that members&#x27; private information was included. Critics argue anonymisation is weak for unstructured text, and that workers are effectively supplying the training material for their own automation without clear consent.</p>
+
+<p>Published November 6, 2026. Source: WIRED — <a href="https://www.wired.com/story/ai-companies-really-really-want-to-buy-your-work-files-and-emails/" target="_blank">AI Companies Really, Really Want to Buy Your Work Files and Emails</a></p>
+
+<h2>What to Watch</h2>
+
+<ul>
+<li><strong>Whether the OpenAI round actually closes near $20B.</strong> The reported $11 billion is a partial figure against an unfinished round; a smaller-than-targeted close, alongside lowered Anthropic IPO expectations, would be the clearest market signal yet that AI valuations are repricing.</li>
+<li><strong>Neocloud consolidation.</strong> Microsoft&#x27;s supplier review may prompt other hyperscalers to follow; watch CoreWeave, Nebius and IREN disclosures for contract non-renewals, and whether debt markets tighten further for smaller providers.</li>
+<li><strong>Agent reliability under long horizons.</strong> The Inkling 2 Small traces show degeneration arriving as loops and context exhaustion late in runs. Expect more labs to publish or be pressured into publishing long-run agent telemetry, and more tooling aimed at loop detection and step budgets.</li>
+</ul>
+</body></html>
