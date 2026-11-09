@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-09</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-09</h1>
+
+<h2>Executive Summary</h2>
+
+<p>The day&#x27;s dominant thread is governance and oversight of the AI build-out, not new model capability. Nvidia&#x27;s board opened an independent investigation into CEO Jensen Huang&#x27;s relationship with a former Megaspeed executive described in US policy memos as a recruited Chinese intelligence asset — an extraordinary event for a company at the center of the US–China chip contest. In parallel, reporting on Commerce Department approvals of Nvidia chip exports found that some cleared Chinese buyers barely exist, and post-midterm results showed voters rejecting data-center ballot measures at scale, with a new Texas governor-elect campaigning on restrictions. On the technical side: Anthropic handed its Agent Skills standard to the Linux Foundation&#x27;s Agentic AI Foundation, GitHub continued expanding Copilot&#x27;s developer surface (code-review APIs, Xcode and JetBrains Air), and an METR audit documented AI-driven acceleration inside Anthropic&#x27;s own R&amp;D. Security researchers also found hundreds of exposed instances of the open-source Artex penetration-testing agent.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>Anthropic Donates Agent Skills Standard to the Linux Foundation&#x27;s Agentic AI Foundation</h3>
+
+<p>Anthropic transferred ownership of Agent Skills — the open format it uses to package procedural knowledge for AI agents — to the Agentic AI Foundation (AAIF), the neutral body it co-founded with Block and OpenAI under the Linux Foundation and to which it previously donated the Model Context Protocol. The donation covers the Agent Skills name and logo, its GitHub organization, and the agentskills.io domain; the specification remains usable without joining the AAIF.</p>
+
+<p>The format is deliberately minimal: a skill is a folder containing a SKILL.md file with metadata and instructions, optionally accompanied by scripts, reference material and templates, loaded on demand by an agent. Anthropic says more than 70 agent platforms have integrated it since publication in December 2025 — including ChatGPT, Cursor, GitHub Copilot and VS Code — with roughly 1 million skills published and nearly 280 million installs. The standard grew out of Claude Code work, where the team found models handled general knowledge work but lacked the procedural know-how for real business tasks.</p>
+
+<p>Engineers from Anthropic, Google, OpenAI and other companies will maintain the standard as individuals, with David Soria Parra and Mahesh Murag as lead maintainers. The proposed roadmap covers versioned releases, a formal proposal process, and security guidance for people who author and install skills — the last being notable given that skills execute bundled scripts. The move pattern-matches MCP&#x27;s path: an Anthropic-originated convention becoming shared infrastructure that competitors build on, which lowers switching costs across coding agents.</p>
+
+<p>Published November 6, 2026 · Anthropic · <a href="https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation" target="_blank">https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation</a></p>
+
+<h3>GitHub Opens Up Copilot Code Review via API and Pushes Copilot Into More IDEs</h3>
+
+<p>GitHub shipped a batch of Copilot changes aimed at teams running agents inside existing engineering workflows. Copilot code review settings can now be managed through the REST and GraphQL APIs at enterprise, organization and repository levels — enterprise admins can enable or disable review globally, organization admins set default review effort and runner configuration, and repository admins control review effort and whether custom instructions and MCP tools are used. Reviews and comments now carry explicit attribution fields, expose the review effort used, and report which skills, MCP servers and custom instructions Copilot cited as sources.</p>
+
+<p>The review overview comment was reorganized, grouping &quot;Files not reviewed&quot; data with exclusion reasons and adding structured thumbs-down feedback categories. Notably, code-review sessions now display AI credits consumed, and the automatic-review repository rule respects bypass lists.</p>
+
+<p>Separately, Copilot arrived in Xcode&#x27;s built-in coding assistant (public preview, starting with Xcode 27.3 beta) and in JetBrains Air, where developers can track multiple agent sessions locally or in the cloud on an existing Copilot subscription. The VS Code 1.145 release adds experimental chat view modes, remote app previews, and local automations with cron expressions. Direction of travel: Copilot becoming an API-managed, auditable service rather than an IDE-bound assistant.</p>
+
+<p>Published November 3–6, 2026 · GitHub Changelog · <a href="https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates/" target="_blank">https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates/</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>Nvidia Board Opens Independent Investigation Into CEO&#x27;s Ties to Alleged Chinese Intelligence Asset</h3>
+
+<p>Nvidia&#x27;s board of directors announced Sunday that it is launching an independent investigation following reports that CEO Jensen Huang was targeted in a Chinese espionage operation. Nvidia simultaneously published a memo Huang sent to employees admitting an affair with Alice Huang, a former executive at Singapore-based chip firm Megaspeed; he did not name her but acknowledged he had been unfaithful to his wife and had &quot;fallen short&quot; of his responsibilities to the company, its board, partners and shareholders.</p>
+
+<p>A memo circulating among US policymakers earlier this year claimed Alice Huang had been recruited by China&#x27;s Ministry of State Security to spy on Nvidia&#x27;s CEO. The board said it has &quot;no reason to believe&quot; that national security or company secrets were compromised, that Huang fully supports the review and will cooperate, and that it retains confidence in him and his leadership team. The investigation will be run by independent directors with outside legal counsel.</p>
+
+<p>The disclosure lands at a delicate moment: Nvidia sits at the center of the US–China AI competition and of export-control policy, and Huang has maintained a close relationship with the Trump administration. Even an investigation that clears the company of security breaches leaves a governance and reputational question hanging over the world&#x27;s most valuable chipmaker, with the full scope of the review — and whether its findings are published — still undefined.</p>
+
+<p>Published November 8, 2026 · TechCrunch (reporting Nvidia&#x27;s announcement) · <a href="https://techcrunch.com/2026/11/08/nvidia-says-its-investigating-ceo-jensen-huangs-relationship-with-possible-chinese-spy/" target="_blank">https://techcrunch.com/2026/11/08/nvidia-says-its-investigating-ceo-jensen-huangs-relationship-with-possible-chinese-spy/</a></p>
+
+<h3>Report Alleges Some Chinese Buyers Approved for Nvidia H200 Chips Barely Exist</h3>
+
+<p>Reporting by The New York Times, summarized by The Verge, raises questions about due diligence behind US approvals for Nvidia H200 exports to China. One firm on the approved list, New Matrix, was found to occupy what the Times described as an empty gray shell of an office with dangling wires; the building&#x27;s tenant directory did not list the company, and staff at the industrial park&#x27;s property manager said they had no record of it. Only scant information about the 17-month-old firm is available online.</p>
+
+<p>What is available is concerning: its owners have ties to a Chinese private-equity firm blacklisted by the US government since 2024. The Times characterized the case not as an isolated lapse but as part of a pattern in which companies connected to entities under national-security-related trade restrictions have been approved to buy Nvidia chips.</p>
+
+<p>The policy backdrop matters. Nvidia was barred from selling advanced chips to China under the Biden administration; the Trump administration relaxed limits after Nvidia agreed to give the US government a 15-percent cut of sales. Combined with the separate spy allegations against Nvidia&#x27;s CEO, this reporting sharpens scrutiny of how export licenses are actually vetted versus how they are announced — a question likely to be taken up in Congress rather than settled by the Commerce Department.</p>
+
+<p>Published November 7, 2026 · The Verge (citing The New York Times) · <a href="https://www.theverge.com/ai-artificial-intelligence/1029483/nvidia-ai-chips-china-blacklist-government" target="_blank">https://www.theverge.com/ai-artificial-intelligence/1029483/nvidia-ai-chips-china-blacklist-government</a></p>
+
+<h3>[Follow-up] Post-Midterm Ballot Results Put Data-Center Siting on Shaky Political Ground</h3>
+
+<p>Building on last week&#x27;s midterm coverage, TechCrunch&#x27;s Equity podcast examined what the results mean for AI infrastructure. On dozens of local ballot measures, voters imposed restrictions or moratoriums on data centers, and in races without a direct vote, candidates who campaigned on restricting data centers won — most consequentially Texas governor-elect Gina Hinojosa, who defeated Greg Abbott after making the issue a campaign promise.</p>
+
+<p>The podcast panel was careful about causation: data centers were not the primary driver of the Democratic wave, but anti-data-center sentiment has become an increasingly grassroots issue, fueled by how hyperscalers and developers pursued project approvals. Reporter Kirsten Korosec said the industry is already seeing companies adjust course — &quot;we&#x27;re already seeing companies like OpenAI all of a sudden go, &#x27;Actually, we can change our policies&#x27;&quot; — and the panel expects the next two years to be harder for hyperscalers and data-center developers, particularly in Texas.</p>
+
+<p>The strategic implication is that the binding constraint on AI capacity may increasingly be local politics rather than chips or capital. That raises the cost of permitting and lengthens timelines for projects that assumed fast approvals, and it makes community-relations strategy a core infrastructure competency rather than an afterthought.</p>
+
+<p>Published November 7, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/11/07/after-the-midterms-things-are-looking-rocky-for-elon-musk-and-data-centers/" target="_blank">https://techcrunch.com/2026/11/07/after-the-midterms-things-are-looking-rocky-for-elon-musk-and-data-centers/</a></p>
+
+<h3>Crusoe Sells Unfinished Wyoming Data-Center Campus to Google, Which Pledges $17 Billion</h3>
+
+<p>Crusoe, the Denver-based data-center developer recently valued at $30.9 billion, confirmed it sold an unfinished data-center project in southeastern Wyoming to Google. Google — which Crusoe had tried and failed to land as a customer — is taking over development after reportedly raising concerns about cost and construction timeline under Crusoe&#x27;s management. The project was originally announced last year with Blackstone-backed infrastructure firm Tallgrass, with plans to eventually scale to 10 gigawatts of capacity.</p>
+
+<p>Neither party disclosed the purchase price, but Google said it will invest $17 billion to develop the campus. The transaction illustrates how difficult it remains for independent developers to deliver very large projects on time and within budget given equipment and power constraints, compounded by growing local opposition. Google has not severed ties with Crusoe: the company is still building another data center for Google near Amarillo, Texas.</p>
+
+<p>Crusoe&#x27;s broader book shows how much of the AI build-out runs through specialist developers — its Abilene, Texas campus is being built in phases for Oracle and OpenAI, a separate 900-megawatt campus next door is for Microsoft with a first building expected mid-2027, and Meta is a customer. The Wyoming sale, first reported by Bloomberg in June, did not stop Crusoe from raising $3.9 billion in September.</p>
+
+<p>Published November 6, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/11/06/crusoe-sells-troubled-wyoming-data-center-project-to-google/" target="_blank">https://techcrunch.com/2026/11/06/crusoe-sells-troubled-wyoming-data-center-project-to-google/</a></p>
+
+<h3>METR Audit Finds AI Roughly Doubled the Pace of Anthropic&#x27;s Own Research</h3>
+
+<p>AI safety nonprofit METR published findings from an 11-week investigation inside Anthropic, concluding the company&#x27;s models are improving roughly twice as fast as a year ago — benchmark data suggesting Anthropic made &quot;roughly two years of historical progress over the last year.&quot; Crucially, METR says it is confident the acceleration is not simply the result of more compute, which has historically driven progress; as of October, the majority of the acceleration is attributable to AI, with its contribution growing over time.</p>
+
+<p>The evidence includes internal Slack polls and employee interviews: staff using Anthropic&#x27;s most capable internal model self-reported being about 12 times as productive as without AI assistance, roughly double what they reported a few months earlier while using Mythos 5. METR found no clear signs of diminishing returns or bottlenecks that would prevent even faster acceleration, while cautioning that &quot;there are some signs that fully autonomous contributions will play a larger role soon.&quot;</p>
+
+<p>The report also reveals that Anthropic finished training three unreleased models over the past six months, codenamed Model 2, Model 3 and Model 4. Anthropic was permitted to redact portions of the final report under its agreement with METR and did so liberally — leaving open how much the public can know about frontier R&amp;D pace and risk. The timing is awkward: Anthropic is preparing to go public while CEO Dario Amodei publicly calls for labs to slow down.</p>
+
+<p>Published November 5, 2026 (reported November 7) · METR via The Verge · <a href="https://www.theverge.com/ai-artificial-intelligence/1029126/anthropic-metr-report-accelerating-ai-development" target="_blank">https://www.theverge.com/ai-artificial-intelligence/1029126/anthropic-metr-report-accelerating-ai-development</a></p>
+
+<h3>Censys Finds Hundreds of Artex AI Hacking Agents Exposed Without Authentication</h3>
+
+<p>Security firm Censys identified more than 800 distinct internet-reachable deployments of Artex, an open-source autonomous penetration-testing tool, accessible without a password. Artex is a Chinese-made system of AI agents that, per Microsoft&#x27;s earlier description, can conduct cyberattacks &quot;from reconnaissance through data exfiltration with little needed human interaction.&quot; It has been linked to real attacks since its public release in July, including against the Korean finance industry and an October intrusion at IT support giant ConnectWise that let Chinese-linked hackers spy on thousands of organizations hosted in Microsoft&#x27;s cloud.</p>
+
+<p>Censys principal researcher Silas Cutler noted that not every instance is operated maliciously and many belong to authorized testers — but Artex does not require internet exposure, so hundreds of open deployments is hard to justify. Exposed systems leak attack tooling, including implants used to maintain persistent access to victim networks. CrowdStrike attributed the Korea attacks to a Chinese-speaking hacker who used an Artex instance that had been publicly exposed for months and appeared to hold data extending well beyond South Korean banks, into payment and gaming companies.</p>
+
+<p>The pattern in the linked attacks was prosaic: weak or known passwords and missing multi-factor authentication. Artex has since announced it will go closed-source, limiting further releases to paying customers, but dozens of copies of its code remain on code-sharing sites — a reminder that agentic offensive tooling now has a persistent open-source tail.</p>
+
+<p>Published November 6, 2026 · TechCrunch (reporting Censys) · <a href="https://techcrunch.com/2026/11/06/hundreds-of-artex-ai-hacking-tools-found-publicly-exposed-to-the-web/" target="_blank">https://techcrunch.com/2026/11/06/hundreds-of-artex-ai-hacking-tools-found-publicly-exposed-to-the-web/</a></p>
+
+<h2>What to Watch</h2>
+
+<ul>
+<li><strong>Nvidia investigation scope and disclosure.</strong> Whether the independent directors publish findings, and whether the probe reaches export-control or customer-vetting decisions, will determine if this stays a personal matter or becomes a board-governance test case for the AI hardware sector.</li>
+<li><strong>State-level data-center legislation after the midterms.</strong> Ballot wins translate into statute only if incoming governors and legislatures act; watch Texas and other high-growth markets for moratorium bills, siting requirements and utility-rate changes that could reset capacity timelines.</li>
+<li><strong>Agent Skills security guidance under the AAIF.</strong> Skills bundle executable scripts and have ~280 million installs; the foundation&#x27;s promised security guidance and proposal process will be the first real test of whether vendor-neutral stewardship keeps pace with adoption.</li>
+</ul>
+</body></html>
