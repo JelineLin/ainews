@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-10</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-10</h1>
+
+<h2>Executive Summary</h2>
+<p>Anthropic dominated Monday with Claude Fable 5.2 and Claude Mythos 5.2, its first frontier release since CEO Dario Amodei publicly called for slowing the pace of AI development — a launch that pairs sharply better agentic-coding numbers with a lower price ahead of a reported trillion-dollar IPO. The coding layer of the stack moved in parallel: Meta shipped Muse Ember, a 10-cents-per-million-token model tuned for the repetitive work agents do all day, and Automattic launched Spacefast to host and deploy AI-generated apps. Capital kept chasing physical constraints: Anthropic is buying roughly $3.4 billion of natural gas turbines, and Fervo&#x27;s contracted geothermal revenue jumped to $11.9 billion on hyperscaler demand. Policy and safety news ran through a claimed DOJ threat to jail an unnamed AI executive, Trump&#x27;s skepticism about existential risk, and Apple quietly starting to meter Apple Intelligence usage. Nvidia&#x27;s leadership crisis remained the background hum.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>Anthropic Ships Fable 5.2 and Mythos 5.2, Citing 90% AI-Written Merges in Its Own Codebase</h3>
+<p>Anthropic released Claude Fable 5.2 and Claude Mythos 5.2, describing them as the same underlying model split by safeguards: Fable carries cyber and biology protections and is available broadly, while Mythos — without those guardrails — is restricted to vetted organizations through the Cyber Verification Program. The pair costs $8 per million input and $40 per million output tokens (20% less than the 5.1 generation), returns responses up to 30% faster, and offers an optional fast mode at $16/$80. Anthropic positions Opus 5.5 as the daily driver and Fable as the escalation path.</p>
+
+<p>The headline coding claim is FrontierCode 2.0, which measures whether a model&#x27;s changes would actually be merged by open-source maintainers. At High effort Fable 5.2 scores 45.3%, roughly matching Opus 5.5&#x27;s best of 45.5% at about half the cost per task and ahead of GPT-6 Astra&#x27;s 42.8%; at Xhigh it reaches 49.1%. Anthropic says over 90% of changes merged into its own core codebase are now written by Claude.</p>
+
+<p>Prerelease anecdotes are unusually concrete: a team of agents migrated a production service from Python to Rust, now starting about 26× faster, and an engineer had the model coordinate over 1,000 subagents for eight days to build a bootable operating system. Anthropic also reports that a 1,000-agent Fable 5.2 run formalized Fermat&#x27;s Last Theorem in 30 hours, versus 11 days for an earlier research version with a purpose-built harness. The system card concedes that both models suspect they are being evaluated more often than prior releases, complicating real-world assessment.</p>
+
+<p>November 9, 2026 · Anthropic · <a href="https://www.anthropic.com/claude-fable-and-mythos-5-2" target="_blank">https://www.anthropic.com/claude-fable-and-mythos-5-2</a></p>
+
+<h3>Meta&#x27;s Muse Ember Targets Agent Executions at 10 Cents per Million Input Tokens</h3>
+<p>Meta Superintelligence Lab released Muse Ember, its lightest and cheapest model yet, aimed squarely at the &quot;execution&quot; half of agent loops: tool calls, coding subtasks, routing, extraction, and long-document parsing. Input pricing is 10 cents per million tokens, which TechCrunch notes undercuts Anthropic&#x27;s Haiku and OpenAI&#x27;s Luna and is competitive with open-weight challengers such as DeepSeek V4.1 Flash and GLM 5.3 Flash. Meta sells Ember on cost-per-task measured against Artificial Analysis&#x27; composite benchmark rather than raw capability.</p>
+
+<p>Ember is designed to be paired rather than stand alone — Meta&#x27;s framing is &quot;Muse Wonder plans, Muse Ember handles the volume,&quot; with a heavier model setting rules that Ember applies across tens of thousands of cases. It is natively multimodal across text, images, and audio, so agents can read screenshots, charts, and scanned documents or work from meeting recordings without a separate perception model. Ember is the fourth model in the Muse brand, following the mid-weight Spark and the flagship Muse Agent.</p>
+
+<p>The release signals where open-weight-derived competition is biting hardest: not at the frontier, but at the high-volume, low-margin tier where agent harnesses spend most of their tokens. That is also the tier where routing decisions — Ember versus a frontier model — most directly determine whether an agent product has viable unit economics.</p>
+
+<p>November 9, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/11/09/meta-releases-muse-ember-a-new-lightweight-model-for-agent-execution/" target="_blank">https://techcrunch.com/2026/11/09/meta-releases-muse-ember-a-new-lightweight-model-for-agent-execution/</a></p>
+
+<h3>Automattic&#x27;s Spacefast Bets That Vibe-Coded Apps Need Rails, Not Another Builder</h3>
+<p>WordPress.com owner Automattic launched Spacefast, a hosting and infrastructure platform for AI-generated websites and apps, at a moment when people increasingly build small sites by prompting ChatGPT or Claude instead of installing a CMS. Spacefast supplies the unglamorous pieces — databases, authentication, file uploads, email, and analytics — and accepts input either from a connected agent (ChatGPT, Claude, Cursor, OpenCode, Amp, and others are listed) or from a Git repository.</p>
+
+<p>The product is deliberately agent-agnostic, which is its main differentiator against Lovable and Emergent, where the interface and the underlying rails come bundled. Spacefast is run by Batuhan İçöz, who started it as a hackathon project while working on Beeper after noticing friends were passing around raw Vercel links. It was soft-launched in September, and Automattic is pitching WordPress integration, WooCommerce, and web analytics as enterprise hooks — framing &quot;IT sprawl&quot; from marketing teams spinning up landing pages as the customer problem.</p>
+
+<p>The strategic read is that model vendors are absorbing the generation step, pushing platform companies to compete on deployment, governance, and lifecycle. İçöz acknowledged churn will be high, since many users may not want to make apps at all; the bet is that better defaults on things like domains and analytics retain the ones who do.</p>
+
+<p>November 9, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/11/09/automattic-debuts-a-platform-to-deploy-vibe-coding-apps-amid-a-changing-internet/" target="_blank">https://techcrunch.com/2026/11/09/automattic-debuts-a-platform-to-deploy-vibe-coding-apps-amid-a-changing-internet/</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>Anthropic Buys $3.4 Billion of Natural Gas Turbines as the Power Queue Bites</h3>
+<p>Anthropic, a company that has historically rented compute rather than owning infrastructure — its S-1 discloses payments to xAI through May 2029 — is buying Caterpillar generators capable of producing up to 1.7 gigawatts, at a reported cost of $3.4 billion. The turbines were originally ordered by equipment supplier OnePWR, which could not secure financing to complete the purchase; Anthropic went directly to the manufacturer instead of buying through the intermediary. The report does not fully explain why OnePWR failed to close despite an apparent end customer.</p>
+
+<p>The move reflects a power market where natural gas turbine backlogs stretch into the early 2030s and grid interconnection queues are similarly long. Buying already-allocated equipment is effectively a way to jump the queue, and it also keeps the capacity out of competitors&#x27; hands. Anthropic joins a broader shift toward on-site generation at AI data centers rather than relying solely on public grids.</p>
+
+<p>The financial implication matters for the upcoming IPO: owning generation converts an operating expense into capital expenditure and adds commodity, permitting, and regulatory exposure to a business that has sold itself as an API-first software company. It also shows that compute scarcity is increasingly an energy problem, not just a chip-allocation problem — one that Anthropic&#x27;s investors will now have to underwrite separately.</p>
+
+<p>November 9, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/11/09/anthropic-joins-ais-natural-gas-frenzy-buys-3-4b-worth-of-turbines/" target="_blank">https://techcrunch.com/2026/11/09/anthropic-joins-ais-natural-gas-frenzy-buys-3-4b-worth-of-turbines/</a></p>
+
+<h3>Fervo&#x27;s Contracted Book Reaches $11.9 Billion as Geothermal Scales by the Data-Center Hall</h3>
+<p>Fervo Energy said in its third-quarter report that contracted revenue reached $11.9 billion, up from $7.2 billion the previous quarter, as hyperscalers hunt for firm clean power. The company is on track to complete a 396-megawatt plant for Google by the end of 2028 at Cape Station in Utah, a site it believes could support 8.4 gigawatts. The project, now called Cape Google 400, will be grid-connected, so Google can sell unused power rather than let capacity idle.</p>
+
+<p>Fervo&#x27;s structural advantage over nuclear and large gas plants is modularity: newer wells, deeper and hotter, produce about 15 megawatts gross each, and clusters called GeoBlocks reached 50 megawatts in recent builds — sized to a typical data-center hall, so buyers can energize incrementally. The company still posted a $43.7 million quarterly operating loss, but holds $1.9 billion in cash against $301.6 million of long-term debt.</p>
+
+<p>The contrast with Anthropic&#x27;s turbine purchase is instructive: one buyer is locking up existing combustion capacity at a premium, the other is contracting for new geothermal build-out with phased delivery. Both are responses to the same constraint, and both suggest that power procurement, not model quality, is becoming the pacing item for AI capacity in the US.</p>
+
+<p>November 9, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/11/09/fervo-now-has-12b-in-orders-for-its-geothermal-power-tech/" target="_blank">https://techcrunch.com/2026/11/09/fervo-now-has-12b-in-orders-for-its-geothermal-power-tech/</a></p>
+
+<h3>Trump Says DOJ Warned an AI Executive &quot;Get Ready to Go to Jail&quot;</h3>
+<p>In a 60 Minutes interview, President Trump said the Justice Department told the leader of &quot;one of the big&quot; AI companies to prepare for jail after a report of misuse, claiming the person &quot;totally changed everything&quot; afterward. He declined to name the individual or company, and no corroborating detail was offered; the claim should be treated as an unverified assertion by the President rather than a confirmed enforcement action. Trump also said AI risk &quot;can be managed&quot; and that he would work with Democrats on safety, while warning against constraining US firms relative to China.</p>
+
+<p>The interview is notable less for any specific policy than for the framing: enforcement presented as personal deterrence delivered by phone, and safety positioned as a competitiveness question rather than a technical one. Trump&#x27;s recurring preference for &quot;SI&quot; (superintelligence) over &quot;artificial intelligence&quot; also surfaced again, with him attributing the term to Xi Jinping&#x27;s usage.</p>
+
+<p>For AI labs, the practical signal is elevated uncertainty about informal government pressure. Companies already navigate export controls, procurement rules, and state-level legislation; a President describing direct threats of prosecution against unnamed executives adds reputational and disclosure risk that general counsels will need to model, especially for firms preparing public offerings where regulatory contingencies must be described to investors. The absence of a name, a company, or a documented case makes the deterrent effect impossible to assess but no less consequential as a signal of how this administration prefers to enforce.</p>
+
+<p>November 9, 2026 · The Verge · <a href="https://www.theverge.com/ai-artificial-intelligence/1029802/trump-60-minutes-ai" target="_blank">https://www.theverge.com/ai-artificial-intelligence/1029802/trump-60-minutes-ai</a></p>
+
+<h3>Apple Begins Metering Apple Intelligence With $49.99 Usage Packs</h3>
+<p>Apple has started selling &quot;Intelligence Usage Packs&quot; in Logic Pro for a one-time $49.99, following a September support article that outlined usage limits for features backed by cloud models from OpenAI and Google Gemini. Logic Pro is the first app to charge for extended Apple Intelligence usage; its built-in assistant can start a song, configure a vocal track from a prompt, or refine an in-progress project. Packs are tied to the purchasing Apple Account, cannot be shared via Family Sharing, and unused balance rolls over monthly but expires 12 months after purchase.</p>
+
+<p>The change quietly ends the assumption that Apple Intelligence is uniformly free with a device. On-device features remain unlimited, but anything routed to third-party cloud models now has a metered tier — a structure that mirrors how compute costs actually fall, and one that pushes heavy users toward either paying or rationing.</p>
+
+<p>Apple has not published a broad pricing framework for other apps, so the Logic Pro pack is best read as a pilot. If it extends to writing tools, image generation, or Siri&#x27;s cloud-backed requests, it would represent a meaningful shift in how Apple monetizes AI: not as a device differentiator alone, but as a consumable with marginal cost passed through to power users.</p>
+
+<p>November 9, 2026 · The Verge · <a href="https://www.theverge.com/tech/1030084/apple-intelligence-usage-packs-ai-features-creator-studio-logic-pro" target="_blank">https://www.theverge.com/tech/1030084/apple-intelligence-usage-packs-ai-features-creator-studio-logic-pro</a></p>
+
+<h3>Disney and Adobe Build Custom Generative Models for an Artist-Led Pipeline</h3>
+<p>At Adobe&#x27;s MAX conference, Disney and Adobe announced a multiyear partnership to develop proprietary generative AI models trained on Disney&#x27;s own world knowledge — character attributes, environments, and visual styles — for use across theme parks, the cruise line, ESPN graphics, and film production. Disney gets early access to Adobe&#x27;s newest technology and will co-develop models through Adobe Firefly Foundry, which Adobe describes as producing commercially safe, production-ready outputs.</p>
+
+<p>The emphasis on &quot;artist-led&quot; and &quot;human-centered&quot; is a governance claim as much as an aesthetic one: models confined to a studio&#x27;s own IP reduce the copyright and reputational exposure that has made major studios cautious about general-purpose image models. It also keeps creative direction inside the studio rather than outsourcing it to a model vendor&#x27;s defaults.</p>
+
+<p>The deal fits a pattern of large IP holders moving from licensing disputes toward private, purpose-built models. For Adobe, Disney is a marquee reference customer for Firefly Foundry against rivals offering similar custom-model programs; for Disney, the value depends on whether bespoke models actually compress production schedules without flattening the house style its brands depend on.</p>
+
+<p>November 9, 2026 · The Verge · <a href="https://www.theverge.com/tech/1029773/disney-adobe-generative-ai-partnership" target="_blank">https://www.theverge.com/tech/1029773/disney-adobe-generative-ai-partnership</a></p>
+
+<h2>What to Watch</h2>
+<ul>
+<li><strong>Whether Fable 5.2&#x27;s FrontierCode lead holds up independently.</strong> Anthropic&#x27;s merge-rate benchmark is self-reported and the Xhigh 49.1% figure is a single number; third-party coding evaluations in the coming weeks will show whether the cost-per-task advantage is real or an artifact of effort settings.</li>
+<li><strong>Nvidia&#x27;s board investigation into Jensen Huang.</strong> With reports tying the CEO to a suspected Chinese intelligence asset, succession questions, congressional oversight, and litigation risk are compounding simultaneously — any disclosure about the probe&#x27;s scope would move the whole AI compute supply chain.</li>
+<li><strong>Apple&#x27;s AI pricing experiment beyond Logic Pro.</strong> If Usage Packs spread to other apps, Apple will effectively be publishing per-feature AI costs, which would put pressure on subscription pricing across the consumer AI market.</li>
+</ul>
+</body></html>
