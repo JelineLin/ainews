@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-12</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-12</h1>
+
+<h2>Executive Summary</h2>
+
+<p>The day&#x27;s defining story is Nvidia&#x27;s leadership crisis: after CEO Jensen Huang admitted an extramarital affair with a woman U.S. intelligence reportedly believes to be a Chinese spy, the board is said to be preparing to remove him, and the stock fell sharply. Capital and capacity dominated everything else — OpenAI reportedly crossed $10B in quarterly revenue for the first time, while CoreWeave rewired its financing toward customer prepayments and short-term contracts priced above $40M per megawatt-year. Anthropic launched the roadshow for its Nasdaq IPO at $70–78 per share. On the product side, Google shipped a purpose-built decision-model API, DeepMind published a cell-type-resolution DNA model, and Databricks pitched an always-on agent for executives. For developers, VS Code 1.146 replaced its agent harness architecture, AWS released an offline emulator so coding agents can test against a local copy of AWS, and DeepMind formally verified Signal&#x27;s protocol code with AI agents.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>VS Code 1.146 Deprecates the Local Agent Harness, Adds &quot;Inbox Mode&quot; for Agent Sessions</h3>
+
+<p>Microsoft shipped Visual Studio Code 1.146, and the headline change is architectural: the Local agent harness is now deprecated and will be removed in February 2027, functionally frozen in the meantime. The Copilot harness — built on the shared Copilot SDK and the default for new sessions — becomes the only supported path. Those sessions run through GitHub&#x27;s infrastructure rather than the local machine, so they keep executing in the background and are reachable from both the editor window and the Agents window; for organizations, the Copilot harness also enforces managed sandbox and permission policies the Local harness lacked. Microsoft published a transition guide covering customization compatibility and migrating existing conversations.</p>
+
+<p>The release leans harder into multi-agent workflow management. &quot;Inbox mode&quot; (off by default) aggregates sessions across projects, surfacing the ones needing attention above those still running. Chat windows, a preview feature, let a chat be detached into its own OS window with editors and terminals arranged around it, plus experimental extension installation from the Agents window.</p>
+
+<p>*Published November 11, 2026 · Visual Studio Code release notes — <a href="https://code.visualstudio.com/updates/v1_146*" target="_blank">https://code.visualstudio.com/updates/v1_146*</a></p>
+
+<h3>AWS Emulator Gives Coding Agents a Free, Offline Copy of AWS to Test Against</h3>
+
+<p>AWS released AWS Emulator, a local emulator built from more than 400 API models covering over 200 AWS services that runs free and offline on a developer&#x27;s machine. Writing on Werner Vogels&#x27; blog, AWS distinguished engineer Swaminathan Sivasubramanian framed it around the idea that made the Paxos-based &quot;Alf&quot; lock service testable twenty years ago: simulate the environment faithfully enough to inject faults and force rare event orderings. With more than 200 services, hand-building that environment is infeasible, so agents build it themselves — working from &quot;fidelity tests,&quot; end-to-end customer scenarios validated against real AWS, then iterating the emulator until it passes the same tests.</p>
+
+<p>All of AWS Emulator&#x27;s code was written and tested by agents. A first passable SQS emulator reportedly arrived from one Kiro prompt in about 15 minutes; internal adoption began within a month. Sivasubramanian&#x27;s argument: when an agent can run its own code against realistic infrastructure, it checks its own work and gets correct results on the first attempt far more often — shifting engineers toward specs, tests, and merge gates, which here include multiple adversarial security agents.</p>
+
+<p>*Published November 11, 2026 · All Things Distributed (Werner Vogels, Amazon CTO) — <a href="https://www.allthingsdistributed.com/2026/11/aws-emulator-and-the-engineers-job-when-agents-write-the-code.html*" target="_blank">https://www.allthingsdistributed.com/2026/11/aws-emulator-and-the-engineers-job-when-agents-write-the-code.html*</a></p>
+
+<h3>AlphaProof Code Formally Verifies the Signal Protocol&#x27;s Implementation in Lean</h3>
+
+<p>Google DeepMind published AlphaProof Code, a multi-LLM agentic framework that split formal verification the way a research team would: humans and models first turned Signal&#x27;s security goals into formal specifications, each reviewed by a human; agents then generated over six million lines of Lean proving the compiled code satisfies them. DeepMind says this is the first time AI has formally verified a widely deployed cryptographic protocol at this depth — and the first time such an implementation has been formally verified by any method. The whole effort took four weeks, against the years such work historically requires; Lean checked the proofs mechanically, so humans reviewed about 1% of the codebase.</p>
+
+<p>The agents went below the design level to the exact code running on devices, where vulnerabilities tend to hide in the gap between specification and implementation. As a control, researchers reintroduced two previously fixed bugs into an isolated copy of Signal&#x27;s code; both times the system produced machine-checked proofs that the buggy version was insecure. Signal CTO Ehren Kret called the AI-driven translation of live code into valid Lean theorems &quot;a major breakthrough.&quot;</p>
+
+<p>*Published November 10, 2026 · Google DeepMind — <a href="https://deepmind.google/blog/introducing-alphaproof-code/*" target="_blank">https://deepmind.google/blog/introducing-alphaproof-code/*</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>Nvidia Board Reportedly Moves to Oust Jensen Huang; Stock Slides</h3>
+
+<p>The Wall Street Journal reported that Nvidia&#x27;s board is preparing to remove co-founder and CEO Jensen Huang, who has led the company for 33 years, with a board meeting possible as soon as Wednesday. The move follows Huang&#x27;s admission on Sunday of an extramarital affair with a woman U.S. intelligence reportedly believes to be a Chinese spy; the New York Times separately reported a relationship with an Nvidia executive who reports to him. The stock fell in after-hours trading and is down roughly 11% over five days, with Congress also preparing to call Huang to testify.</p>
+
+<p>The governance problem is structural. Huang delegates little, has around 60 direct reports, and the company has no obvious successor or public succession plan — a striking gap for the most valuable company in the AI supply chain. TechCrunch&#x27;s reporting frames the story less as a personal scandal than as a test of whether Nvidia&#x27;s board can impose conventional governance on a founder-CEO whose centrality has been treated as an asset. Details remain attributed to anonymous sources and the board&#x27;s decision is not final.</p>
+
+<p>*Published November 11, 2026 · TechCrunch (citing The Wall Street Journal) — <a href="https://techcrunch.com/2026/11/11/nvidias-stock-drops-as-board-reportedly-preps-to-oust-ceo-jensen-huang/*" target="_blank">https://techcrunch.com/2026/11/11/nvidias-stock-drops-as-board-reportedly-preps-to-oust-ceo-jensen-huang/*</a></p>
+
+<h3>Anthropic Opens IPO Roadshow at $70–$78 Per Share on Nasdaq</h3>
+
+<p>Anthropic launched the roadshow for its initial public offering, offering 825 million shares of Class A common stock at an expected price of $70 to $78 per share, with listing on the Nasdaq Global Select Market under the symbol &quot;ANT.&quot; Of those shares, roughly 801.4 million are being offered by the company and 23.6 million by existing stockholders, from whose sale Anthropic receives no proceeds; underwriters hold a 30-day option on up to 123.75 million additional shares.</p>
+
+<p>The filing formalizes a remarkable year in which Anthropic moved from research lab to public-market contender on the strength of enterprise adoption. At the midpoint the offering would raise roughly $61 billion before the greenshoe — among the largest technology listings on record, and a war chest for compute. The registration statement has been filed with the SEC but is not yet effective; the share count and price range remain subject to change.</p>
+
+<p>*Published November 10, 2026 · Anthropic — <a href="https://www.anthropic.com/news/roadshow-launch*" target="_blank">https://www.anthropic.com/news/roadshow-launch*</a></p>
+
+<h3>Google Ships Gemini Decisions API Built for Bounded, Calibrated Choices</h3>
+
+<p>Google introduced the Gemini Decisions API, powered by a new Gemini Decision 1 model (`gemini-decision-1`) that scores candidate answers in a single forward pass instead of decoding text token by token. Developers pass one multimodal input — text, images, audio, video, or PDFs up to 256K tokens — plus as many as 1,000 independent questions in three shapes: yes/no checks, multiple choice (2–255 options), and ordered rubric scoring. Every response carries a confidence score from 0 to 1 so code can route ambiguous cases to a fallback or a human.</p>
+
+<p>Google prices it at $0.10 per million input tokens with no output tokens billed, and reports 150–250 ms end-to-end latency (50–100 ms of model compute) that stays nearly flat from 1 to 100 questions per request. Google says it leads shared benchmarks spanning agent routing, reasoning, ranking, and multimodal understanding with the lowest calibration error, and is nearly 5x cheaper than Gemini 3.5 Flash-Lite via the Interactions API. Internally, Gemini Notebook uses it as a real-time router, cutting latency for everyday queries by up to 40%.</p>
+
+<p>*Published November 11, 2026 · Google (The Keyword) — <a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/*" target="_blank">https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/*</a></p>
+
+<h3>OpenAI&#x27;s Quarterly Revenue Reportedly Tops $10B for the First Time</h3>
+
+<p>OpenAI&#x27;s quarterly revenue crossed $10 billion for the first time in the third quarter, according to reporting cited by TechCrunch — an almost 50% jump from the $6.7 billion recorded in Q2, up sharply from the roughly 18% sequential growth seen between Q1 and Q2. Adjusted operating margin also improved, narrowing from -150% to -109%. Bloomberg reported the company is now at a $50 billion annualized run rate.</p>
+
+<p>The numbers mark a recovery from a weaker stretch earlier in the year, when Anthropic was outpacing OpenAI in enterprise revenue growth. OpenAI&#x27;s improvement is attributed to tighter pricing and discounts, better models, and a heavier push into enterprise products and agents. Caveats matter: the figures are reported rather than officially confirmed, and the two companies annualize differently — Anthropic counts sales made by cloud partners, OpenAI only its share of some partner sales. Anthropic separately said its annualized run rate reached $81 billion as of the end of October.</p>
+
+<p>*Published November 11, 2026 · TechCrunch — <a href="https://techcrunch.com/2026/11/11/openais-quarterly-revenue-reportedly-crosses-10b-for-the-first-time/*" target="_blank">https://techcrunch.com/2026/11/11/openais-quarterly-revenue-reportedly-crosses-10b-for-the-first-time/*</a></p>
+
+<h3>CoreWeave Rewrites Its Financing Around Prepayments and Short-Term Contracts</h3>
+
+<p>On its earnings call, CoreWeave said it will stop using the unsecured debt market &quot;at current yields&quot; and instead borrow against specific customer contracts, drawing funds as needed to build out a $132.5 billion backlog. The neocloud reported $3.66 billion in quarterly revenue, up 168% year over year, but a $709 million net loss and $846 million in quarterly interest expense. It expects roughly $9 billion in customer prepayments and deposits over the next three months, including more than $3 billion tied to new contracts for capacity already built.</p>
+
+<p>The company is also shifting toward shorter deals at much higher prices: capacity is being sold at more than $40 million per megawatt annually on short-term contracts, versus $20–25 million per megawatt on four- and five-year terms, after raising prices about 25% in July and another 10% later in the quarter. The tradeoff is real — lenders weight long-term contracts more heavily because they value predictable cash flow, and bond investors have already pushed yields higher on data center debt.</p>
+
+<p>*Published November 11, 2026 · TechCrunch — <a href="https://techcrunch.com/2026/11/11/coreweave-turns-to-customer-prepayments-shorter-contracts-to-fund-ai-growth/*" target="_blank">https://techcrunch.com/2026/11/11/coreweave-turns-to-customer-prepayments-shorter-contracts-to-fund-ai-growth/*</a></p>
+
+<h3>DeepMind&#x27;s AlphaGenome 2 Predicts Variant Effects at Single-Cell Resolution</h3>
+
+<p>Google DeepMind released AlphaGenome 2, a DNA sequence model that predicts how genetic variants change gene expression in specific cell types rather than in bulk tissue averages. It is conditional: alongside a million-letter DNA sequence it takes a target biological condition — a tissue, cell type, or cell state — at every stage of its architecture, so it learns how the same DNA is read differently across cells. Trained on more than 107 million individual cell profiles across human and mouse samples, it identifies nearly twice as many expression-changing variants as the previous state-of-the-art model. It also predicts DNA methylation, a widely requested readout the original model omitted.</p>
+
+<p>Because the model separates a cell&#x27;s biological state from its outputs, it can impute missing measurements — given single-cell gene activity, it predicts unmeasured chromatin accessibility — and adapt to new single-cell experiments without retraining. It is available today for non-commercial research via the AlphaGenome API and in private preview for commercial use.</p>
+
+<p>*Published November 11, 2026 · Google DeepMind — <a href="https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/*" target="_blank">https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/*</a></p>
+
+<h3>Databricks Repositions Genie as an Always-On Agent for Executives</h3>
+
+<p>Databricks unveiled an updated Genie that can carry out multistep jobs unsupervised, using an ontology the company built to supply context from data customers already store on the platform. CEO Ali Ghodsi demonstrated his own usage rather than a scripted demo: Genie surfaced the weak spots in an employee satisfaction survey, helped him rate and discard executives&#x27; proposed fixes, summarized a sales pitch that went badly (including the features the prospect wanted), and prepared him for a podcast by reviewing past appearances. TechCrunch&#x27;s framing is that Genie is being pitched as a source of unvarnished truth for leaders who, past Dunbar&#x27;s number of roughly 150 people, stop hearing bad news directly — Ghodsi cites Databricks&#x27; 12,000 employees.</p>
+
+<p>Ghodsi argues agents can do for business functions what coding harnesses did for programmers, with cost controlled through Databricks&#x27; Unity Gateway, which sets usage limits and swaps in cheaper open-weight models.</p>
+
+<p>*Published November 11, 2026 · TechCrunch — <a href="https://techcrunch.com/2026/11/11/databricks-new-ai-agent-tells-ceo-ali-ghodsi-the-unvarnished-truth/*" target="_blank">https://techcrunch.com/2026/11/11/databricks-new-ai-agent-tells-ceo-ali-ghodsi-the-unvarnished-truth/*</a></p>
+
+<h3>United Airlines Bans Third-Party AI Agents From Booking Flights</h3>
+
+<p>United Airlines said it is barring AI agents from making reservations on travelers&#x27; behalf, updating its booking and ticketing policies and restricting access &quot;directly within our digital platforms and indirectly via travel agencies and aggregators.&quot; United&#x27;s stated reasons are twofold: sharing account credentials — including payment details — with third-party AI assistants can expose sensitive information or trigger unintended purchases, and agent-driven actions such as check-in may conflict with federal rules, including requirements that travelers verify in person that luggage contains no banned substances.</p>
+
+<p>Analyst Henry Harteveldt reads the move as United protecting its position against &quot;yet another, and potentially even more powerful, intermediary&quot; beyond search, metasearch, and OTAs — and avoiding the cost of a surge in bot flight searches. The policy cuts against a competing trend: Southwest has made its inventory viewable to ChatGPT users. United fares remain bookable through Kayak, Hopper, and Google Flights.</p>
+
+<p>*Published November 11, 2026 · CBS News — <a href="https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/*" target="_blank">https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/*</a></p>
+
+<h2>What to Watch</h2>
+
+<ul>
+<li><strong>Nvidia&#x27;s board decision and Huang&#x27;s status.</strong> A confirmed removal — or a decision to keep him — would be the largest CEO transition in the AI hardware boom, with no obvious successor and roughly 11% of market value already repriced in five days.</li>
+<li><strong>Whether Anthropic&#x27;s IPO prices at the top of its $70–$78 range.</strong> The outcome is the clearest public-market referendum yet on frontier-lab economics, and a strong debut would pull competing labs toward listing.</li>
+<li><strong>Adoption of decision-specific model endpoints like Gemini Decisions.</strong> If routing, grading, and policy checks migrate to single-pass classifiers, a meaningful share of inference spend shifts away from generative calls — worth watching in agent-framework and eval tooling.</li>
+</ul>
+</body></html>
