@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-13</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-13</h1>
+
+<h2>Executive Summary</h2>
+
+<p>The day&#x27;s defining event was corporate, not technical: Jensen Huang resigned as Nvidia&#x27;s CEO effective immediately, ending a 33-year tenure at the company that became the load-bearing supplier of the AI boom. CFO Colette Kress takes over as interim CEO, Harvey Jones becomes the board&#x27;s first chair, and the board has begun an external and internal search — with Chinese export-control questions, a Senate investigation and reports of personal-conduct issues all unresolved. Two other threads competed for attention. Google pushed Gemini 4 Hydrogen into general availability across the API, AI Studio, the Gemini app, Search and Antigravity, explicitly positioning it as a fast &quot;execution engine&quot; beneath Carbon and Argon rather than another frontier flag-bearer. And a forensic startup published technical evidence that four Chinese labs trained recent models on export-restricted Blackwell-class GPUs. On the tooling side, Terminal-Bench shipped 4.1, a hardening release aimed at reward hacking and verifier false negatives.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>Google Ships Gemini 4 Hydrogen and a Dynamic &quot;Orchestrator&quot; Router in Antigravity</h3>
+
+<p>Google made Gemini 4 Hydrogen generally available on November 12 across every tier of AI Studio, the Gemini API, Gemini for business, the Gemini app, Search, and Antigravity. Positioned below Carbon and Argon as the everyday execution model, Hydrogen scores 51 on the Artificial Analysis Intelligence Index at its default high thinking level (versus Argon&#x27;s 50) and 54 at its top xhigh setting, at a flat $1.50 per million input and $7.50 per million output tokens across the full 1M-token context. Google says it finishes tasks 2.5x faster than Gemini 3.8 Flash while tripling Terminal-Bench 4.1 scores (57% versus 18.2%) and cutting fabricated claims by more than 5x.</p>
+
+<p>The more interesting architectural piece is Orchestrator, a new model option in Antigravity. Rather than a static router that guesses task difficulty from the first prompt, Orchestrator switches bidirectionally between Carbon and Hydrogen mid-trajectory: Carbon explores read-only and plans, Hydrogen writes edits and runs tests, and control hands back to Carbon when Hydrogen hits friction. Google reports near-Carbon success on Terminal-Bench with 24% less quota consumed and 19% faster completion on average. The Antigravity SDK lets teams wire the two models explicitly for fixed role separation.</p>
+
+<p>Google&#x27;s citations (SWE-sweep, Agent Arena, HLE-Diamond, Vals benchmarks) are largely vendor-reported and should be treated as directional until independently reproduced. The pricing and flat-context design nonetheless set a clear marker in the mid-tier coding market.</p>
+
+<p>*Published November 12, 2026 · Google (The Keyword) and Google Antigravity Blog · <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/" target="_blank">blog.google</a> · <a href="https://antigravity.google/blog/gemini-4-hydrogen-in-google-antigravity/" target="_blank">antigravity.google</a>*</p>
+
+<h3>[Follow-up] Terminal-Bench 4.1 Hardens Verifiers Against Reward Hacking and Re-Scores the 4.0 Leaderboard</h3>
+
+<p>Two days after Google started reporting Hydrogen results against Terminal-Bench 4.1, the benchmark&#x27;s maintainers published what changed. The core problem: 44 tasks in Terminal-Bench 4.0 execute agent-authored code during verification inside the same process that grades it, which in principle lets an agent read tests, monkeypatch pytest into skipping, or leave a daemon that overwrites the reward file after scoring.</p>
+
+<p>Terminal-Bench 4.1 standardises a hardened path. Harbor strips dangerous symlinks and permissions before artifacts enter the verifier container, and RewardKit&#x27;s new Worker class runs submitted code as an untrusted user in a separate process, kills leftover processes, and only then lets a trusted grader assign a score. The team re-graded all 4.0 submissions from saved artifacts at zero additional inference cost; the original 4.0 leaderboard runs had totalled $116k in inference. Of 11,550 trials only about 1.16% changed score — 162 trials, of which 134 were expected effects of the verifier changes and 28 were measurement discrepancies that retained their original scores. 89 changes were false negatives (overly strict checks rejecting correct solutions, e.g. a Bach harmonisation rule that forbade deliberate delayed resolution) and 45 were false positives.</p>
+
+<p>*Published November 12, 2026 · Terminal-Bench (Laude Institute) · <a href="https://www.tbench.ai/news/terminal-bench-4-1" target="_blank">tbench.ai</a>*</p>
+
+<h3>Gemini 4 Hydrogen Rewrites Google Search&#x27;s Answer Layer</h3>
+
+<p>Separately from the developer launch, Google deployed Hydrogen into Google Search globally, framing it as a reasoning upgrade for the AI answer surface rather than an interface change. According to VP of Product Robby Stein, the model understands multi-part questions with more precision, issues simultaneous queries, and renders answers with more structured tables and visuals while linking out to a wider set of relevant sites.</p>
+
+<p>That framing matters because Search&#x27;s AI summaries have been the most contested surface in Google&#x27;s portfolio: publishers have complained about traffic loss, and regulators in several markets have scrutinised how much of the open web is being absorbed into generated answers. Google is not offering new measurement data here, so whether the &quot;wider range of helpful links&quot; claim translates into referral traffic is unverified. The rollout is global and live.</p>
+
+<p>*Published November 12, 2026 · Google (The Keyword) · <a href="https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/" target="_blank">blog.google</a>*</p>
+
+<h2>Other AI Developments</h2>
+
+<h3>Jensen Huang Resigns as Nvidia CEO; CFO Colette Kress Named Interim Chief</h3>
+
+<p>Nvidia&#x27;s board announced on November 12 that Jensen Huang resigned as president, CEO and board member effective immediately, after 33 years building the company into the central supplier of AI accelerators and a roughly $4 trillion firm. CFO and EVP Colette Kress, who joined in September 2013 after nearly 25 years in finance roles at Cisco and Microsoft, becomes interim CEO while retaining the CFO job. Harvey C. Jones, formerly CEO and executive chairman of Synopsys, was appointed the board&#x27;s first-ever chair, and the board said it will consider both internal and external candidates for a permanent successor.</p>
+
+<p>Jones said the board expects &quot;operations, customer commitments and product roadmap to continue without interruption,&quot; a statement that will be tested quickly: Nvidia reports third-quarter fiscal 2027 results on an already-scheduled date. Context around the exit remains contested and partly unverified — reporting has focused on relationships with employees and on an alleged Chinese espionage connection through Megaspeed, with separate Reuters reporting on a second workplace relationship. Nvidia&#x27;s own release gives no reason. The strategic question for the industry is less about the interim CEO than about whether Nvidia&#x27;s roadmap, customer allocations and political relationships were personally bound to Huang.</p>
+
+<p>*Published November 12, 2026 · NVIDIA Newsroom (with CNBC, TechCrunch) · <a href="https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition" target="_blank">nvidianews.nvidia.com</a>*</p>
+
+<h3>Forensic Analysis Finds Blackwell Fingerprints in Six Chinese Frontier Models</h3>
+
+<p>A startup called Unemployment Labs published a weight-level forensic study concluding that DeepSeek, Moonshot AI, MiniMax and Ant Group trained recent models on export-restricted Blackwell-class GPUs. The method recovers traces of each model&#x27;s initial weight values and searches for the hardware configuration that reproduces them; for DeepSeek-V4-Flash and Kimi K3 the team says it confirmed the match on physical Blackwell chips. The paper identifies DeepSeek-V4-Flash and MiniMax-M3 as matching B200/B300 parts (148 SMs) and DeepSeek-V4-Pro, Kimi K3, Kimi K3.1-Pro and Ling-3.1-flash as matching GB200/GB300 (152 SMs).</p>
+
+<p>The authors are careful about scope: the fingerprint shows how weights were created and &quot;supports, without proving&quot; that the same hardware performed training. They explicitly do not establish where chips were located, how access was obtained, or that export controls were violated. Earlier models from the same labs fingerprint as Hopper, consistent with disclosed H800 fleets. The claim is significant because it is derived from public model weights rather than leaks — and because it is an independent vendor&#x27;s analysis, not a government finding, it will need replication before regulators treat it as evidence.</p>
+
+<p>*Published November 12, 2026 · Unemployment Labs · <a href="https://unemploymentlabs.com/checkpoint-forensics" target="_blank">unemploymentlabs.com</a>*</p>
+
+<h3>Anthropic Opens Its IPO Book With Q3 Revenue of $17B</h3>
+
+<p>Anthropic launched the public-facing portion of its initial public offering, publishing a founders&#x27; letter, roadshow video and financial highlights. The disclosed Q3 2026 figures are striking: $17.0 billion in revenue at more than 12x year-over-year growth, over 11,900 customers spending at least $100K on a trailing-twelve-month basis (also up more than 12x), a 15% adjusted operating margin, and a &gt;4x improvement in compute efficiency measured as revenue divided by compute and infrastructure expense since Q1 2025. The reported $23.3 billion net loss is dominated by a $21.9 billion non-cash charge tied to revaluing convertible notes, derivatives and SAFEs.</p>
+
+<p>Customer case studies lean heavily on coding: Rakuten cites 14x growth in Claude Code seats (about 50 to 700 company-wide) and a reduction in new-feature time-to-market from 24 to 5 working days; Legora reports 4.3 non-billable hours recaptured per lawyer weekly across 31 firms. The numbers reframe the competitive debate — Anthropic is now disclosing margins and compute efficiency alongside capability, which is a different footing than model-benchmark marketing.</p>
+
+<p>*Published November 12, 2026 · Anthropic · <a href="https://ipo.anthropic.com/us/" target="_blank">ipo.anthropic.com</a>*</p>
+
+<h3>Frontier Labs Face Suit Seeking to Halt Frontier AI Development</h3>
+
+<p>Reuters reported on November 12 that OpenAI, Google and Anthropic have been hit with a lawsuit seeking to halt frontier AI development. Details of the filing, the plaintiffs and the legal theory were not accessible from primary documents at publication time and should be treated as developing; the headline claim is a request for injunctive relief against continued frontier training rather than a damages action. The case lands in an unusually crowded legal environment: state-level data-center litigation, RICO claims over a Georgia project, and congressional scrutiny of chip export policy are all live simultaneously.</p>
+
+<p>The practical significance for technical readers is procedural. Injunction requests force courts to engage with capability claims and safety arguments as evidence rather than marketing, and discovery could surface internal evaluation data. Watch for the docket, the jurisdiction and whether the court treats the request as ripe — most such suits fail at the standing or remedy stage.</p>
+
+<p>*Published November 12, 2026 · Reuters · <a href="https://www.reuters.com/business/openai-google-anthropic-hit-with-lawsuit-seeking-halt-frontier-ai-development-2026-11-12/" target="_blank">reuters.com</a>*</p>
+
+<h3>World Labs Opens Atlas to Everyone, Pointing World Models at Developer Pipelines</h3>
+
+<p>World Labs opened Atlas, its world-model product built on Marble, to general availability, shipping four tools alongside it. Viewfinder reconstructs a scene from uploaded or generated photos and lets users move the camera and render new paths through it; Chisel provides greybox-style scene blocking that updates every camera view as objects move; Splats to Mesh converts Gaussian splats into meshes with real geometry for game engines and 3D tools; and Relight manipulates lighting on splats. A developer API and integrations, including Blender, ship with the launch.</p>
+
+<p>The pitch is explicitly workflow-oriented rather than demo-oriented: film and VFX users build a set and direct cameras through it, architecture teams go from photos to a mesh, and robotics researchers generate spatial environments for simulation. That last use case is the one with the most durable value, since photoreal reconstruction of real spaces addresses a persistent bottleneck in embodied-AI training data.</p>
+
+<p>*Published November 12, 2026 · World Labs · <a href="https://worldlabs.ai/atlas" target="_blank">worldlabs.ai</a>*</p>
+
+<h2>What to Watch</h2>
+
+<p><strong>Nvidia&#x27;s Q3 FY2027 earnings call.</strong> It is the first test of the board&#x27;s &quot;no interruption&quot; claim and the first public appearance of an interim CEO navigating customer allocations and export-policy questions under congressional scrutiny. Guidance language on supply commitments will matter more than the headline revenue number.</p>
+
+<p><strong>Whether Hydrogen&#x27;s benchmark claims survive independent replication.</strong> Google&#x27;s Terminal-Bench 4.1 jump (18.2% to 57% versus 3.8 Flash) and the Orchestrator quota savings are vendor-reported. Terminal-Bench&#x27;s own regrade showed that verifier assumptions can move scores in both directions, so third-party harnesses and leaderboard submissions over the next two weeks are the real signal.</p>
+
+<p><strong>The Blackwell fingerprint methodology.</strong> If independent researchers reproduce the weight-level hardware attribution, it becomes a general auditing tool for export-control compliance — and a template for scrutinising any lab&#x27;s claimed compute footprint.</p>
+</body></html>
