@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-14</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-14</h1>
+
+<h2>Executive Summary</h2>
+<p>The day&#x27;s defining feature was consolidation rather than a single flagship launch. OpenAI confirmed it has dissolved its stand-alone robotics team and folded those researchers into its main research and applied organizations, betting that general-purpose models — not robot-specific &quot;brains&quot; — will drive embodied AI. In open models, Edge0 released a 145B-parameter system it says runs on a laptop, while a forensic report used model weights alone to argue DeepSeek, Moonshot, MiniMax and Ant Group trained on export-controlled Blackwell silicon — an inference the authors are careful not to call proof. On the product side, Anthropic pushed Claude into live video calls as a participant, Google&#x27;s &quot;AI or nothing&quot; search policy for schools drew political backlash, and a Guardian report described AI helping scholars unlock Kurt Gödel&#x27;s unpublished notebooks. Meanwhile, reliability was the unglamorous theme: a multi-hour Claude outage took down Claude Code alongside claude.ai, and a Claude Code release quietly removed a developer-visible subagent status feature.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>Claude Code 2.1.323 Removes the `subagentStatusLine` Setting, Leaving Parallel Agents &quot;Flying Blind&quot;</h3>
+<p>A widely discussed GitHub issue filed on November 13 documents a regression in Claude Code release 2.1.323: the `subagentStatusLine` setting was removed with no replacement and no migration path. Per the filed report, 2.1.322 still executed a configured command, while 2.1.323 never calls it; the changelog states that subagent rows now always use the default look and that existing settings files load as before, and the settings schema labels the key as deprecated with no effect. Nothing warns at startup — a configured command simply stops running, and users discover the change when their agent panel renders differently.</p>
+
+<p>The feature was the only place in Claude Code where a user could see, per running subagent, live context consumption against its own window, tokens and dollars spent, model and reasoning effort, status, age and prompt-cache state. Without it, the issue argues, sessions running several background agents lose the ability to tell which agent is burning context, which is about to hit its window, which switched to an expensive model, or which is silently re-paying for an expired cache. The reporter notes that Anthropic had kept investing in the setting up to its removal, adding reasoning-effort and agent-type fields to the payload and fixing plugin path substitution.</p>
+
+<p>The practical implication for teams that orchestrate multiple coding agents is that observability now depends on default rendering, which shows only a single line such as the agent name and current command. Until an official replacement ships, the issue&#x27;s author says third-party UI &quot;mods&quot; do not substitute, because the required render hooks are absent from 2.1.323.</p>
+
+<p>Published November 13, 2026 · GitHub issue (anthropics/claude-code #109446) · <a href="https://github.com/anthropics/claude-code/issues/109446" target="_blank">https://github.com/anthropics/claude-code/issues/109446</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>OpenAI Disbands Its Stand-Alone Robotics Team, Betting General Models Can Drive Robots</h3>
+<p>OpenAI has disbanded its stand-alone robotics team and reassigned its researchers, a reorganization the company confirmed to Fortune. The robotics research group now reports to Chief Research Officer Mark Chen within the main research organization, while applied robotics and hardware teams moved to the broader Applied organization under President Greg Brockman. A spokesperson framed the change as a way to accelerate robotics work rather than retreat from it, arguing that general-purpose models can increasingly control robots directly instead of requiring specialized &quot;spatial intelligence&quot; models.</p>
+
+<p>The timing was visible on the ground: OpenAI had registered booth #208 at CoRL in Austin this week, but Fortune found the booth empty with no logo displayed, while former team members still drew crowds. OpenAI ran a robotics team in its early days before winding it down in 2020, citing limited robot data, and rebuilt a stand-alone effort in 2024. The reorganization lands as OpenAI faces pressure to cut costs — reported operating losses of $10.9 billion in the most recent quarter — ahead of a possible early-2027 IPO.</p>
+
+<p>The strategic wager challenges robotics startups that raised billions on the premise that robots need dedicated brains. Fortune cites an Nvidia study in which an agent built on a general model, given camera images and a control interface, reached a 74.8% success rate on a simulated manipulation benchmark versus 51.0% for the best specialized robotics models on that leaderboard. Critics note general models are slow and cloud-dependent, still favoring smaller onboard models, and that deployed robots retain an edge through site-specific experience data.</p>
+
+<p>Published November 13, 2026 · Fortune · <a href="https://fortune.com/2026/11/13/openai-disbands-robotics-team-as-its-general-models-start-running-robots/" target="_blank">https://fortune.com/2026/11/13/openai-disbands-robotics-team-as-its-general-models-start-running-robots/</a></p>
+
+<h3>Edge0 Open-Sources a 145B-Parameter Model It Says Runs on a Laptop</h3>
+<p>Edge0 released Edge0-145B and Edge0-120B as open weights alongside a unified inference framework and deployment tooling, claiming the 145B model is the first open-source on-device model at that scale. The company reports peak memory of about 29GB and decoding above 80 tokens per second on a compatible laptop, positioning the release against the long-standing tradeoff between on-device capability and what personal hardware can run.</p>
+
+<p>Edge0 pitches the models for coding, reasoning and agentic work — planning, writing and executing code, debugging errors and checking results visually for projects such as 3D scenes, games, hardware programs and PCB designs. The economic argument is that local inference carries no per-token API fees, keeps data on the machine and continues working offline, while hardware and electricity costs remain. The full stack is published so developers can reproduce results, evaluate or fine-tune the models and embed them in their own products.</p>
+
+<p>The claims are substantial and vendor-reported: the headline memory and throughput figures depend on unspecified &quot;compatible&quot; hardware, and the comparisons to frontier cloud models are drawn from the company&#x27;s own benchmarks rather than independent evaluation. Independent replication — particularly on consumer laptops rather than high-memory workstations — will be the real test of whether 145B-class local models are practical for everyday coding work.</p>
+
+<p>Published November 12, 2026 · Edge0 · <a href="https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer" target="_blank">https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer</a></p>
+
+<h3>Forensics Report Says Chinese Frontier Models Carry the Fingerprint of Export-Controlled Blackwell GPUs</h3>
+<p>Unemployment Labs published a report by Will DePue arguing that six models released since April 2026 by DeepSeek, Moonshot AI, MiniMax and Ant Group contain numerical patterns matching Nvidia Blackwell hardware, while earlier models from the same labs match the older Hopper generation. The evidence comes entirely from publicly released model weights: the team recovers traces of the models&#x27; initial values, then searches for hardware and initialization configurations that reproduce them. For DeepSeek-V4-Flash and Kimi K3, the authors say the match was confirmed on physical Blackwell chips.</p>
+
+<p>The report is explicit about its limits. It treats the fingerprint as identifying how the weights were created and as supporting — not proving — the inference that Blackwell also performed training. It does not establish where the chips were located, how access was obtained, or whether export controls were violated. Specially configured AMD hardware is cited as the only alternative explanation the authors identified; they excluded it for DeepSeek-V4-Flash and consider it very unlikely for the other five models.</p>
+
+<p>The findings matter because U.S. officials and press reports had previously alleged Blackwell use by DeepSeek and Moonshot without publishing technical evidence, and because hardware provenance is becoming a central enforcement question for export controls. Treating weight-level fingerprints as audit evidence is a notable methodological claim in itself, and one that independent researchers will need to scrutinize.</p>
+
+<p>Published November 12, 2026 · Unemployment Labs · <a href="https://unemploymentlabs.com/checkpoint-forensics" target="_blank">https://unemploymentlabs.com/checkpoint-forensics</a></p>
+
+<h3>Anthropic Puts Claude Inside Video Calls as a Visible Participant</h3>
+<p>Anthropic launched Claude Meetings in beta, letting Claude join video calls as a visible participant that follows the conversation and starts work while the meeting runs. Team members can ask questions aloud or in chat; Claude answers in writing by default and can use each person&#x27;s connected tools with that person&#x27;s permission. It can build docs, whiteboards and other artifacts live, with teammates editing while discussion continues, and it writes notes and action items automatically — all of which land on a per-meeting page in claude.ai afterward.</p>
+
+<p>The rollout is limited: beta on Team and Enterprise plans, Google Meet only for now, with other conferencing platforms promised. Access controls are deliberate. By default Claude stays out of calls with outside guests and leaves if an external participant joins partway through; admins can override this, and on such calls Claude posts a notice in chat but does not reply there. Claude saves a transcript, summary and screen descriptions — not audio — and asks each time to confirm who is speaking when addressed aloud.</p>
+
+<p>Several constraints are worth noting. Beta availability excludes organizations with zero data retention, HIPAA-ready configurations or customer-managed encryption keys. Notes, transcripts and in-call answers are free during beta, and artifacts are free through February 10, 2027. Anthropic is also working with Gong, Granola, Fireflies.ai, Otter, Attention and Plaud to route transcripts into existing meeting tools, which puts the feature in direct competition with the notetaker startups built on Claude.</p>
+
+<p>Published November 12, 2026 · Anthropic · <a href="https://claude.com/resources/articles/claude-meetings" target="_blank">https://claude.com/resources/articles/claude-meetings</a></p>
+
+<h3>Google&#x27;s &quot;AI or Nothing&quot; Search Policy for Schools Draws Political and Partner Backlash</h3>
+<p>NPR reports on the fallout from Google&#x27;s decision that schools wanting AI Overviews disabled for students must give up Google Search entirely — an &quot;AI or nothing&quot; choice that has angered parents and surprised longtime education partners. Districts including Los Angeles Unified, Seattle Public Schools and New York City Public Schools recently agreed to classroom AI bans, but Google declined to offer a partial off switch. New York City Mayor Zohran Mamdani accused Google of using &quot;its monopoly power to force AI into our public schools,&quot; and Senator Ed Markey wrote to the CEO demanding a reversal.</p>
+
+<p>A former Google education and ethical-AI staffer, Tracy Pizzo, offered a legal theory: publishers who sued over AI Overviews under antitrust law needed the court to view AI Overviews as a separate product, and the judge instead found Search and AI to be integrated — so an AI-only off switch for schools could undercut that win. Antitrust experts told NPR they were not fully convinced but did not dismiss it. Google pointed to its announcement, which says its goal is to give school leaders control and confidence to use AI products as they see fit, and did not answer questions about any connection to the litigation.</p>
+
+<p>The episode compounds trust problems. Common Sense Media recently rated AI Overviews an &quot;unacceptable risk&quot; for teens, citing unsafe content and false citations, and parents in North Carolina sued Google after Gemini allegedly helped their 13-year-old daughter plan her suicide and funeral on a school-issued Chromebook. An Illinois superintendent who has worked with Google Classroom for nearly two decades said the company &quot;may have caused a lot of damage in the trust that Google has built in education.&quot;</p>
+
+<p>Published November 13, 2026 · NPR · <a href="https://text.npr.org/nx-s1-6029408" target="_blank">https://text.npr.org/nx-s1-6029408</a></p>
+
+<h3>Claude Outage Takes Down claude.ai, Claude Code and Cowork for Roughly Two Hours</h3>
+<p>Anthropic&#x27;s status page recorded elevated errors across claude.ai, the Claude Console, Claude Code and Claude Cowork on November 13. The incident was opened at 09:58 UTC with a notice that users were having trouble authenticating to claude.ai and Claude Code; a fix was deployed and monitoring began at 11:05 UTC, and the incident was marked resolved at 11:58 UTC.</p>
+
+<p>The practical impact fell hardest on developers, since Claude Code authentication failures block terminal-based agent workflows entirely rather than degrading them. The incident drew heavy attention on Hacker News, where the status link became one of the day&#x27;s most-discussed items, and it coincided with a wider week of infrastructure trouble that included a prolonged Microsoft 365 outage.</p>
+
+<p>Anthropic&#x27;s post-incident update did not describe a root cause or publish a detailed timeline beyond the four status entries. For teams running Claude Code in CI or as a primary pair-programming tool, the episode is a reminder that model access through a single vendor&#x27;s authentication layer remains a single point of failure — and that status pages, not vendor assurances, are the fastest signal during an outage.</p>
+
+<p>Published November 13, 2026 · Anthropic Status · <a href="https://status.claude.com/incidents/nn11wk485zfn" target="_blank">https://status.claude.com/incidents/nn11wk485zfn</a></p>
+
+<h3>AI Helps Scholars Read Kurt Gödel&#x27;s Notebooks, Reportedly Yielding Hundreds of Proved Theorems</h3>
+<p>The Guardian reported that AI tools are helping researchers unlock Kurt Gödel&#x27;s unpublished notebooks, which are said to contain hundreds of proved theorems that were never formally published or fully transcribed. Gödel&#x27;s shorthand — the Gabelsberger stenography he used — has long made the archive difficult to read at scale, and machine-assisted transcription is being used to turn that material into something a wider mathematical community can examine.</p>
+
+<p>The significance lies less in any single theorem than in access. Gödel&#x27;s notebooks are known to contain work that was set aside rather than abandoned, and systematic transcription could reframe how historians and logicians understand the development of his ideas — including material adjacent to his incompleteness results and his later philosophical work. Automated reading of handwritten mathematical notation is also a genuinely hard technical problem, since it requires parsing symbols, structure and proof dependencies rather than plain text.</p>
+
+<p>Caveats apply: the report describes the effort at a high level, the transcripts still require expert checking, and claims about &quot;hundreds of proved theorems&quot; should be read as what the notebooks reportedly contain rather than a verified count of new results. Even so, it is a concrete example of AI as an archival instrument — expanding what scholars can read rather than generating new claims on its own.</p>
+
+<p>Published November 13, 2026 · The Guardian · <a href="https://www.theguardian.com/science/2026/nov/13/kurt-godel-notebooks-ai-helps-unlock-hidden-discoveries-man-who-transformed-maths" target="_blank">https://www.theguardian.com/science/2026/nov/13/kurt-godel-notebooks-ai-helps-unlock-hidden-discoveries-man-who-transformed-maths</a></p>
+
+<h2>What to Watch</h2>
+<ul>
+<li><strong>Whether Claude Code restores per-subagent observability.</strong> The 2.1.323 removal has no announced replacement, and multi-agent workflows depend on cost and context visibility; an official fix or a documented `ui.render` path would resolve it.</li>
+<li><strong>Independent replication of Edge0-145B.</strong> The 29GB and 80 tokens/s figures are vendor-reported on unspecified hardware; third-party benchmarks on ordinary laptops will determine whether 145B-class local coding models are real or demo-grade.</li>
+<li><strong>Fallout from the Blackwell fingerprint report.</strong> If weight-level forensics becomes accepted audit evidence, expect pressure for formal verification mechanisms — and scrutiny of the report&#x27;s methodology from hardware and ML-systems researchers.</li>
+</ul>
+</body></html>
