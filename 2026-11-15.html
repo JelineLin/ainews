@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-15</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-15</h1>
+
+<h2>Executive Summary</h2>
+
+<p>The weekend&#x27;s news is dominated by the fallout from Jensen Huang&#x27;s resignation as Nvidia CEO, and by the financial system&#x27;s response to AI&#x27;s role in markets. Two Nvidia shareholders publicly asked the board to keep a return open, while the Federal Reserve&#x27;s November Financial Stability Report put AI at the top of its risk list, cited by 87% of surveyed contacts — up from 50% in the spring. On the product side, OpenAI&#x27;s launch of ChatGPT Wallet marks a concrete step into agentic commerce, with tokenized cards and biometric approval, though access is limited to U.S. Pro users for now. Research keeps turning toward the mechanics of agents themselves: a new arXiv paper quantifies how much work coding agents waste after they have already solved the problem, and another shows arena-style leaderboards can be gamed by 45 rank positions. And Cloudflare open-sourced Kitesurf, the browser engine it built for agents.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>Coding Agents Solve Early and Stop Late — New &quot;Termination Lag&quot; Study Quantifies the Wasted Tail</h3>
+
+<p>A new arXiv paper by Musa Cim, Burak Topcu and Mahmut Taylan Kandemir characterizes &quot;termination lag&quot;: the number of steps between an agent&#x27;s first correct patch and the point where its run actually ends. To measure it, the authors recorded and tested every distinct repository patch produced during execution, across five models, two agent frameworks and three SWE-bench datasets. The headline finding is that 38–82% of successful runs have a correct solution in their very first source-code edit.</p>
+
+<p>The waste that follows is substantial. Post-solution steps account for a median of 35–37% of run length for Qwen3-Coder and 54–60% for Laguna-XS.2 on SWE-bench Verified and Multilingual — most of it spent verifying work and re-exploring the repository. In a small but notable fraction of cases (1–8%), that continued activity leads the agent to undo its earlier correct patch, so the final answer ends up wrong.</p>
+
+<p>The practical implication is that for a large share of coding-agent sessions, the effective cost is dominated by work done after success. Detecting the first passing patch — and deciding whether continued verification is worth it — is a cheap lever on both token spend and accuracy. The paper is a useful counterpoint to benchmarks that report pass rates alone.</p>
+
+<p>*Published November 14, 2026 (arXiv submission dated November 11) · Source: arXiv · <a href="https://arxiv.org/abs/2611.14960" target="_blank">arxiv.org/abs/2611.14960</a>*</p>
+
+<h3>AWS Shows How to Route Coding Agents Between Models on Bedrock — and Measure Cost the Right Way</h3>
+
+<p>AWS published a technical walkthrough for deploying LiteLLM with NVIDIA&#x27;s NeMo Switchyard routing plugin on Amazon ECS/Fargate, pointed at Amazon Bedrock. The argument inverts the usual per-token framing: coding agents like Claude Code and Codex CLI work in tasks, so the metric that matters is cost per solved task — total run cost divided by runs whose tests pass — because a task can span a handful of model calls or dozens, each replaying history, and retries on unsolvable tasks still cost money.</p>
+
+<p>The sample supports two non-classifier strategies: Stage routing, which reads recent tool activity and results in request history to pick between a capable model and a cheaper one (exactly two candidates), and Random routing for weighted traffic splits and A/B tests. The writeup is candid about maturity: it pins switchyard-server 0.3.0, which NVIDIA documents as a demo/evaluation component, uses an experimental LiteLLM integration, and is explicitly sample code for non-production accounts.</p>
+
+<p>The architecture is deliberately locked down — private subnets, a path allowlist of `/v1/chat/completions`, `/v1/models` and `/health/liveliness`, WAF rules and IAM-scoped Bedrock calls. The payoff is a repeatable harness for deciding whether a routed model group beats a single-model baseline on your own workload.</p>
+
+<p>*Published November 13, 2026 · Source: AWS Machine Learning Blog · <a href="https://aws.amazon.com/blogs/machine-learning/route-coding-agent-requests-to-the-right-model-on-amazon-bedrock-with-nvidia-nemo-switchyard/" target="_blank">aws.amazon.com/blogs/machine-learning/route-coding-agent-requests-to-the-right-model-on-amazon-bedrock-with-nvidia-nemo-switchyard</a>*</p>
+
+<h3>Cloudflare Open-Sources Kitesurf, a Stateless Browser Engine Built for AI Agents</h3>
+
+<p>Cloudflare released Kitesurf — the stateless browser it introduced in August for AI agents — on GitHub under Apache 2.0. Kitesurf runs entirely on Cloudflare Workers: it parses HTML, applies CSS, executes page JavaScript and renders screenshots without a browser container, and it speaks the Chrome DevTools Protocol, so clients like Puppeteer can connect to it unchanged.</p>
+
+<p>Under the hood it is a stack of Rust crates compiled to WebAssembly — Blitz for parsing, DOM, layout and painting; Stylo for CSS; Boa for JavaScript as a fallback when JS cannot run in Dynamic Workers; Linebender libraries for text and 2D graphics; Krilla for PDF output. The codebase splits into three parts: the Engine (sessions and client connections), PageScript (page execution) and PageRenderer (drawing).</p>
+
+<p>The release matters for agent builders who want the browser primitive without the managed API: you can clone, `pnpm install`, run `pnpm run dev` against a local port, or deploy to your own account (a Workers Paid plan is required because pages get isolated Dynamic Workers). Cloudflare is explicit that Kitesurf is under heavy development, with compatibility, reliability and efficiency as the focus, and asks contributors to open an issue and get maintainer sign-off before sending PRs.</p>
+
+<p>*Published November 13, 2026 · Source: Cloudflare Blog · <a href="https://blog.cloudflare.com/kitesurf-open-source/" target="_blank">blog.cloudflare.com/kitesurf-open-source</a>*</p>
+
+<h2>Other AI Developments</h2>
+
+<h3>Trump-Linked Congress and Regulators Face a Looming Nvidia Leadership Crisis</h3>
+
+<p>Nvidia&#x27;s board is hearing from voices urging it to keep the door open for Jensen Huang. Altimeter Capital CEO Brad Gerstner and Atreides Management&#x27;s Gavin Baker signed a letter asking the board to &quot;pursue a slow, measured, and deliberate process,&quot; including weighing &quot;the potential return of Jensen Huang.&quot; The letter stops short of demanding immediate reinstatement, and acknowledges that interim CEO Colette Kress, Nvidia&#x27;s CFO for 13 years, will lead capably.</p>
+
+<p>The political dimension is already in motion. Commerce Secretary Howard Lutnick has agreed to testify before the Senate Banking Committee on December 10 about chip controls, and Huang has been asked to appear as well. A letter also pressed Lutnick to testify before the House Intelligence Committee on Megaspeed, the Singapore-based Nvidia customer under Justice Department investigation for possibly rerouting restricted chips to China.</p>
+
+<p>Adding to the pressure, President Trump is scheduled to visit China this week for the APEC summit in Shenzhen but, according to U.S. officials, does not plan to raise Nvidia or the spy allegations with Xi Jinping. That gap between the market&#x27;s demand for clarity and the administration&#x27;s silence is the thing to watch.</p>
+
+<p>*Published November 14, 2026 · Source: CNBC · <a href="https://www.cnbc.com/2026/11/14/nvidia-investors-jensen-huang-return-board-letter.html" target="_blank">cnbc.com/2026/11/14/nvidia-investors-jensen-huang-return-board-letter.html</a>*</p>
+
+<h3>Federal Reserve&#x27;s Financial Stability Report Puts AI at the Top of Its Risk List</h3>
+
+<p>In its November Financial Stability Report, released November 13, the Federal Reserve found AI risks cited by 87% of surveyed market contacts as salient to U.S. financial stability — up from 50% in the spring survey, and far ahead of the next most-cited risk, a risk-asset correction at 52%. Higher long-term rates (48%), cyberattacks (43%) and fiscal debt sustainability (43%) followed.</p>
+
+<p>Respondents flagged three distinct concerns: elevated equity valuations and the chance that disappointing earnings trigger a correction; cybersecurity risk, from state actors or from frontier models themselves; and the complexity of AI-related financing structures. The report also includes a dedicated box on leverage in the data-center buildout, reflecting how much of the current cycle is being financed with debt.</p>
+
+<p>The broader system looked stable by the Fed&#x27;s framework — but with a warning: hedge fund leverage is at its highest since 2013 and concentrated among a small group of funds. The survey window closed October 28, so it captures the pre-election mood rather than the Nvidia shock that followed.</p>
+
+<p>*Published November 13, 2026 · Source: Board of Governors of the Federal Reserve System · <a href="https://www.federalreserve.gov/publications/files/financial-stability-report-20261113.pdf" target="_blank">federalreserve.gov/publications/files/financial-stability-report-20261113.pdf</a>*</p>
+
+<h3>OpenAI Opens ChatGPT Wallet to Let Agents Shop With Tokenized Cards and Biometric Approval</h3>
+
+<p>OpenAI launched ChatGPT Wallet, giving its agents (&quot;dots&quot;) the ability to research a purchase and complete checkout on a user&#x27;s behalf, with the user reviewing items, total and card before anything is charged. Approval requires a security check such as Face ID or a fingerprint, which creates a transaction record. Access is narrow at launch: a limited number of U.S. ChatGPT Pro subscribers, 18 and older, with a U.S.-issued Visa, Mastercard or American Express.</p>
+
+<p>The mechanics matter more than the launch list. Cards are stored once, and checkout charges a payment token rather than the raw card number, so neither the dot nor the merchant sees the underlying credentials. Merchants automatically receive fulfillment details like shipping address and contact info from the agent. OpenAI says users keep their card rewards and dispute protections.</p>
+
+<p>Looking ahead, OpenAI plans spending limits and rules around purchase categories and time windows, so users can pre-approve more autonomous shopping, and a wider set of supported retailers. That last part is the hard constraint: Amazon bans AI agents from its storefront to steer users to Alexa, and OpenAI published a Commerce Partner Playbook to help merchants adapt.</p>
+
+<p>*Published November 13, 2026 · Source: TechCrunch (launch confirmed via OpenAI News) · <a href="https://techcrunch.com/2026/11/13/chatgpts-new-wallet-lets-ai-agents-shop-and-check-out-for-you/" target="_blank">techcrunch.com/2026/11/13/chatgpts-new-wallet-lets-ai-agents-shop-and-check-out-for-you</a>*</p>
+
+<h3>Leaderboard Hacking: Arena Rankings Can Be Pushed Up 45 Places by Strategic Voting, Prompting and Nomination</h3>
+
+<p>A new paper from Eve Fleisig, Joachim Baumann, Dylan Hadfield-Menell and Dirk Hovy shows that arena-style leaderboards — anonymous pairwise comparisons aggregated with a Bradley-Terry model — are vulnerable to three manipulation strategies available to any provider: strategic voting (including votes on models irrelevant to the comparison), strategic prompting (selecting prompts that flatter a model), and strategic nomination (inserting deliberately weak models to shift relative rank).</p>
+
+<p>Demonstrated on public leaderboard data, each attack alone moves nearly every tested model up by 15–20 places; combined, they can move a model up by as much as 45 positions. The authors stress that the vulnerability is structural, not specific to one site: any preference-based evaluation that allows open prompting, voting or model submission and aggregates with Bradley-Terry inherits it.</p>
+
+<p>The paper also proposes defenses for each attack vector. For buyers who use leaderboard rank as procurement shorthand — or for teams that ship on the basis of arena wins — the result is a reminder that vote-based rankings measure the behavior of a crowd as much as the quality of a model.</p>
+
+<p>*Published November 14, 2026 (arXiv submission dated November 10) · Source: arXiv · <a href="https://arxiv.org/abs/2611.14769" target="_blank">arxiv.org/abs/2611.14769</a>*</p>
+
+<h3>Cloudflare Warns That AI Penetration-Testing Frameworks Have Become an Ecosystem</h3>
+
+<p>Cloudflare published an analysis of how fast LLM-based penetration-testing orchestrators have spread. In the month since ARTEX — the original open-source agentic pentest framework — was taken down by its creator, the ecosystem has fragmented into more than 12,000 repositories with several hundred unique forks carrying its lineage, plus hundreds of similar orchestration frameworks. Daily requests against AI pentest and exploitation tooling are up 30x since October 1.</p>
+
+<p>The company reports tracking 50+ such agents and says it observed over 50 framework families scanning Cloudflare customers globally in just three days, from IPs numbering in the thousands. These frameworks map assets into a graph that parallel agents enumerate, verify and attack at inference speed, and some chain stolen credentials for lateral movement. Cloudflare argues this is a doctrinal shift: human skill is no longer the limiting factor, and a single operator can hit multiple organizations at once.</p>
+
+<p>The defensive guidance is conventional — WAF with rate limits, anomaly detection, bot defense, identity-gated access, schema validation and threat intelligence — but the framing is notable. Agentic offense is being commoditized faster than agentic defense is being productized.</p>
+
+<p>*Published November 13, 2026 · Source: Cloudflare Blog · <a href="https://blog.cloudflare.com/adapting-to-ai-penetration-testing-orchestrators/" target="_blank">blog.cloudflare.com/adapting-to-ai-penetration-testing-orchestrators</a>*</p>
+
+<h2>What to Watch</h2>
+
+<ul>
+<li><strong>Nvidia&#x27;s December 10 Senate hearing.</strong> Lutnick&#x27;s testimony — and whether Huang appears — will determine whether the chip-export scandal becomes a formal policy fight. Watch for any move on Megaspeed&#x27;s supply chain and how the board sequences its CEO search.</li>
+<li><strong>Coding-agent cost tooling.</strong> With the &quot;termination lag&quot; paper and AWS&#x27;s routed-model sample landing the same week, expect harnesses to start shipping explicit stopping criteria and cost-per-solved-task dashboards. Early adopters should re-measure single-model baselines before trusting routing wins.</li>
+<li><strong>Agentic commerce and retailer resistance.</strong> OpenAI&#x27;s Wallet is invite-limited, but the pattern — tokenized cards, biometric approval, agent-facing checkout — is the template. Amazon&#x27;s ban and the Commerce Partner Playbook set up a platform-vs-retailer fight over who controls the checkout surface.</li>
+</ul>
+
+<hr>
+
+<p>*Briefing generated November 15, 2026. Stories published or breaking within the last 24–48 hours; each entry states its publication date. No items repeat coverage from November 13–14.*</p>
+</body></html>
