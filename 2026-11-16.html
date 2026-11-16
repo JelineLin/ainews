@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-16</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-16</h1>
+
+<h2>Executive Summary</h2>
+<p>The week&#x27;s dominant story is still Nvidia: after Jensen Huang resigned as CEO on November 12–13 over relationships with a Megaspeed executive linked by U.S. investigators to Chinese chip diversion, the backlash has become a policy event. Members of Congress in both parties now want stricter China export rules and testimony, while allies — Elon Musk and Epic&#x27;s Tim Sweeney among them — push a (loosely verified) petition to reinstate him. Beneath the boardroom drama sits a capital-allocation question: neoclouds are building at unprecedented scale on contract-backed debt while deadlines slip. On the model side, the day&#x27;s most interesting artifact is methodological rather than promotional: JetBrains ran 1,200 controlled prompts across 12 frontier models and found that &quot;controversial opinions&quot; about programming languages are largely a shared, predictable prior — Python, Rust and TypeScript absorb three-quarters of the attacks, and models frequently argue both sides of the same question. The practical caveat across all of it: much of this weekend&#x27;s Nvidia reporting rests on anonymous sourcing and a petition whose signatures include obvious fakes.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>Twelve Frontier Models Tested 1,200 Times: Coding &quot;Opinions&quot; Are Mostly a Shared Prior, JetBrains Finds</h3>
+<p>JetBrains AI researchers asked 12 recent models from ten labs in three countries — including GPT-6.1 Sol and Terra, Claude Opus 5.5, Gemini 4 Argon, Grok 4.7, DeepSeek V4 Pro, Qwen3.8 2.4T A95B, Kimi K3.1 Pro, GLM 5.3, Mistral Large 4 and Meta&#x27;s Muse Spark — for their most controversial programming-language hot take, 50 times each on a random-language prompt and 50 times on an open prompt, always in a fresh conversation with no system prompt. All 1,200 requests returned; the whole experiment cost $7.68.</p>
+
+<p>The results undermine the idea that models have idiosyncratic taste. Asked to pick a language &quot;at random,&quot; the 600 picks covered only 14 languages, with five accounting for 90% and Go and Python alone taking 307. The choice was driven by target selection, not chance: Gemini 4 Argon picked Python 35 times and attacked it all 35 times; DeepSeek picked Rust 31 times and attacked it 31 times. Overall, 904 of 1,200 takes (75%) were attacks, and 600 of those landed on just Python, Rust and TypeScript.</p>
+
+<p>Some opinions were near-universal across labs: 78 takes from 9 of 10 labs argued Rust&#x27;s ownership model costs more than it&#x27;s worth for ordinary application code (only Anthropic demurred). PHP drew 28 takes and zero attacks; Java got 90 takes and 80 defenses, mostly of checked exceptions — with Claude Opus 5.5 and GLM 5.3 producing the same sentence word for word. Go&#x27;s `if err != nil` split the corpus exactly 118–118, and GPT-6.1 Sol defended it 20 times and attacked it 21. Practical takeaway: model &quot;preferences&quot; about languages are bad signal when choosing a stack, and good signal about training-data consensus.</p>
+
+<p>Published November 15, 2026 · JetBrains Blog · <a href="https://blog.jetbrains.com/ai/2026/11/ai-models-hate-python-and-love-php-we-asked-12-of-them-1-200-times/" target="_blank">https://blog.jetbrains.com/ai/2026/11/ai-models-hate-python-and-love-php-we-asked-12-of-them-1-200-times/</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>Congress Moves to Tighten AI Chip Export Rules as the Huang Scandal Metastasizes</h3>
+<p>Following revelations about former Nvidia CEO Jensen Huang&#x27;s relationship with a suspected Chinese spy, lawmakers in both parties are pushing to further restrict exports of advanced AI chips. Senate Minority Leader Chuck Schumer has said Huang and the Trump administration must answer to Congress, and Senate Banking Committee Chairman Tim Scott sent letters to Huang and Commerce Secretary Howard Lutnick calling for public testimony. The Remote Access Security Act — introduced in the House in April 2025 but stalled in the Senate — is drawing renewed interest.</p>
+
+<p>House Speaker Mike Johnson has said there is &quot;growing consensus in Congress on limiting chip exports to China,&quot; according to Reuters, and that he personally supports restricting Chinese access to powerful Nvidia chips. The proximate trigger is Megaspeed, the Singapore data-center company U.S. investigators suspect of funneling Nvidia hardware to China, where the woman at the center of the affair worked. The practical consequence is that a personal-conduct scandal has become a structural risk for Nvidia&#x27;s largest growth market, and any carve-out Huang&#x27;s successor might have hoped to negotiate now looks politically untenable.</p>
+
+<p>Published November 15, 2026 · The Verge · <a href="https://www.theverge.com/ai-artificial-intelligence/1033984/congress-export-rules-ai-chips-china" target="_blank">https://www.theverge.com/ai-artificial-intelligence/1033984/congress-export-rules-ai-chips-china</a></p>
+
+<h3>Allies Push to Reinstate Huang as FT Reports He Has Discussed a Comeback</h3>
+<p>The Financial Times reported that Jensen Huang has discussed the possibility of returning as CEO with close allies, as Silicon Valley figures try to pressure Nvidia&#x27;s board. A public letter demanding the board &quot;bring Jensen back&quot; has passed 150,000 signatures and drawn support from Elon Musk and Epic Games CEO Tim Sweeney; Megaspeed, meanwhile, said Alice Huang has not worked there since August 2025 — a claim that raises more questions than it answers about the timeline.</p>
+
+<p>The evidence is soft in both directions. Business Insider noted that petition signatures include entries such as &quot;Tim Cruise, Hollywood actor&quot; and a misspelling of Xi Jinping&#x27;s name, so the headline count is not a reliable measure of sentiment. And one ally quoted by the FT conceded that &quot;having an affair with a subordinate is a fireable offense.&quot; Interim CEO Colette Kress, Nvidia&#x27;s long-time CFO, is widely read as a caretaker appointment. Treat reports of a return as unconfirmed; the verifiable facts remain the resignation, the board&#x27;s investigation, and a company without a public succession plan.</p>
+
+<p>Published November 15, 2026 · The Verge · <a href="https://www.theverge.com/tech/1033999/jensen-huang-return-nvidia-megaspeed" target="_blank">https://www.theverge.com/tech/1033999/jensen-huang-return-nvidia-megaspeed</a></p>
+
+<h3>Reporting Turns to Governance: What Nvidia&#x27;s Security Team Knew, and When</h3>
+<p>TechCrunch&#x27;s account of Nvidia&#x27;s security leadership adds useful context to the scandal&#x27;s timeline. Long-time chief security officer David Reber stepped down in August after four years in the role and seven at the company, citing health reasons and disclosing a young-onset Parkinson&#x27;s diagnosis. His replacement, Saša Zdjelar, came from ExxonMobil and ReversingLabs. Two and a half months later, Huang&#x27;s departure over questions about his extramarital relationships — beginning with a Megaspeed executive — became public.</p>
+
+<p>Nothing public connects the security leadership change to the Megaspeed matter, and the article is careful to say so. Former intelligence officers quoted argue that CEO relationships fall to HR, legal and the board rather than security, but that any affair can give a foreign service leverage over an executive who wants it kept quiet — and that human-source collection through ordinary conversation is precisely the hardest thing for corporate security to detect. The piece is a reminder that the governance questions after a CEO ouster usually matter more than the gossip that triggered it.</p>
+
+<p>Published November 14, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/11/14/where-was-nvidias-security-team/" target="_blank">https://techcrunch.com/2026/11/14/where-was-nvidias-security-team/</a></p>
+
+<h3>Nebius Commits $40 Billion for 2027 — While Its Microsoft Contract Slips by Quarters</h3>
+<p>On its Q3 call, Nebius laid out $40 billion in planned spending for 2027, well above Wall Street expectations, to be funded largely through customer prepayments and loans backed by customer contracts. The problem is execution: its contract with Microsoft, worth up to $19.4 billion, is behind schedule. Only just over half of the Microsoft capacity is now planned for delivery by year-end, with the remainder in Q2 2027 — despite tranches originally meant for 2025 and 2026.</p>
+
+<p>The delay traces to DataOne, the third-party operator of the Vineland, New Jersey site, winding down unpermitted temporary gas generation faster than planned as it switches to Bloom Energy fuel cells; New Jersey regulators fined the facility $1.1 million in August for operating at least 45 unpermitted generators, and residents have sued over noise. Microsoft can terminate affected service after a grace period if dates are missed, and the contract carries late-delivery penalties. CEO Arkady Volozh was candid: &quot;Building at this scale is hard, and delays are part of our industry right now. We are not immune.&quot;</p>
+
+<p>Published November 12, 2026 · TechCrunch · <a href="https://techcrunch.com/2026/11/12/nebius-tests-the-neocloud-playbook-with-40-billion-in-planned-spending/" target="_blank">https://techcrunch.com/2026/11/12/nebius-tests-the-neocloud-playbook-with-40-billion-in-planned-spending/</a></p>
+
+<h3>New Preprint: Arena-Style Leaderboards Can Be Gamed by Up to 45 Rank Positions</h3>
+<p>A paper from Eve Fleisig, Joachim Baumann, Dylan Hadfield-Menell and Dirk Hovy (arXiv:2611.14769, submitted November 10) finds that preference-based leaderboards — the anonymous pairwise-comparison, Bradley-Terry-aggregation format used by popular model arenas — are highly vulnerable to manipulation by unscrupulous providers. The authors identify three concrete attack classes: strategic voting (including votes on irrelevant models), strategic prompting (choosing prompts that favor a model), and strategic nomination (inserting irrelevant models to shift rankings).</p>
+
+<p>Demonstrated on public leaderboard data, each attack moves a model by up to 15–20 places, and combined they can lift a model by as much as 45 positions. The finding generalizes beyond any single site: the authors note it applies to any preference-based evaluation using Bradley-Terry that permits open prompting, voting or model submission. They also describe mitigations against each attack. For teams using arena scores to pick models — increasingly common for coding and agentic workloads — the relevant point is that leaderboard rank is a noisy, adversary-adjacent signal, and internal task-specific evals remain the only reliable arbiter.</p>
+
+<p>Published November 10, 2026 · arXiv · <a href="https://arxiv.org/abs/2611.14769" target="_blank">https://arxiv.org/abs/2611.14769</a></p>
+
+<h2>What to Watch</h2>
+<ul>
+<li><strong>Nvidia&#x27;s board and any hearing schedule.</strong> With Schumer and Scott demanding testimony and the FT reporting comeback discussions, the next verifiable datapoint is a board statement or a scheduled congressional appearance — not petition counts. Watch whether interim CEO Colette Kress publishes a strategy or remains a caretaker.</li>
+<li><strong>Neocloud delivery dates.</strong> Nebius is the first of the contract-financed builders to publicly re-cut delivery windows. If Microsoft tightens oversight across Nebius, IREN and Nscale as Bloomberg reported, 2027 capex plans across the category will need revisiting.</li>
+<li><strong>Leaderboard integrity.</strong> Expect arena operators to respond to the arXiv leaderboard-manipulation paper, possibly with prompt/vote gating. Any change to how coding benchmarks like CursorBench or SWE-style arenas admit submissions is worth tracking.</li>
+</ul>
+</body></html>
