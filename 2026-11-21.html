@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-21</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-21</h1>
+
+<h2>Executive Summary</h2>
+
+<p>The last 24 hours were dominated by two things that rarely arrive together: a claimed breakthrough in pure mathematics and a rout in AI equities. Levent Alpöge, a mathematician employed by Anthropic, published a Lean-only proof of the Generalized Riemann Hypothesis generated with an internal Claude model; Terence Tao has catalogued it as one of three simultaneous AI-heavy results, while cautioning that community digestion will take time. In markets, Anthropic&#x27;s IPO closed flat-to-lower and the wider AI complex shed roughly $4 trillion in value, and Reuters reported the SEC is examining Nvidia&#x27;s accounting while a House committee says Cursor may phase out Chinese open-weight models. On the product side, Thinking Machines released a compact open-weights model built on looped-transformer reasoning, OpenAI shipped a medicinal-chemistry benchmark and a framework for fighting distillation-based capability theft, and a veteran Emacs developer launched DreamCoder, a challenge to terminal-based coding agents.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>DreamCoder Ships a Browser-Native Coding Harness That Rejects the Terminal</h3>
+
+<p>Mickey Petersen, the author of *Mastering Emacs*, released DreamCoder after fifteen months of development — a &quot;frontier coding harness&quot; that runs in the browser on macOS, Linux and Windows and uses a tiling window manager rather than a single chat pane. The design brief is a direct critique of the Claude Code lineage: Petersen argues that terminal-first agents, and the sidebar-plus-chat GUIs that copied them, are second-class coding environments, and that copying multi-line text inside a terminal is a baseline failure that &quot;even a casual user will bristle&quot; at.</p>
+
+<p>DreamCoder is one of the few harnesses written by someone with a long history of building extensible editors, and the announcement frames the work explicitly through Lisp and Emacs history — McCarthy&#x27;s Advice Taker, S-expressions, and the idea that a serious tool must be malleable by its user. That heritage suggests the harness will compete on programmability and layout control rather than raw model access.</p>
+
+<p>The launch claims a &quot;successful beta test&quot; but publishes no benchmark numbers comparing task completion or cost against Claude Code, Cursor or Codex, so quality claims remain unverified. The interesting question it poses is structural: whether the terminal&#x27;s dominance is a durable preference or an artifact of everyone copying the same early design.</p>
+
+<p>Published November 20, 2026 · Mastering Emacs ·</p>
+<p><a href="https://www.masteringemacs.org/article/announcing-dreamcoder" target="_blank">https://www.masteringemacs.org/article/announcing-dreamcoder</a></p>
+
+<h3>Thinking Machines&#x27; Inkling 2 Mini Loops Its Middle Layers to Buy Reasoning Without Tokens</h3>
+
+<p>Thinking Machines Lab released Inkling 2 Mini, a 26.4B-parameter Mixture-of-Experts model with 3.4B active parameters, available with open weights through its Tinker platform. The architectural bet is a looped transformer: the 24-layer model is split into four six-layer blocks, and the two middle blocks run three times per token. The company says looping beats looping the final twelve layers on 27 of 28 evaluations, and that at training step 2,000 the no-loop baseline would need 1.51–1.91× more compute to match the middle-loop loss.</p>
+
+<p>On coding, Inkling 2 Mini reports 48.2% on DeepSWE v1.1 and 46.5% on Vals Index v2.2, which Thinking Machines says leads every open-weights model under 100B total parameters, and it also leads comparable models on SWE-bench Pro v2. Weights ship mostly in NVFP4 with the last four layers in MXFP8, for a ~20GB footprint; researchers ran it offline on a MacBook Pro and had it build a playable flight simulator in minutes.</p>
+
+<p>The paper&#x27;s more provocative claim concerns monitorability. Because looping lets the model reason without writing intermediate steps down, the variable-loop research variant&#x27;s no-chain-of-thought time horizon rose from 16 seconds at one pass to 37 seconds at three, while its visible chain of thought stayed legible and shrank. Thinking Machines reports no upward trend on agentic-sabotage evaluations as loops increased. It is candid about gaps: the model trails Qwen3.8-27B on MultiChallenge (50.0%) and ComplexConstraints (33.4%), and looping does not add factual knowledge.</p>
+
+<p>Published November 20, 2026 · Thinking Machines Lab ·</p>
+<p><a href="https://thinkingmachines.ai/news/inkling-2-mini/" target="_blank">https://thinkingmachines.ai/news/inkling-2-mini/</a></p>
+
+<h3>A House Report Says Cursor May Abandon Chinese Open-Weight Models</h3>
+
+<p>A House Committee on Homeland Security and House Select Committee on China report, shared with CNBC ahead of publication, says SpaceX-owned Cursor plans to &quot;explore phasing out PRC-developed open-weight models because of geopolitical risk&quot; — significant because Cursor built its Composer 2 coding model on Moonshot AI&#x27;s Kimi K2.5. The report follows a months-long investigation into Chinese model adoption across the American tech stack; Airbnb and DoorDash also engaged with investigators. SpaceX acquired Cursor in August at an implied $60 billion equity value, and has been training Grok models with Cursor&#x27;s involvement.</p>
+
+<p>The committee&#x27;s diagnosis is economic rather than purely security-focused: cost, customizability and near-frontier performance drove adoption, and the report states the U.S. lacks a competitive open-weight alternative &quot;at price and performance the market demands.&quot; Its recommendations include a &quot;national American open-weight initiative&quot; combining public compute, shared evaluation infrastructure and lawful access to frontier models for training, plus a prohibition on PRC-developed models in federal information systems and federal contracts.</p>
+
+<p>None of the named companies confirmed the substance of the report to CNBC. For developers, the practical risk is supply-chain: several of the strongest low-cost coding models in 2026 are Chinese open-weight releases, and a policy-driven migration would raise inference costs for exactly the workloads — agentic coding — where token volume is highest.</p>
+
+<p>Published November 20, 2026 · CNBC ·</p>
+<p><a href="https://www.cnbc.com/2026/11/20/cursor-chinese-ai-models-geopolitical-risk.html" target="_blank">https://www.cnbc.com/2026/11/20/cursor-chinese-ai-models-geopolitical-risk.html</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>Anthropic Mathematician Publishes a Lean-Only Proof of the Generalized Riemann Hypothesis</h3>
+
+<p>Levent Alpöge, a mathematician at Anthropic, posted a short essay and formalization asserting that he and Claude &quot;discovered a proof&quot; of the Riemann Hypothesis — first formulated in 1859 and one of the Clay Millennium Prize problems — and that the method extends to the Generalized Riemann Hypothesis. Rather than publishing prose, Alpöge released a Lean formalization in fourteen archive parts, arguing it would be inappropriate to post &quot;some massive unreadable travesty of slop.&quot; He estimates the argument is extremely long and expects it to be &quot;massively simplified, likely immediately.&quot;</p>
+
+<p>Terence Tao catalogued the result alongside two related claims: Alpöge with Tristan Buckmaster and Matei Coiculescu produced a human-readable proof of finite-time blowup for the unforced incompressible 3D Euler equations, and Alpöge with Buckmaster generated a Navier–Stokes blowup proof, both with Lean formalizations and heavy AI assistance. Tao notes the GRH paper is Lean-only, that the strategy appears to use the full machinery of the Langlands program and arithmetic geometry, and that digestion will take time.</p>
+
+<p>Independent confirmation of Lean compilation has been reported informally, but verification is not validation: a compiling proof establishes correctness only relative to its statements and axioms. Alpöge himself acknowledges the timing is awkward, arriving the same week his employer went public, and says he messaged CEO Dario Amodei last Sunday to ask how to announce.</p>
+
+<p>Published November 20, 2026 · Levent Alpöge / Terence Tao&#x27;s blog ·</p>
+<p><a href="https://alpo.ge/remark.pdf" target="_blank">https://alpo.ge/remark.pdf</a> · <a href="https://terrytao.wordpress.com/2026/11/20/unforced-euler-singularity-unforced-navier-stokes-singularity-and-the-generalized-riemann-hypothesis/" target="_blank">https://terrytao.wordpress.com/2026/11/20/unforced-euler-singularity-unforced-navier-stokes-singularity-and-the-generalized-riemann-hypothesis/</a></p>
+
+<h3>OpenAI Publishes MedChemBench, a Hard Benchmark for Medicinal-Chemistry Reasoning</h3>
+
+<p>OpenAI released MedChemBench, a benchmark of 99 problems drawn from 117 papers and patents and 761 distinct molecular structures, built to test whether models can connect molecular structure to experimental evidence. The scenarios mirror real research programs: models receive a biological target, the chemists&#x27; goals, prior compounds and selected experimental findings, then must reconstruct structures with correct stereochemistry, explain choices, rank and select compounds, and predict measured properties.</p>
+
+<p>The design targets a specific difficulty — competing properties. In one PRMT5 inhibitor problem, models must jointly predict cellular potency, cell-barrier permeability and liver-enzyme stability for three related compounds, where later withheld experiments show compound 23 was more potent while compound 24 permeated better and degraded more slowly. Partial credit is awarded by closeness to measured values, and supplied measurements must be reproduced correctly, which penalizes models that improvise inconsistent numbers.</p>
+
+<p>Results show a compressed top end: GPT-6.2 Astra at xhigh scored 84.5% of available credit, versus 83.3% for GPT-6 Astra, 82.0% for GPT-6.1 Sol and 58.2% for GPT-5.6 Sol. OpenAI notes GPT-6 Astra was strongest at structure reconstruction and evidence explanation but weaker at compound selection and numerical prediction — the parts of the workflow closest to a chemist&#x27;s actual judgment.</p>
+
+<p>Published November 20, 2026 · OpenAI ·</p>
+<p><a href="https://openai.com/index/introducing-medchembench/" target="_blank">https://openai.com/index/introducing-medchembench/</a></p>
+
+<h3>OpenAI Details Defenses Against Adversarial Distillation, Claiming 54% to 0.2% Attack Success</h3>
+
+<p>OpenAI published its approach to &quot;adversarial distillation&quot; — using a frontier model&#x27;s outputs without authorization to train a second model that inherits capabilities but not safeguards. The framing is dual-use: a model that helps defenders find vulnerabilities can also help attackers exploit them, and a distilled copy carries no refusal behavior. OpenAI says the defenses now align closely with those used for biology and cybersecurity.</p>
+
+<p>The technical focus is protected reasoning, or chain of thought, which can carry information the final answer omits and is therefore high-value training data. OpenAI describes a stack combining adaptive red-teaming, model training, classifiers and API-level protections with investigations into coordinated extraction campaigns. In an internal adaptive evaluation, the average attack success rate at recovering previously generated protected reasoning fell from 54.0% against GPT-6 Astra with original safeguards to 0.2% against GPT-6.2 Astra — a roughly 270-fold reduction.</p>
+
+<p>That number comes from OpenAI&#x27;s own red-team harness, so it measures the defense against its own attackers rather than an independent adversary, and the company does not publish per-technique breakdowns in the post. Two claims are worth tracking: that protection tracks capability rather than degrading it, and that the same detection stack generalizes across labs, which OpenAI explicitly argues others should build on.</p>
+
+<p>Published November 20, 2026 · OpenAI ·</p>
+<p><a href="https://openai.com/index/combatting-adversarial-distillation/" target="_blank">https://openai.com/index/combatting-adversarial-distillation/</a></p>
+
+<h3>Anthropic Completes Its IPO as AI Stocks Shed Roughly $4 Trillion</h3>
+
+<p>Anthropic announced the closing of its initial public offering: 1,127,000,000 Class A shares at $83.00, including full exercise of the underwriters&#x27; 147-million-share option, alongside the closing of its concurrent private placement. That is the final mechanical step after last week&#x27;s record listing.</p>
+
+<p>The market backdrop inverted quickly. Shares that opened at $111.50 on their first day were trading below the offer price by Friday, and the Wall Street Journal reported the reversal punctuated a broader $4 trillion decline across AI-linked equities — a rout that has since moved from sentiment to disclosure, with Reuters reporting the SEC is examining Nvidia&#x27;s accounting. Anthropic&#x27;s deal structure still left it with an unusually large cash position, but the listing&#x27;s &quot;pop&quot; has become a cautionary data point about how much future compute spending investors will fund.</p>
+
+<p>The immediate read-through for the sector is that public markets are now pricing AI capex and circular financing more skeptically than private rounds did, and that newly public labs face quarterly scrutiny of burn for the first time.</p>
+
+<p>Published November 20, 2026 · Anthropic · Reported November 20, 2026 · WSJ / Reuters ·</p>
+<p><a href="https://www.anthropic.com/news" target="_blank">https://www.anthropic.com/news</a></p>
+
+<h2>What to Watch</h2>
+
+<ul>
+<li><strong>Independent verification of the GRH formalization.</strong> Lean compilation is a necessary but insufficient check, and the maths community&#x27;s Zulip thread will determine whether the argument&#x27;s statements and axioms survive scrutiny; a clean refutation or a drastically shortened proof would both be consequential for how AI-generated mathematics is reviewed.</li>
+<li><strong>Whether Composer 3 abandons Kimi K2.5.</strong> If Cursor actually ships a successor trained without Chinese open-weight bases, it becomes the first clear test of whether a U.S. open-weight alternative exists at competitive price and performance — and a signal for every team currently routing coding traffic through Qwen or Moonshot.</li>
+<li><strong>Looped architectures as a monitorability argument.</strong> Inkling 2 Mini&#x27;s claim that looping preserves legible chain-of-thought while raising capability is testable at other scales; if it holds for frontier models, it complicates the assumption that opaque reasoning is the price of better performance.</li>
+</ul>
+</body></html>
