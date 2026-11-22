@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-22</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-22</h1>
+
+<h2>Executive Summary</h2>
+
+<p>A quiet Saturday produced a day of guardrails, not launches. OpenAI published detailed defenses against &quot;adversarial distillation,&quot; claiming a 270-fold reduction in successful protected-reasoning extraction on its newest models, and broadened its push for anti-distillation legislation. In Geneva, a week of UN talks on lethal autonomous weapons ended with a two-year window to merely propose rules — possibly optional ones — a result humanitarian groups called a &quot;nothing burger.&quot; Google, meanwhile, began pitching AI more deeply into Search&#x27;s front door and quietly revealed an internal &quot;Mirror Dimension&quot; internet used to train and attack its Chrome browsing agents. On the research side, OpenAI released MedChemBench, a 99-problem medicinal-chemistry benchmark that exposes where models still stumble. Markets remain the loudest story: Anthropic&#x27;s record IPO is colliding with the worst week for tech stocks since 2020, and Nvidia closed its longest weekly losing streak since 2008 — a backdrop that will shape how much risk capital is available for everything above.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>OpenAI Hardens GPT-6.2 Astra and Sol Against Reasoning-Trace Extraction</h3>
+
+<p>OpenAI published a technical account of how it detects and disrupts &quot;adversarial distillation&quot; — using a frontier model&#x27;s outputs to train a second model that inherits capabilities without the original safeguards. The company focuses on protected reasoning: the chain-of-thought traces that often contain information a final answer omits, making them unusually valuable training data. Under an adaptive black-box red-team evaluation aggregated across six attacker models, the success rate for recovering protected reasoning from an *earlier* request fell from 54.0% against GPT-6 Astra to 0.2% against GPT-6.2 Astra; extraction of reasoning from the *current* request dropped from 22.9% to 0.9%. Selected improvements are now being backported to GPT-6 Astra.</p>
+
+<p>OpenAI says its defenses combine adversarial testing, model training, classifiers, API-level protections, and investigations of coordinated campaigns. Weekly enforcement actions have ranged from thousands to tens of thousands of accounts, with the rate rising sharply this summer. The post reiterates earlier allegations — a February briefing to Congress about DeepSeek distillation attempts, and a September disruption campaign partly attributed to individuals associated with Moonshot AI — and says more campaign disclosures are coming. OpenAI also backs legislation including the Chip Security Act, AI OVERWATCH Act, and MATCH Act.</p>
+
+<p>The practical implication for developers is that reasoning traces are becoming a guarded interface rather than a reliable training signal: the post recommends checking assistant messages and tool-call arguments for leaks and restricting how encrypted reasoning can be reused across conversations and models. For teams building coding agents on top of frontier APIs, that means more scrutiny of how transcripts are stored, replayed, and repurposed as fine-tuning data.</p>
+
+<p>*Published November 20, 2026 · OpenAI · <a href="https://openai.com/index/combatting-adversarial-distillation" target="_blank">https://openai.com/index/combatting-adversarial-distillation</a>*</p>
+
+<h2>Other AI Developments</h2>
+
+<h3>UN Autonomous-Weapons Talks End With a Two-Year Window and Possibly Optional Rules</h3>
+
+<p>Diplomats in Geneva closed a week of negotiations on lethal autonomous weapons at 4:30 a.m. Saturday with a compromise far weaker than what the International Committee of the Red Cross had demanded: a binding treaty within a year. Instead, countries get two years to *propose* regulations, and those rules could end up non-binding. Russia opened the session by objecting to the agenda; the United States proposed a five-year window for nonbinding, optional guidelines. The final deal was still an improvement over no outcome, negotiators argued — a sign the UN disarmament machinery can still function — but campaigners called it a &quot;real disappointment&quot; and a &quot;nothing burger.&quot;</p>
+
+<p>The stakes are concrete. NPR reports that 80% of civilian deaths in Sudan this year were caused by drones, and semi-autonomous systems are killing civilians in Ukraine and Gaza. ICRC legal adviser Georgia Hinds framed the issue as a moral line technology cannot fix: &quot;You cannot hold a machine accountable for a violation of the law.&quot; Anna Hehir of the Future of Life Institute warned that autonomous weapons, unlike nuclear arms, are cheap and easy to acquire — meaning proliferation is likely to outpace any eventual rulemaking.</p>
+
+<p>The immediate consequence is that, for at least two more years, AI-enabled targeting decisions remain effectively unregulated internationally, while the systems in question grow more capable. The ICRC has already renewed its call for a binding treaty.</p>
+
+<p>*Published November 21, 2026 · NPR (via The Verge) · <a href="https://www.npr.org/2026/11/21/nx-s1-6047916/killer-robots-un-drones" target="_blank">https://www.npr.org/2026/11/21/nx-s1-6047916/killer-robots-un-drones</a> · <a href="https://www.theverge.com/tech/1039554/un-regulations-killer-robots" target="_blank">The Verge summary</a>*</p>
+
+<h3>Google Reveals &quot;Mirror Dimension,&quot; a Synthetic Internet Built to Train and Attack Chrome&#x27;s AI Agents</h3>
+
+<p>Google&#x27;s Chrome team disclosed an internal system it calls the Mirror Dimension: a large, fully controlled replica of the web — social networks, shopping sites, bank dashboards, promotional-code flows — where browsing agents are trained to complete tasks under realistic conditions. The motivation is a training dilemma. Small test environments are too limited to teach open-web navigation, and models can develop &quot;eval awareness,&quot; behaving differently when they detect a simulation. Setting raw agents loose on the real internet is worse. The Mirror Dimension offers scale without exposure.</p>
+
+<p>Building it required its own automation: fleets of website and app-development agents, directed by a purpose-built harness, generated the fake services and data flows. To let agents run inside real Chrome — necessary for fidelity — researchers had to bypass the browser&#x27;s own validity checks, including using forged web certificates, because Chrome&#x27;s protections otherwise block the controlled environment. Google stresses these techniques rely on &quot;god-mode&quot; access and would not work against real users. Hidden prompt-injection attacks act as resilience tests throughout.</p>
+
+<p>Chrome AI security engineer Charles Qian says agents are starting to show &quot;a mature sense of judgment&quot; about what information a task needs and when to hand control back to the user. Google plans to open the environment to more internal teams, and director of engineering Doug Turner framed publication as a template for others: &quot;This is the first step.&quot; For anyone building computer-use or browser agents, the takeaway is that realistic adversarial simulation, not just static benchmarks, is becoming table stakes.</p>
+
+<p>*Published November 19, 2026 · WIRED · <a href="https://www.wired.com/story/google-built-a-giant-mirror-dimension-internet-to-test-its-chrome-ai-agents/" target="_blank">https://www.wired.com/story/google-built-a-giant-mirror-dimension-internet-to-test-its-chrome-ai-agents/</a>*</p>
+
+<h3>OpenAI Launches MedChemBench to Test Whether Models Can Reason Like Medicinal Chemists</h3>
+
+<p>OpenAI released MedChemBench, a benchmark of 99 problems drawn from 117 papers and patents and 761 distinct molecular structures. The tasks replay real research context — a biological target, program goals, compounds studied so far, selected experimental findings — and ask models to reconstruct molecules, explain evidence, rank and select compounds, and predict numerical properties. Scoring gives partial credit for closeness to measured values, which makes the benchmark sensitive to the tradeoffs that define the field: a compound that binds a target more tightly may cross cell membranes poorly or clear faster in liver assays.</p>
+
+<p>At the xhigh reasoning setting, GPT-6.2 Astra earned 84.5% of available credit, ahead of GPT-6 Astra (83.3%), GPT-6.1 Sol (82.0%), and GPT-5.6 Sol (58.2%). The generational gains look modest, and the error profile is revealing: reconstruction of molecular structures and explanation of experimental evidence are comparatively strong, while compound selection and numerical property prediction remain weaker. A stereochemistry-and-ring-size case showed GPT-6 Astra assembling an 18-atom ring correctly in all ten attempts, while GPT-5.6 Sol and Luna failed every time — producing a 15-atom ring and a fragmented structure, respectively.</p>
+
+<p>OpenAI is explicit about the limits. The results do not show that models can discover drugs or improve lab decisions; prior exposure to published sources cannot be ruled out, and each response was a single attempt without tools, feedback, or new experiments. MedChemBench therefore measures reasoning over historical evidence rather than discovery capability — a useful, honest calibration of what &quot;AI for science&quot; currently means.</p>
+
+<p>*Published November 20, 2026 · OpenAI · <a href="https://openai.com/index/introducing-medchembench" target="_blank">https://openai.com/index/introducing-medchembench</a>*</p>
+
+<h3>Signal Blocks Mobile Screenshots and AI Screen-Reading, Calling OS Agents &quot;Hostile to Privacy&quot;</h3>
+
+<p>Signal is restricting screenshots on both Android and iOS and blocking on-device AI agents such as Gemini and Siri from reading on-screen content. In a blog post, Signal president Meredith Whittaker argued that OS-level agentic features which analyze the screen to build context are &quot;undermining Signal&#x27;s ability to independently guarantee privacy,&quot; and that app developers lack robust tools to stop them. iOS users will see a toggle to block screenshots and prevent Siri AI from scanning displayed content; comparable controls are coming to Android.</p>
+
+<p>Whittaker&#x27;s critique targets the asymmetry between platforms and apps. Even where Signal can detect and block AI data access, she said, Google, Apple, Microsoft and others still control lower layers of the stack. Her ask is structural: operating-system vendors should give application developers a reliable, enforceable way to declare what agents may and may not read, rather than leaving each app to reverse-engineer defenses.</p>
+
+<p>This is a meaningful precedent for the agent era. As assistants become capable enough to operate phones and desktops — Google&#x27;s Gemini now drives a Mac, and Apple is reportedly hiring to build its own agent — every sensitive app faces the same question Signal just answered publicly. Expect more consumer apps to adopt screenshot restrictions, and pressure to build up around OS vendors to formalize an &quot;agent access&quot; permission model.</p>
+
+<p>*Published November 20, 2026 · The Verge (reporting Signal&#x27;s announcement) · <a href="https://www.theverge.com/ai-artificial-intelligence/1038390/signal-blocking-ai-agent-screenshots-mobile-app" target="_blank">https://www.theverge.com/ai-artificial-intelligence/1038390/signal-blocking-ai-agent-screenshots-mobile-app</a>*</p>
+
+<h3>&quot;100X Engineers&quot; and the Grief of Losing the Craft: How AI Is Reshaping Software Work</h3>
+
+<p>CNBC&#x27;s reporting on the changing developer job surfaces a tension rarely captured in benchmark numbers. A 2026 Stack Overflow survey cited in the piece found 83% of developers use at least one AI tool. For Gemma Rodgers, a UK developer, that speed has cost something: problems that once took days of debugging now fall to a few prompts — &quot;a breadcrumb of joy, not a full meal of joy.&quot; Others describe missing the flow states that came from sustained work in a codebase.</p>
+
+<p>The more consequential shift is in judgment. James Broadhead, CTO of Taktile, says engineers who once spent three weeks on a prototype can generate ten in an afternoon, and the hard part is deciding which are any good. Agents &quot;spit out so much code that [engineers] haven&#x27;t read it all anymore,&quot; eroding the mental model of how a codebase is structured. Joshua Wöhle of Mindstone argues the gap between AI-fluent and AI-averse workers is widening past the old &quot;10X engineer&quot; framing toward &quot;100X engineers,&quot; forcing companies to choose between upskilling staff and concentrating on top performers.</p>
+
+<p>The developmental risk is the sharpest point: routine coding and debugging are where junior engineers traditionally build skill. Chris Sees of Hoxton Mix calls that &quot;where you learn lessons and build scar tissue,&quot; and warns firms must fold AI into the learning process rather than let it shortcut it. No numbers settle this debate — but the concern is now mainstream enough to be a business-press story, not just a forum thread.</p>
+
+<p>*Published November 20, 2026 · CNBC · <a href="https://www.cnbc.com/2026/11/20/ai-coding-tools-software-engineers.html" target="_blank">https://www.cnbc.com/2026/11/20/ai-coding-tools-software-engineers.html</a>*</p>
+
+<h3>Google Pushes Search Toward a Chat-First Homepage With an AI Sidebar</h3>
+
+<p>Google rolled out a redesigned Search homepage that drops the classic search button and adds an AI sidebar carrying conversational history, per Ars Technica. The redesign makes the query box more of a prompt field than a keyword entry point, and surfaces prior AI interactions beside results. It follows Google&#x27;s aggressive bundling of Gemini into Search, including the Gemini 4 Hydrogen upgrade announced earlier this month.</p>
+
+<p>The strategic logic is straightforward: Google is defending default-search share as chat assistants become the first place users ask questions. Keeping conversation history on the homepage raises switching costs and gives Google more context to personalize answers — and more data to tune its models. But it also invites the scrutiny that has followed AI Overviews: publishers have argued that AI-generated summaries and chat answers divert traffic away from original reporting, and a sidebar that foregrounds prior chat sessions pushes the page further from the ten-blue-links model that made Google a gateway to the web.</p>
+
+<p>For site operators, the operational takeaway is that Search referral patterns may keep shifting, and that AI-sidebar placement may become a new surface to optimize for — similar to featured snippets a decade ago. Ars treats the change as a notable break in Search&#x27;s twenty-plus-year interface convention rather than a cosmetic tweak.</p>
+
+<p>*Published November 20, 2026 · Ars Technica · <a href="https://arstechnica.com/ai/2026/11/googles-latest-search-page-redesign-drops-the-search-button-adds-ai-sidebar/" target="_blank">https://arstechnica.com/ai/2026/11/googles-latest-search-page-redesign-drops-the-search-button-adds-ai-sidebar/</a>*</p>
+
+<h2>What to Watch</h2>
+
+<ul>
+<li><strong>Anthropic&#x27;s post-IPO trading and the AI capex narrative.</strong> Anthropic&#x27;s record IPO is now trading into a market that just posted its worst week since 2020, with Nvidia on its longest weekly losing streak since 2008. Whether Anthropic holds its offering price will be read as a verdict on whether public markets will fund frontier-lab compute bills.</li>
+<li><strong>OpenAI&#x27;s next distillation-campaign disclosures.</strong> OpenAI says more enforcement details are coming, after attributing prior campaigns partly to individuals linked to Moonshot AI. Watch whether this escalates into formal government action under the Chip Security Act or AI OVERWATCH Act.</li>
+<li><strong>Whether OS vendors answer Signal&#x27;s call for agent-access permissions.</strong> Signal&#x27;s screenshot block is a workaround for a missing platform primitive. If Google, Apple, or Microsoft ship an enforceable &quot;agent may read X&quot; API, it would reshape how every sensitive app defends itself against on-device assistants.</li>
+</ul>
+</body></html>
