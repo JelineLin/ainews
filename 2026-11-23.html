@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-23</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-23</h1>
+
+<h2>Executive Summary</h2>
+
+<p>Two currents dominate today&#x27;s news. First, governance: OpenAI&#x27;s chief scientist proposed perplexity as a cross-lab yardstick for intelligence and the basis of industry development limits, lending a concrete metric to a &quot;pace the frontier&quot; debate that until now ran on vibes. Second, friction between AI agents and the real world. Major US banks moved to wall off third-party agents, UN talks on autonomous weapons ended without binding rules, and Microsoft&#x27;s president warned of more outages ahead, partly because AI makes flaws easier to find. On the tooling side, the coding-agent wave is spilling past the IDE: developers are now pointing Claude Code and Codex at televisions, cameras and synths, which is producing both grassroots adoption and pushback from hardware makers. Together the stories suggest a maturing field where the binding constraints are becoming institutional, financial and physical.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>Coding agents leave the IDE: vibe-hacking televisions, cameras and game consoles</h3>
+
+<p>An essay from The Verge&#x27;s David Pierce documents a year in which developers and non-developers began using coding agents to modify consumer hardware, not just write software. The clearest case is developer &quot;Gathin T,&quot; who spent roughly 90 minutes prompting Claude Code to redesign his Xiaomi Android TV interface — removing on-screen ads and simplifying input switching — using USB debugging and a couple of permission changes with the TV and his computer on the same Wi-Fi network. He packaged the work as CleanYourTV, which Pierce says became one of GitHub&#x27;s most popular repositories and attracted thousands of pull requests.</p>
+
+<p>The pattern matters because Android underpins an enormous range of devices, from dishwashers to digital photo frames, and an LLM can locate hidden APIs or unpack firmware files where humans previously probed by hand. Camera enthusiasts are repackaging firmware to add recording modes and color profiles; musicians are rewriting synth firmware (M-Vave released open-source firmware for its FM-1 rather than fight the hackers); gamers have produced scripts enabling controllers across devices.</p>
+
+<p>None of this is technically new — firmware hacking and Magic Lantern-style projects are old — but the collapse in effort lowers the bar sharply. Pierce notes the resulting exposure: users modifying firmware operate outside manufacturer support, and Take-Two&#x27;s former head of AI predicted &quot;more invasive DRM, platform-level solutions&quot; and streaming as a defensive response.</p>
+
+<p>November 22, 2026 · The Verge · <a href="https://www.theverge.com/column/1039139/vibe-coding-gadgets-tv-camera" target="_blank">https://www.theverge.com/column/1039139/vibe-coding-gadgets-tv-camera</a></p>
+
+<h3>LocalCode packages a local agentic coding loop for Apple Silicon</h3>
+
+<p>A small open-source project illustrates how fast coding-agent functionality is being pulled down to single machines. LocalCode, pushed to GitHub on November 22, installs via `uv pip install localcode` and runs an agentic coding session entirely on an Apple Silicon Mac with 16 GB or more of unified memory and macOS 13+. It reads and edits project files, runs builds, tests, Git and shell commands, searches code by name, content or structure, remembers task state across messages, and exposes an OpenAI-compatible endpoint at `/server` so other local apps can use the running model.</p>
+
+<p>The interesting part is the model portfolio and the inference engineering. LocalCode ships a catalog of 12 models in 169 quantization options, spanning Gemma 4 (12B and 26B-A4B), Qwen 3.6/3.8, Thinking Machines&#x27; Inkling 2 Mini, DeepSeek V4 Flash, and coding-specific weights such as a 30B-A3B &quot;North-Mini-Code&quot; and a 40B &quot;Flint.&quot; It uses vendor-supplied speculative drafters for roughly 2x faster replies, &quot;copy drafting&quot; that yields 3.5–4x faster file rewrites, prompt-cache reuse, precompiled GPU kernels, and specific fixes for Inkling 2 whose mixture-of-experts layers had been silently running on CPU.</p>
+
+<p>Caveats are worth stating: the repository is young (creation date April 2026, 19 stars at time of writing), so performance claims are the maintainer&#x27;s own. Still, it is a useful marker of how much optimization is now aimed at the solo-developer, offline end of the market rather than the frontier API.</p>
+
+<p>November 22, 2026 · LocalCode (GitHub) · <a href="https://github.com/mjwsolo/localcode" target="_blank">https://github.com/mjwsolo/localcode</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>OpenAI&#x27;s chief scientist proposes perplexity as the metric for AI speed limits</h3>
+
+<p>In a November 22 research post, OpenAI chief scientist Jakub Pachocki argued that pretraining progress is best tracked by perplexity — or equivalently cross-entropy loss — on held-out data, and that this single metric has predicted broad capability jumps better than any downstream benchmark. He published OpenAI&#x27;s internal measurements for the first time, noting the competitive cost of doing so.</p>
+
+<p>The numbers he cites: GPT-3.5 sat at roughly 0.99 log-perplexity on OpenAI&#x27;s main evaluation set, GPT-4 at about 0.91 (the point at which productive chain-of-thought emerged), and models below 0.8 coincided with what he calls transformative capabilities in cybersecurity and mathematics. He expects further breakthroughs in the 0.68–0.70 window but concedes he does not know what they will be or whether current evals test for them. He also argues AI could accelerate pretraining research itself as soon as 2027, while alignment and monitoring progress is unlikely to keep pace.</p>
+
+<p>The policy proposal: common, perplexity-anchored limits that frontier developers commit not to cross until monitoring reaches a defined milestone, such as a successor to chain-of-thought monitors. Sam Altman called it the most important thing OpenAI has published in a while; the post lands amid an industry &quot;pacing&quot; debate set off by a former researcher&#x27;s warnings and Anthropic&#x27;s safety-heavy IPO filings.</p>
+
+<p>November 22, 2026 · OpenAI · <a href="https://openai.com/index/perplexity-and-intelligence" target="_blank">https://openai.com/index/perplexity-and-intelligence</a></p>
+
+<h3>US banks move to ban third-party AI agents — and shift the risk to users</h3>
+
+<p>Wells Fargo is set to activate updated terms on Tuesday governing AI agents, with a blunt warning: &quot;Your use of any AI Agent is AT YOUR OWN RISK.&quot; According to Wired, JPMorgan Chase changed its terms in late October to prohibit third-party agents that log in with customer credentials; Bank of America warned customers the same day against sharing login details; Citibank and PNC have also amended terms.</p>
+
+<p>The banks are reacting to a year in which consumer agents became genuinely useful for shopping and booking but also produced public failures. Elsewhere the perimeter is tightening too: Amazon has blocked Meta&#x27;s Muse from purchasing on its platform, and United has said personal bots may not buy flights on a customer&#x27;s behalf. Analysts quoted by Wired are skeptical of the scale of the problem — Forrester&#x27;s Sucharita Kodali notes most people do not know what agents are — while acknowledging banks are structurally risk-averse and want to get ahead of disputes about who pays when a bot buys ten roast chickens.</p>
+
+<p>The twist is that institutions are simultaneously locking the front door and building their own agents. American Express has floated limited reimbursement for some agentic mistakes. Wells Fargo says its generative-AI assistant has been used more than a billion times. The likely near-term outcome is agentic commerce proceeding through first-party rails rather than open web automation.</p>
+
+<p>November 22, 2026 · Wired · <a href="https://www.wired.com/story/banks-are-cracking-down-on-ai-agents/" target="_blank">https://www.wired.com/story/banks-are-cracking-down-on-ai-agents/</a></p>
+
+<h3>UN autonomous-weapons talks end with a two-year window and little else</h3>
+
+<p>Diplomats meeting in Geneva on rules for autonomous weapons — &quot;killer robots&quot; — adjourned having agreed only to &quot;start discussing options,&quot; according to The Verge&#x27;s account of NPR&#x27;s reporting. Before talks began, the International Committee of the Red Cross called for legally binding rules within a year, a call backed by the UN secretary-general and Pope Leo. The compromise instead gives countries two years to propose regulations, with negotiations over content and enforcement likely to run much longer, and leaves room for some eventual rules to remain optional.</p>
+
+<p>Russia, Israel and the United States were the principal obstructions: Russia opened by objecting to the meeting&#x27;s agenda, and Washington proposed a five-year window for discussing nonbinding, optional guidelines. Humanitarian organizations argue the urgency is concrete, pointing to civilian casualties attributed to semi-autonomous weapons and drones in Ukraine, Gaza and Sudan.</p>
+
+<p>For AI governance watchers, the episode is a useful counterpoint to the week&#x27;s industry-led safety proposals. Where companies are sketching voluntary, metric-based limits among themselves, the multilateral track remains stuck on basic questions of obligation and scope — a gap likely to widen as autonomy in weapons systems advances faster than the diplomatic calendar.</p>
+
+<p>November 21, 2026 · The Verge · <a href="https://www.theverge.com/tech/1039554/un-regulations-killer-robots" target="_blank">https://www.theverge.com/tech/1039554/un-regulations-killer-robots</a></p>
+
+<h3>Microsoft and US intelligence warn more outages are coming, partly because of AI</h3>
+
+<p>After a week that included a nationwide FAA ground stop, a multi-day Outlook outage and a JPMorgan Chase banking disruption, both Microsoft and the US intelligence community said the public should expect more. Director of National Intelligence Jay Clayton told CNN that any &quot;step change in technology&quot; brings &quot;bumps in the road&quot; and that Americans should be prepared for heavy investment in system upgrades and cybersecurity. Microsoft President Brad Smith was blunter with CBS, saying the industry must prepare &quot;for the coming months&quot; because &quot;the whole information infrastructure of the world is in effect being upgraded right now.&quot;</p>
+
+<p>Smith&#x27;s notable claim is about causation: AI has made it easier to find flaws in software, which cuts both ways — defenders can patch faster, and attackers can exploit faster. The past week&#x27;s incidents were attributed to cyberattacks, and recent months have seen intrusions at the USDA, JPMorgan and supermarket chains.</p>
+
+<p>The Verge frames the outages as a structural problem of aging systems under rapid change rather than a single cause, blending AI-assisted offense with human error during rushed remediation. Either way, the practical message for operators is that reliability budgets are being repriced upward.</p>
+
+<p>November 22, 2026 · The Verge · <a href="https://www.theverge.com/tech/1039851/major-tech-outages" target="_blank">https://www.theverge.com/tech/1039851/major-tech-outages</a></p>
+
+<h3>Binding of Isaac studio pulls Suno-generated music after Steam review bombing</h3>
+
+<p>The Binding of Isaac: Repentance Plus was review-bombed on Steam after a Reddit user, ShweetsStuff, found that music in a Grand Theft Auto–themed segment contained Suno metadata pointing to tracks on Suno&#x27;s site. Creator Edmund McMillen apologized on X and said he &quot;had no idea&quot; generative AI music had been used. Within hours, developer Nicalis said the game had been updated and the generated files removed.</p>
+
+<p>The episode is less about the music than about disclosure and trust. Valve requires developers to disclose how and when generative AI is used during development, and Nicalis had not flagged it. McMillen, notably, has publicly criticized AI in game development as &quot;uninspired and bland,&quot; which is why much of the response on X gave him the benefit of the doubt rather than treating it as deliberate concealment.</p>
+
+<p>As of publication the game remained &quot;overwhelmingly negative&quot; on Steam, showing how quickly provenance questions can turn into commercial damage — and why platform-level AI disclosure rules are becoming a practical compliance issue for small studios, not just a policy talking point.</p>
+
+<p>November 22, 2026 · The Verge · <a href="https://www.theverge.com/games/1039770/binding-of-isaac-ai-music" target="_blank">https://www.theverge.com/games/1039770/binding-of-isaac-ai-music</a></p>
+
+<h2>What to Watch</h2>
+
+<ul>
+<li><strong>Whether perplexity limits get any second party.</strong> Pachocki&#x27;s proposal is only meaningful if other frontier labs publish comparable loss numbers on a shared dataset. Watch for responses from Google DeepMind, Anthropic or Chinese labs — and for criticism that perplexity is not comparable across tokenizers and data mixes, which would undercut the whole scheme.</li>
+<li><strong>Bank agent terms in practice.</strong> Wells Fargo&#x27;s Tuesday activation will be the first real test of whether &quot;at your own risk&quot; clauses survive contact with customers and regulators, and whether card-network reimbursement (as floated by Amex) becomes the de facto liability layer for agentic commerce.</li>
+<li><strong>Open-weights momentum in local coding agents.</strong> LocalCode&#x27;s catalog — DeepSeek V4 Flash, Inkling 2 Mini, Qwen 3.8 — shows capable coding models arriving at consumer-hardware sizes. Watch benchmark results on real repositories rather than vendor speed claims, since that determines whether local agents become a genuine alternative to hosted ones.</li>
+</ul>
+
+<hr>
+<p>*Compiled 2026-11-23 from primary sources and reputable technology publications. Stories previously covered on 2026-11-21 and 2026-11-22 (OpenAI adversarial distillation, DreamCoder, Inkling 2 Mini, Cursor/PRC models) were excluded.*</p>
+</body></html>
