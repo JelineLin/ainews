@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-24</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-24</h1>
+
+<h2>Executive Summary</h2>
+<p>The day&#x27;s defining theme was AI agents moving from &quot;can write&quot; to &quot;can act&quot; — approving code, shielding live production systems, and reaching into personal data. Anthropic&#x27;s Claude Ship hands pull-request triage and, under written policy, approval authority to agents; OpenAI and Cisco open-sourced Shirudo, which uses eBPF to block exploits on running Linux kernels without a restart. Google extended AI Mode&#x27;s Personal Intelligence to Wallet, Drive and the Gemini app. In infrastructure, Amazon paid $7.5 billion for Decart&#x27;s model-optimization stack as it prepares to sell Trainium chips, while NVIDIA claimed more than 10x throughput per kilowatt from Vera Rubin in provisional MLPerf Endpoints results (which cover agentic coding workloads). Governance and environment stories dominated the rest: Oregon and Virginia sued SpaceX over Grok&#x27;s sexualized deepfakes, COP31 broke down with data centers as a central sticking point, and OpenAI shipped a chat-tuned GPT-6.2 Sol.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>Anthropic&#x27;s Claude Ship Gives Agents Standing to Approve Pull Requests</h3>
+<p>Anthropic launched Claude Ship, a suite of coding agents that extends Claude from writing code to deciding when it ships. The product bundles three components: Code Review, which has been generally available since October; PR Steward, now in beta, which steps in on failing CI checks, merge conflicts and review feedback, and comments after each push with what it changed and how to roll it back; and Claude Approvals, also in beta, which applies an approval policy a team writes as a file in the repository.</p>
+
+<p>The interesting move is the delegation of merge authority. Approval policies are expressed in natural language and can weigh Code Review findings or the customer&#x27;s own classifiers. Anthropic frames this as a response to its own workflow: &quot;On the Claude Code team, Claude writes most of our code, and we wanted everything after the PR to move that fast too,&quot; the company wrote. Its guidance for the beta is cautious — start Approvals in observe-only mode, pilot on a single repository, set monthly spending limits, and keep escalation paths to humans.</p>
+
+<p>Claude Ship runs on GitHub repositories and is available to Claude Team and Enterprise plans, with control over where it executes (Quick, Standard or Deep review settings) retained by the customer. The limits are real: beta status, GitHub-only coverage, and approval policies whose correctness is now itself a code artifact under review.</p>
+
+<p>Published November 23, 2026 · Source: TechCrunch / The Verge</p>
+<p><a href="https://techcrunch.com/2026/11/23/anthropic-launches-claude-ship-letting-ai-agents-review-fix-and-approve-code-changes/" target="_blank">https://techcrunch.com/2026/11/23/anthropic-launches-claude-ship-letting-ai-agents-review-fix-and-approve-code-changes/</a></p>
+
+<h3>OpenAI and Cisco Open-Source Shirudo, an eBPF &quot;Shield&quot; Runtime Built with Codex</h3>
+<p>OpenAI and Cisco released Shirudo (&quot;shield&quot; in Japanese), an open-source runtime that protects running Linux systems while patches are staged. The premise: deploying a fix can take days or weeks, and blocking the Linux operation an exploit relies on can also break legitimate traffic. Shirudo lets operators test a temporary eBPF shield that blocks the vulnerable code path while allowing normal requests, then load it live — no restart, no downtime.</p>
+
+<p>The engineering claims are specific. Shields are cryptographically signed and verified before loading, the kernel&#x27;s eBPF verifier enforces program safety, and a Trusted Platform Module provides hardware-backed attestation of protections loaded or removed. In a controlled test, a Codex-generated shield blocked a Java4Shell exploit against a running Elasticsearch instance by attaching an input check to Java&#x27;s Base64 decoder, with the service staying online. Operators, not agents, approve deployment.</p>
+
+<p>Shirudo is BSD 2-Clause licensed, with BPF programs dual-licensed BSD/GPL, and OpenAI says it intends to publish tested shields alongside vulnerability disclosures. The project is a first step toward infrastructure that adapts to threats, though it depends on teams writing and validating shields for each flaw.</p>
+
+<p>Published November 23, 2026 · Source: OpenAI</p>
+<p><a href="https://openai.com/index/introducing-shirudo/" target="_blank">https://openai.com/index/introducing-shirudo/</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>Amazon Buys Decart&#x27;s Optimization Stack for $7.5B Ahead of Trainium Sales Push</h3>
+<p>Amazon agreed to acquire Israeli startup Decart for $7.5 billion — chiefly for the team behind its Decart Optimization Stack (DOS), software that makes AI models run efficiently across NVIDIA, Amazon and Google hardware, per Bloomberg&#x27;s reporting. Decart is best known publicly for real-time world models such as Oasis 3 and AI video tools; DOS is the under-the-hood asset Amazon wants.</p>
+
+<p>Amazon will take the DOS technology plus Decart&#x27;s founding team and its researchers and engineers. Peter DeSantis, SVP of foundational AI models and custom silicon, framed the rationale in efficiency terms: &quot;Every leap forward in AI starts with getting more out of every chip… More efficient compute means better training, better reinforcement learning, faster inference, and better models for customers at a lower cost.&quot;</p>
+
+<p>Strategically, the deal targets NVIDIA&#x27;s software moat. Amazon has used Trainium in its own data centers and is preparing to sell the chips to external customers; optimization tooling that ports workloads smoothly is a prerequisite for competing. Neither company commented further to TechCrunch; the price is large relative to the startup&#x27;s public profile, and the deal is reportedly not yet closed.</p>
+
+<p>Published November 23, 2026 · Source: TechCrunch</p>
+<p><a href="https://techcrunch.com/2026/11/23/amazon-snaps-up-decarts-ai-optimization-tech-for-7-5b-as-it-prepares-to-sell-trainium-chips/" target="_blank">https://techcrunch.com/2026/11/23/amazon-snaps-up-decarts-ai-optimization-tech-for-7-5b-as-it-prepares-to-sell-trainium-chips/</a></p>
+
+<h3>Google Extends AI Mode&#x27;s Personal Intelligence to Wallet, Drive and Gemini</h3>
+<p>Google is widening Personal Intelligence in Search&#x27;s AI Mode beyond Gmail, Calendar and Photos. A Google Wallet connection begins rolling out today; Drive and the Gemini app follow &quot;in the coming weeks,&quot; per The Verge and Google&#x27;s announcement. The pitch is context stitching: documents and spreadsheets scattered across Drive can inform answers, while Wallet data can support budgeting, spending reduction and credit-card rewards analysis.</p>
+
+<p>Google says Wallet access is read-only — AI Mode can read account information but cannot move or manage money — and every connection is optional and revocable. Context can also travel between the Gemini app and Search, so work started in one continues in the other. A forthcoming &quot;Personalization&quot; icon beneath responses will show which context was used. Google also said AI Overviews and AI Mode will tailor results to recent search context.</p>
+
+<p>The trade-off is familiar and sharpening: Google&#x27;s unique advantage is the depth of its account data, and so is its concentration of risk. Disclosure controls and opt-outs are the mitigations offered, but no independent audit of data handling accompanied the rollout.</p>
+
+<p>Published November 23, 2026 · Source: The Verge / TechCrunch</p>
+<p><a href="https://www.theverge.com/tech/1040762/googles-ai-search-will-be-able-to-access-more-of-your-personal-context" target="_blank">https://www.theverge.com/tech/1040762/googles-ai-search-will-be-able-to-access-more-of-your-personal-context</a></p>
+
+<h3>NVIDIA Pitches Vera Rubin on Agentic Inference: 10x Throughput per Kilowatt, Provisional</h3>
+<p>NVIDIA published benchmark analysis claiming that Vera Rubin NVL72 delivers more than 10x the throughput per kilowatt of GB300 NVL72 at a shared minimum of 50 tokens per second per user, in provisional MLPerf Endpoints v1.0 submissions. The measurements span Kimi K3, DeepSeek-V4.1-Flash and Qwen3.6-35B-A3B, with per-model ratios of 10x, 9x and 5x on throughput per kW and 3x to 5x on end-to-end interactivity at matched concurrency.</p>
+
+<p>Context matters. MLPerf Endpoints v1.0 is explicitly an agentic benchmark: coding trajectories and enterprise workflows served through API endpoints, with generated tool calls checked against reference values and separate SWE-bench Verified runs to confirm quality is preserved. That makes these numbers directly relevant to coding-agent deployment economics. NVIDIA attributes gains to HBM4 and sixth-gen NVLink plus software — prefix caching, state reuse, disaggregated prefill/decode, Dynamo routing, and model-specific kernels such as DeepSeek&#x27;s MegaMoE.</p>
+
+<p>Caveats are material: Vera Rubin results were provisional and pending MLCommons verification at publication, the comparisons are vendor-authored, and examples used differ in GPU counts and power envelopes between platforms. The number to track is verified results, not latest claims.</p>
+
+<p>Published November 20, 2026 (benchmark results November 9–10) · Source: NVIDIA Technical Blog</p>
+<p><a href="https://developer.nvidia.com/blog/nvidia-vera-rubin-nvl72-leads-agentic-inference-performance-on-mlperf-endpoints-v1-0/" target="_blank">https://developer.nvidia.com/blog/nvidia-vera-rubin-nvl72-leads-agentic-inference-performance-on-mlperf-endpoints-v1-0/</a></p>
+
+<h3>Oregon and Virginia Sue SpaceX Over Grok&#x27;s Sexualized Deepfakes</h3>
+<p>Oregon Attorney General Dan Rayfield and Virginia Attorney General Jay Jones filed separate but similar consumer-protection lawsuits against SpaceX on Monday, alleging the company ignored industry-standard safeguards around Grok&#x27;s image generation and misrepresented the safety of X and Grok. Virginia&#x27;s complaint accuses Elon Musk of willfully disregarding warnings about AI-generated sexualized deepfakes and treating the gap &quot;not [as] a failure but a feature,&quot; seeing &quot;a market opportunity for more profits.&quot;</p>
+
+<p>This is an escalation in the Grok deepfake fight: earlier pressure came through legislation, regulator inquiries and platform-policy demands, whereas these filings invoke state consumer-protection statutes with their own enforcement machinery and potential civil penalties. The state-by-state strategy also sidesteps stalled federal action.</p>
+
+<p>The core allegation is that safeguards were deliberately weak rather than accidentally broken, which would undercut a standard &quot;we&#x27;re improving the model&quot; defense. Expect the discovery process — internal warnings and product decisions — to matter more than the legal arguments, and to set a template other states can copy.</p>
+
+<p>Published November 23, 2026 · Source: The Verge</p>
+<p><a href="https://www.theverge.com/ai-artificial-intelligence/1040255/x-grok-ai-deepfakes-oregon-virginia-lawsuit" target="_blank">https://www.theverge.com/ai-artificial-intelligence/1040255/x-grok-ai-deepfakes-oregon-virginia-lawsuit</a></p>
+
+<h3>COP31 Collapses as AI Data Center Demand Derails the Electricity Deal</h3>
+<p>COP31 ended in Antalya, Turkey on Sunday, two days over schedule, without an agreed pact. One of the most anticipated outcomes — raising electricity&#x27;s share of global energy consumption from roughly 20% today to 35% by 2035 — failed to gain consensus, and the text omitted the term &quot;fossil fuels&quot; despite calls from many nations. The EU, UK and climate-vulnerable states rejected it as too weak; the US did not participate after withdrawing from the Paris accord.</p>
+
+<p>AI load was a central reason. Data center electricity consumption is forecast to double by 2030 by the International Energy Agency; a Sierra Club analysis projects US power-sector emissions could rise 42% by 2030; Harvard researchers found US hyperscale data centers already emit more than Denmark. Meta disclosed a 45% year-over-year rise in climate pollution and is &quot;re-evaluating&quot; its net-zero timeline. Around 80 nations signed a voluntary 35% electrification pledge whose membership has not been published, and a separate voluntary AI-and-energy pledge attracted little support while still allowing &quot;low-emission&quot; gas.</p>
+
+<p>Published November 23, 2026 · Source: The Verge</p>
+<p><a href="https://www.theverge.com/science/1040497/ai-data-centers-electricity-un-climate-summit" target="_blank">https://www.theverge.com/science/1040497/ai-data-centers-electricity-un-climate-summit</a></p>
+
+<h3>OpenAI Ships a Chat-Tuned GPT-6.2 Sol for Subscription Tiers</h3>
+<p>OpenAI released a chat-specific variant of GPT-6.2 Sol, first launched earlier this month, describing it as &quot;much better at handling complex requests, especially when you give it detailed instructions or ask it to find information online.&quot; It rolls out to ChatGPT Plus, Pro, Business and Enterprise subscribers.</p>
+
+<p>The release is a packaging decision as much as a model one. GPT-6.2 Sol was introduced as a general model; a chat-tuned version optimized for instruction-following and web-grounded answers signals that OpenAI is segmenting serving by modality and use case rather than a single flagship endpoint. That matters for cost and latency: conversational workloads have different serving profiles than agentic ones.</p>
+
+<p>Details remain thin — OpenAI has published no benchmark deltas, context-window changes or pricing adjustments alongside the rollout, and it is unclear whether API access is affected or whether the chat variant differs architecturally from the base model.</p>
+
+<p>Published November 23, 2026 · Source: The Verge</p>
+<p><a href="https://www.theverge.com/ai-artificial-intelligence/1040716/openai-launched-a-chat-specific-version-of-gpt-6-2-sol" target="_blank">https://www.theverge.com/ai-artificial-intelligence/1040716/openai-launched-a-chat-specific-version-of-gpt-6-2-sol</a></p>
+
+<h2>What to Watch</h2>
+<p>1. <strong>Verified MLPerf Endpoints results for Vera Rubin.</strong> NVIDIA&#x27;s 10x throughput-per-kilowatt claim is provisional and vendor-authored. MLCommons verification will reveal whether the agentic-inference efficiency story holds, which directly shapes the cost of running coding agents at scale.</p>
+<p>2. <strong>How Claude Approvals is actually adopted.</strong> Whether enterprises enable autonomous merge approval, and under what observe-only periods and spending caps, will be an early real-world test of delegated code authority — and of whether approval policies become a new class of auditable code.</p>
+<p>3. <strong>State litigation as AI enforcement.</strong> Oregon and Virginia&#x27;s Grok suits could establish a template for consumer-protection actions against model providers, especially if discovery surfaces internal deliberations about deliberately weak safeguards.</p>
+</body></html>
