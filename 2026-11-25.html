@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-25</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-25</h1>
+
+<h2>Executive Summary</h2>
+
+<p>Tuesday&#x27;s news converged on a single theme: agents are now doing consequential work, and the results are mixed at best. The UK&#x27;s National Cyber Security Centre reported a marked rise in AI-assisted intrusions since September, with agentic offensive frameworks automating the discovery and exploitation of years-old weaknesses; attackers used similar tooling to find and exploit a zero-day, per Ars Technica. On the defensive side, OpenAI&#x27;s new protein-design research shows frontier models reasoning their way through structural biology, while its iFood case study shows coding agents run as API-callable infrastructure across 15,000 repositories. The most sobering item came from ShellBench: even top models failed more than a third of everyday personal-assistant tasks, and safety requirements were violated in 15.7% of attempts. Meanwhile, Tidal moved to delete 29 million fully AI-generated tracks, and Anthropic&#x27;s stock slid below its $83 IPO price.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>OpenAI Details How iFood Runs Coding Agents Across 15,000 Repositories</h3>
+
+<p>OpenAI published a customer case study on iFood&#x27;s &quot;Remote Agents Platform,&quot; which turns engineering chores into a REST API call: a team submits a prompt and environment requirements, the platform runs an agent on a dedicated remote runner inside an isolated sandbox, and the result returns as a merge request. Progress can be streamed in real time.</p>
+
+<p>The problem the platform addresses is scale rather than difficulty. Each of iFood&#x27;s 15,000-plus repositories periodically needs dependency fixes, internal standards validation, or analysis tasks; &quot;solving this for one repository is easy,&quot; senior engineer Victor Coelho said, but teams previously built fragmented one-off solutions. The platform has completed more than 25,000 runs at an average inference cost of $0.04 per run, using GPT‑5.6 Luna. Its first major internal user was the security team, where the number of vulnerabilities fixed more than doubled.</p>
+
+<p>The write-up is a useful reference for teams moving from IDE-bound assistants to agent fleets: the hard parts are runtime isolation, lifecycle management, and verifying that an agent actually completed its task—not model intelligence. It lands the same week Anthropic shipped Claude Ship for pull-request review and approval, underscoring that agent infrastructure, not just model quality, is now the competitive front.</p>
+
+<p>Published November 24, 2026 · OpenAI (customer story) · <a href="https://openai.com/business/customer-stories/ifood/" target="_blank">https://openai.com/business/customer-stories/ifood/</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>NCSC Warns &quot;Agentic Offensive Frameworks&quot; Are Turning Old Weaknesses Into Fast Breaches</h3>
+
+<p>The UK National Cyber Security Centre said it has seen a &quot;marked rise&quot; in AI-assisted cyber attacks since September 2026, with organizations across multiple sectors reporting incidents caused by agentic offensive frameworks—tools originally built for authorized red teaming, now applied offensively. The agentic loop plans attack steps with an LLM, runs off-the-shelf security tools against a target, reads the results, and adapts.</p>
+
+<p>The NCSC stressed that none of the exploited weaknesses are novel memory-corruption bugs or known-but-unpatched flaws. They are unmitigated weaknesses accumulated through years of technical debt, paired with weak or guessable passwords and abused API endpoints. What changed is speed and cost: agents move from discovery to exploitation in minutes, try every endpoint and credential exhaustively, and learn from failures, all running cheaply on open models or resold API access. The dominant framework cited is ARTEX, alongside Cairn, PentAGI, RedAmon, Xalgorix, and Darkmoon.</p>
+
+<p>The NCSC noted the trade-off that today&#x27;s frameworks are noisy—they favor speed over stealth and generate detectable traffic—but warned that may not persist. Its conclusion is unglamorous: basic controls and strong foundations have never mattered more, and AI does not make established security practices obsolete.</p>
+
+<p>Published November 24, 2026 · NCSC (UK) blog, reported by TechCrunch · <a href="https://www.ncsc.gov.uk/blogs/familiar-weaknesses-exploited-faster-defending-against-agentic-cyber-attacks" target="_blank">https://www.ncsc.gov.uk/blogs/familiar-weaknesses-exploited-faster-defending-against-agentic-cyber-attacks</a></p>
+
+<h3>Attackers&#x27; AI Agents Found and Exploited a Zero-Day With Little Human Input</h3>
+
+<p>Ars Technica reported that Amazon disclosed a case in which hackers&#x27; AI agents located and exploited a previously unknown vulnerability with minimal human direction. The report frames the incident as a step beyond assisted hacking: rather than humans driving tools, the agents handled reconnaissance and exploitation themselves. The development echoes an earlier disclosure that Chinese attackers used autonomous agents to take over a university server via a zero-day, first detailed by The Register on November 20.</p>
+
+<p>Taken alongside the NCSC&#x27;s findings, the picture is that autonomous exploitation has moved from proof of concept to observed practice. The strategic concern is asymmetric: defenders must patch every exposed system, while an agent needs to find one gap, and the marginal cost of attempting more attacks is close to zero. It also sharpens the case for agent-level monitoring and logging, since the distinguishing signal of such attacks may be volume and exhaustiveness rather than a novel technique.</p>
+
+<p>Note: Ars Technica blocks automated retrieval, so this summary relies on its published headline and syndicated feed description; specific technical details beyond those should be treated as unconfirmed.</p>
+
+<p>Published November 24, 2026 · Ars Technica · <a href="https://arstechnica.com/security/2026/11/amazon-says-hackers-ai-agents-found-and-exploited-0-day-with-little-human-input/" target="_blank">https://arstechnica.com/security/2026/11/amazon-says-hackers-ai-agents-found-and-exploited-0-day-with-little-human-input/</a></p>
+
+<h3>GPT-6 Models Design Proteins From Reasoning and Code Alone</h3>
+
+<p>OpenAI published a preprint, &quot;GPT-6 as a Universal Foundation Model for Protein Biology,&quot; arguing its GPT‑6 family can design new protein structures and amino-acid sequences without calling specialized biology models. Instead, the models reason in natural language and write code about geometry, chemistry, and binding.</p>
+
+<p>In one demonstration, an internal research model matched or outperformed specialized protein-design systems on many of 14 tested tasks. Researchers could specify attachment points and structural features—for example, how many coils or strands a minibinder should contain—and an internal model followed with near-perfect fidelity in 3D. In lab work with partner Onava, proteins based on GPT‑6.2 designs showed evidence of binding across five targets, and redesigned antibodies retained binding; specialized models still helped supply sequences and select candidates.</p>
+
+<p>OpenAI&#x27;s write-up notes limitations and says more work is needed before practical use, but the headline claim is that general-purpose reasoning plus coding can absorb tasks previously requiring bespoke scientific software. If it holds up under peer review, it is a template for how frontier models may enter other technical domains: not as specialized tools but as general reasoners that write their own.</p>
+
+<p>Published November 24, 2026 · OpenAI · <a href="https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities/" target="_blank">https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities/</a></p>
+
+<h3>ShellBench: Even the Best Personal AI Agents Fail a Third of Everyday Tasks</h3>
+
+<p>A new benchmark, ShellBench, tested agents on the messy work people actually delegate—shopping schedules, travel, invoices, school pickups—drawing on more than 10 million anonymized real-world agent interactions. It was developed with researchers from The OpenClaw Foundation, Parsewave, Hugging Face, Red Hat, and UC Berkeley.</p>
+
+<p>Even the strongest models from OpenAI, Anthropic, and Meta failed more than a third of tasks; 15.7% of all attempts violated at least one safety requirement. Consistency was worse than raw capability: when each task was run three times under identical conditions, OpenAI&#x27;s GPT‑6 Astra, the top scorer, succeeded on all three attempts less than half the time. Specific failures were stark—agents failed to account for a child&#x27;s school pickup 79.5% of the time, leaked a sensitive bank upload token in 18.6% of attempts, and recommended duplicate or incorrect invoice payments 40.3% of the time.</p>
+
+<p>The results matter because consumer agent adoption is surging—Meta said more than 10 million people in the US and Canada set up its Muse agent within six weeks—while benchmarks have skewed toward coding and professional work. ShellBench suggests the bottleneck is unreliable everyday data sources and privacy judgment, not task complexity.</p>
+
+<p>Published November 24, 2026 · TechCrunch, reporting ShellBench research · <a href="https://techcrunch.com/2026/11/24/even-the-best-ai-agents-struggle-with-everyday-life/" target="_blank">https://techcrunch.com/2026/11/24/even-the-best-ai-agents-struggle-with-everyday-life/</a></p>
+
+<h3>[Follow-up] Anthropic&#x27;s Stock Falls Below Its $83 IPO Price</h3>
+
+<p>Anthropic shares traded as low as $76 on Tuesday, below the $83 offer price and nearly 12% below Monday&#x27;s close, less than a week after debuting on Nasdaq at $111.50. Falling below the IPO price is a negative signal because underwriters typically price deals at a discount to expected trading value.</p>
+
+<p>Context: Anthropic&#x27;s November 20 closing announcement confirmed gross proceeds of roughly $93.5 billion on 1.127 billion shares, with about $313 million Class N shares sold concurrently to AMD and Broadcom—a float that now has to absorb public-market scrutiny. TechCrunch frames the slide as a barometer for how public investors value AI companies; a sustained decline could pressure private valuations and weaken IPO prospects for peers. Nvidia also fell more than 7% by midday Tuesday, giving back part of its 30%-plus rally after Jensen Huang&#x27;s reinstatement.</p>
+
+<p>What changed since our earlier coverage: the stock has moved from pricing and first-day trading into below-IPO territory. The story is no longer the offering itself but whether public markets will sustain frontier-lab economics.</p>
+
+<p>Published November 24, 2026 · TechCrunch, with Anthropic&#x27;s IPO closing release · <a href="https://techcrunch.com/2026/11/24/anthropic-shares-fall-below-ipo-price-a-worrying-sign-for-ai-startups/" target="_blank">https://techcrunch.com/2026/11/24/anthropic-shares-fall-below-ipo-price-a-worrying-sign-for-ai-startups/</a></p>
+
+<h3>Tidal Will Delete 29 Million Fully AI-Generated Tracks Starting December 9</h3>
+
+<p>Tidal said that over the past 90 days more than 43% of tracks uploaded to the platform were fully AI-generated, prompting an outright ban. Starting December 9, Tidal will remove fully AI-generated music, deleting more than 29 million songs by year-end and rejecting an estimated 80,000 to 85,000 tracks per day.</p>
+
+<p>The policy also bars distributors from delivering 100% AI-generated tracks and rejects submissions whose metadata declares full AI generation, while still accepting AI-assisted work. Tidal music lead Robert Anderson said the company had already tagged and demonetized wholly AI-generated tracks in June, but that did not prove a sufficient deterrent.</p>
+
+<p>Tidal is among the first major streaming services after Bandcamp to ban AI music outright. Deezer plans a user-facing filter, while Spotify and YouTube Music have preferred labeling. The move tests whether platform-level exclusion can work when detection is imperfect and upload volume is enormous—and it gives artists a concrete precedent to cite in licensing disputes.</p>
+
+<p>Published November 24, 2026 · TechCrunch, also reported by The Verge and Ars Technica · <a href="https://techcrunch.com/2026/11/24/tidal-to-ban-and-remove-millions-of-ai-generated-tracks-as-ai-slop-inundates-music-streaming/" target="_blank">https://techcrunch.com/2026/11/24/tidal-to-ban-and-remove-millions-of-ai-generated-tracks-as-ai-slop-inundates-music-streaming/</a></p>
+
+<h2>What to Watch</h2>
+
+<ul>
+<li><strong>Whether agentic attacks force a change in baseline security policy.</strong> The NCSC says exploited flaws are old and preventable; watch for regulators or insurers tying coverage and compliance to basic hardening rather than novel AI-specific rules.</li>
+<li><strong>ShellBench&#x27;s methodology and adoption.</strong> If independent labs reproduce the consistency findings, &quot;passes all three attempts&quot; could become a standard metric for consumer agent products—and a differentiator in marketing.</li>
+<li><strong>Public-market read-through from Anthropic&#x27;s stock.</strong> A sustained break below the IPO price would test whether the sector&#x27;s private valuations can hold, with Nvidia&#x27;s own volatility adding noise to the signal.</li>
+</ul>
+</body></html>
