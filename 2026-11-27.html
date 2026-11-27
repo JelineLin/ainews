@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily AI Briefing · 2026-11-27</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 18px;line-height:1.75;color:#1a1a1a;background:#fafafa}
+h1{font-size:23px}h2{font-size:19px;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}h3{font-size:17px;margin-top:20px}h4{font-size:16px;margin:16px 0 4px}
+p{margin:6px 0}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #eee;margin:18px 0}
+strong{color:#111}
+.back{display:inline-block;margin-bottom:16px;color:#888;font-size:14px}
+@media(prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{border-color:#30363d}a{color:#58a6ff}strong{color:#fff}hr{border-color:#30363d}}
+</style></head><body>
+<a class="back" href="./index.html">← 返回目录</a>
+<h1>Daily AI Briefing · 2026-11-27</h1>
+
+<h2>Executive Summary</h2>
+
+<p>The clearest AI story of the past day is not a model launch but an infrastructure one: Google made its Workspace MCP servers generally available and paired that with a terms addendum requiring AI agents to use MCP rather than the Workspace REST APIs, with enforcement beginning 1 February 2027 and per-request billing later in the year. Agent tooling is consolidating around protocols and budgets rather than raw intelligence. Meanwhile, DeepMind&#x27;s Koray Kavukcuoglu described internal agents running a share of Gemini&#x27;s experimental compute, framed carefully against claims of recursive self-improvement. On the research side, Scott Aaronson catalogued a striking run of AI-assisted complexity results — VP ≠ VNP and the claim that ω = 9/4 — while cautioning that cryptographic consequences remain unverified. SemiAnalysis&#x27;s first cross-model GDPx ranking shows GPT-6.2 Astra on top but at 19.3%, and Clay&#x27;s Head of AI explained why coding-agent harnesses now beat custom tool loops for non-coding work.</p>
+
+<h2>AI Coding / Code Models</h2>
+
+<h3>Google Forces AI Agents Onto Workspace MCP — and Its Gmail Server Cannot Send Email</h3>
+
+<p>Google made its eight Workspace MCP servers generally available on 24 November and published a Workspace AI Tools Addendum requiring that any tool &quot;is or is driven by an AI Agent&quot; reach Gmail, Drive, Calendar and other Workspace data through Google&#x27;s MCP servers instead of the REST APIs. Enforcement starts 1 February 2027; from that date, agents calling REST directly are held to Standard-tier quotas regardless of the project&#x27;s paid tier, while non-AI scripts are unaffected.</p>
+
+<p>The public Gmail server&#x27;s toolset is the practical problem. It can search mail, read threads, create drafts and apply labels, but cannot send, reply, forward, or update an existing draft — those tools require partner access. An agent that drafts a reply, takes user feedback, then revises it must create a second draft and abandon the first. Drive coverage is similarly thin: an agent can generate a report but cannot move it into a folder or share it, and a 30-day data-retention cap forces memory-building assistants to rebuild indexes monthly.</p>
+
+<p>Developer-side enforcement relies on an OAuth self-declaration checkbox (&quot;Use this client for an AI-powered agent&quot;), required since 11 November. The free Standard tier allows 5,000 MCP requests per day per project per product, and costly calls such as `search_threads` count as ten requests. Admins gain agent inventory, confirmation prompts for sensitive actions, audit logging and DLP coverage — genuine controls, though as Vortner&#x27;s analysis notes, most would work equally well over REST. The result before the deadline is a split market: large vendors with partner access can send email through approved channels, while independent agents and coding-assistant plugins can only draft.</p>
+
+<p>Published 2026-11-24 · TechStackups (analysis of Google&#x27;s Workspace AI Tools Addendum and quota pages) · <a href="https://techstackups.com/articles/google-workspace-ai-agents-mcp/" target="_blank">https://techstackups.com/articles/google-workspace-ai-agents-mcp/</a></p>
+
+<h3>Clay Rebuilt Its Agent as a Coding Agent — and Found Frontier Models Mostly Useful for Orchestration</h3>
+
+<p>On Latent Space, Clay&#x27;s Head of AI Jeff Barg described rebuilding the company&#x27;s go-to-market agent, Sculptor, as a coding agent running the Clay CLI inside a cloud sandbox on the Pi harness. The original tool-loop design shared a system prompt across a fixed set of tools, and it failed: it was good at adding columns but bad at booking qualified meetings, and LLM-as-judge evals missed how customers actually used it — analyzing tables, or loading enterprise tables with millions of rows. The rewrite exploited what coding agents already do well (Bash and Python) and added a data layer, Audiences, that matches CRM and Gong records so the agent can see them together.</p>
+
+<p>Barg&#x27;s economics numbers are the interesting part. Lead qualification has been effectively solved for about a year, he argues; the whole 40-million-company database could be screened against an ideal customer profile for roughly $1,500 using a cheap classifier like TypeSafe&#x27;s Jev. Frontier models still matter for deep research and orchestration, where he estimates the best plays are ten to a hundred times more effective than average ones. Usage is split nearly 50/50 between Clay&#x27;s own agent and external harnesses such as Claude Code, and Clay plans a sandboxed agent with equal results either way, plus an automatic model router to spare customers the selector.</p>
+
+<p>Published 2026-11-26 · Latent Space · <a href="https://latent.space/p/how-clay-builds-gtm-agents-jeff-barg-head-of-ai/" target="_blank">https://latent.space/p/how-clay-builds-gtm-agents-jeff-barg-head-of-ai/</a></p>
+
+<h3>[Follow-up] SemiAnalysis: GPT-6.2 Astra Tops GDPx but Leads at 19.3%; Fable 5.2 Owns Coding and Chip Design</h3>
+
+<p>*What changed since our previous coverage:* the first independent cross-model scoring on GDPx, the benchmark SemiAnalysis launched on 1 November, now that Anthropic, OpenAI, Google, Alibaba and Moonshot have all shipped new models.</p>
+
+<p>GDPx comprises 206 tasks built with 14 specialized data partners and deliberately excludes sectors like government and real estate in favor of domains where frontier models will have the most economic impact. Its defining property is headroom: Opus 5.5 scored just 12% on release, versus 50%-plus typical launches, so the benchmark can still discriminate between releases. On the full-domain leaderboard, GPT-6.2 Astra leads at 19.3%, Claude Fable 5.2 is second at 16.4%, and the best non-OpenAI/Anthropic model, Gemini 4 Carbon, is fifth at 10.9% — barely ahead of the widely praised Gemini 4 Neon at 10.1%.</p>
+
+<p>SemiAnalysis&#x27;s most useful finding is a measurement artifact: safety classifiers in Astra and Fable 5.2 depress scores in cyber, biology and alignment, so the authors publish a second leaderboard excluding those domains with partial grading for legal and finance. They also argue Gemini 4 Neon&#x27;s warm reception reflects behavior rather than intelligence — it is pleasant to talk to, like GPT-4o — and note Fable 5.2 dominates chip design, software engineering and quant trading. The cost-performance Pareto frontier is entirely OpenAI&#x27;s, with DeepSeek v4.1 Flash appearing only at the low end.</p>
+
+<p>Published 2026-11-26 · SemiAnalysis · <a href="https://newsletter.semianalysis.com/p/evaluating-recent-model-releases" target="_blank">https://newsletter.semianalysis.com/p/evaluating-recent-model-releases</a></p>
+
+<h2>Other AI Developments</h2>
+
+<h3>DeepMind&#x27;s Kavukcuoglu: Agents Already Run Part of Gemini&#x27;s Experimental Compute</h3>
+
+<p>Speaking on Google&#x27;s podcast, DeepMind VP of Research Koray Kavukcuoglu said AI agents control part of the compute used to run experiments for the next Gemini model — a concrete, if deliberately bounded, admission of automation in frontier research. He framed it as part of a broader strategic shift: rather than separate teams for projects like AlphaFold and fusion research, the lab now leans on a single general-purpose algorithm serving both science and products, with each Gemini generation hand-built while parallel teams work on successors.</p>
+
+<p>Kavukcuoglu explicitly separated this from recursive self-improvement, saying the lab is still far from it. He cited a specific safety choice: DeepMind does not reward the agents&#x27; chain-of-thought during training, so their intentions remain readable in natural language before they act rather than being optimized into an uninterpretable internal language. He also offered limits on capability — models can render fluid flows and collisions convincingly without understanding them precisely, and no existing benchmark captures the core of intelligence, so no test can say when AGI arrives. His operational definition is adoption-driven: AGI begins when everyday products earn enough trust that people delegate decisions to them as they would to a colleague.</p>
+
+<p>Published 2026-11-26 · The Decoder (reporting on Google DeepMind&#x27;s podcast) · <a href="https://the-decoder.com/ai-agents-now-control-part-of-deepminds-compute-for-gemini-experiments-but-recursive-self-improvement-remains-distant/" target="_blank">https://the-decoder.com/ai-agents-now-control-part-of-deepminds-compute-for-gemini-experiments-but-recursive-self-improvement-remains-distant/</a></p>
+
+<h3>Aaronson on the Mathocalypse: ω = 9/4, VP ≠ VNP, and a Matching FFT Lower Bound</h3>
+
+<p>Scott Aaronson&#x27;s post is the best single account of the research burst around Thanksgiving. While colleagues were still digesting OpenAI&#x27;s and Anthropic&#x27;s proofs of VP ≠ VNP — following the Alpöge/Anthropic Lean proof of the Riemann Hypothesis — OpenAI released a claim that the matrix multiplication exponent ω is exactly 9/4, a *lower* bound matching the upper bound it published on 6 October. If correct, a question open since Strassen&#x27;s ω &lt; 3 in the late 1960s resolves to a rational number, and decades of expert confidence that ω = 2 were wrong. A second release claimed the number of linear gates for the Fourier transform is N(log N)^{1/2+o(1)}, beating the 1960s FFT bound with a matching lower bound.</p>
+
+<p>Aaronson is emphatic about two things. First, these are not isolated curiosities: Yupan Liu&#x27;s preprint proving QIP(2) = PSPACE — a top complexity result in any normal year — barely registered, and AI assistance there was unremarkable. Second, he insists proofs coming directly from OpenAI or Anthropic be treated as correct absent contrary evidence, given repeated Lean certificates, while warning against both denialism and the labs&#x27; habit of uploading papers to GitHub without press releases. He states he is &quot;virtually certain&quot; the labs hold undisclosed cryptographic results, but deliberately declines to characterize them, calling such rumors unreliable.</p>
+
+<p>Published 2026-11-25 · Shtetl-Optimized (Scott Aaronson) · <a href="https://scottaaronson.blog/?p=10379" target="_blank">https://scottaaronson.blog/?p=10379</a></p>
+
+<h3>WIRED: Meta Declined the FCA&#x27;s Offer to Joint-Test Muse in Its Sandbox</h3>
+
+<p>The UK Financial Conduct Authority asked Meta to jointly test its Muse AI assistant inside the regulator&#x27;s sandbox, and Meta declined, according to Colin Payne, the FCA&#x27;s head of innovation, speaking at a panel hosted by Whitespace on Tuesday. Payne described the ask as routine given Muse&#x27;s planned UK rollout, noting that such testing normally takes weeks or months of planning and that Meta only informed the FCA of its plans last month. Meta spokesperson Matthew Pollard said the company has &quot;engaged constructively with the appropriate regulatory authorities and will continue to do so.&quot;</p>
+
+<p>The regulatory interest is specifically about agentic payments: the FCA wants to know how agents will transact on behalf of users, especially where understanding of the product is low. Payne&#x27;s concern is that an agent acting autonomously must act in the consumer&#x27;s interest, and his framing — &quot;another force of attack, agents hitting the streets, most of them coming from the US&quot; — signals the FCA sees Muse as one of many incoming agentic shopping tools rather than a one-off. UK grocers and retailers including Sainsbury&#x27;s, M&amp;S, Ocado, Debenhams Group and Currys say they have been working with Meta on Muse access. The ICO stressed user control over personal data, the CMA has already forced Meta to amend UK terms to promise &quot;reasonable skill and care,&quot; and more than 10 million North American users have set up Muse since September.</p>
+
+<p>Published 2026-11-26 · WIRED · <a href="https://www.wired.com/story/meta-refused-to-share-muse-for-testing-uk-financial-watchdog-complains/" target="_blank">https://www.wired.com/story/meta-refused-to-share-muse-for-testing-uk-financial-watchdog-complains/</a></p>
+
+<h3>[Follow-up] OpenAI&#x27;s GPT-6 Designs Proteins Without Specialized Biology Models</h3>
+
+<p>*What changed since our previous coverage:* OpenAI published the underlying preprint and wet-lab results, including per-assay numbers.</p>
+
+<p>OpenAI&#x27;s preprint, &quot;GPT-6 as a Universal Foundation Model for Protein Biology: Beyond Specialized Models,&quot; reports that models in the GPT-6 family can design new protein shapes and amino acid sequences using only reasoning and general-purpose code, without calling specialized biology models to generate designs. On 14 protein tasks tested computationally, newer generations matched or beat specialized models on most, with one clear weakness: predicting a complete protein structure. Researchers could steer designs by prompting for attachment points, overall shape, and even the number of coils or strands in a minibinder — switching tasks by changing the prompt, not retraining.</p>
+
+<p>Lab validation came through partner Onava. Proteins built from a pre-release GPT-6.2&#x27;s designs showed evidence of binding for at least one protein across each of five targets; separately, 14 of 107 resequenced proteins bound, and 128 of 182 redesigned small antibodies plus 179 of 272 antibody fragments retained binding. The caveat matters: specialized models (SolubleMPNN, RFdiffusion and others) still supplied sequences and candidate selection, and GPT-6.2&#x27;s three-dimensional designs scored slightly below RFdiffusion, with newer internal models scoring above. Cost remains an open question — on an earlier DNA task, GPT-6.1 Sol reportedly ran roughly 2,000x more expensive per task than a specialized model.</p>
+
+<p>Published 2026-11-24 · OpenAI · <a href="https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities" target="_blank">https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities</a></p>
+
+<h2>What to Watch</h2>
+
+<ul>
+<li><strong>Workspace MCP compliance before 1 February 2027.</strong> The two-month window is short for anyone shipping a coding agent with a Gmail or Drive plugin. Watch whether Google expands partner-only Gmail tools (send, reply, draft updates) to general availability, and how it detects undeclared agents calling REST — that determines whether the addendum is a real gate or a paper one.</li>
+</ul>
+
+<ul>
+<li><strong>Whether the complexity results survive independent verification.</strong> Aaronson&#x27;s confidence is notable, but a claim that ω = 9/4 reverses a consensus expectation, and the labs publish via GitHub without announcements. Independent Lean checking and the promised cryptic consequences (including any attacks on deployed cryptosystems) are the next checkpoints; treat unverified factoring rumors as noise.</li>
+</ul>
+
+<ul>
+<li><strong>Cost-tuned frontier models and benchmark divergence.</strong> Clay&#x27;s anecdote, the GDPx rankings and independent evaluations suggesting Astra/Sol 6.2 reason less per task all point the same direction: behavioral preference and raw capability are diverging. Watch whether model routers become the default UX and whether safety classifiers keep distorting aggregate benchmark scores.</li>
+</ul>
+</body></html>
